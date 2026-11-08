@@ -8,7 +8,7 @@
     <title>AL-MINHAJ Creative Studio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@500;600;700&family=Poppins:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet" />
     <style>
       :root{
         --gold:#c9a227; --gold-2:#e8c874; --gold-3:#f4dc9a;
@@ -195,6 +195,160 @@
         border-radius:12px;padding:11px 14px;font-size:13.5px;line-height:1.8;color:#d6dcee;
       }
 
+      /* ---------- Passport Photo Studio ---------- */
+      .studio{text-align:start}
+      .studio-head{text-align:center;margin-bottom:14px}
+      .studio-head h2{margin:0 0 4px;font-family:"Noto Nastaliq Urdu","Noto Naskh Arabic",serif;font-size:clamp(21px,4vw,27px);font-weight:700;line-height:2;color:#fff}
+      .studio-head p{margin:0 auto;color:#aeb9d6;font-size:14px;line-height:1.8;max-width:600px}
+      .st-card{background:linear-gradient(165deg,#13224e 0%,#0a1430 72%);border:1px solid rgba(201,162,39,.45);border-radius:18px;box-shadow:0 12px 28px rgba(2,6,20,.35);padding:16px;color:#fff;margin-bottom:14px}
+      .st-card h3{margin:0 0 10px;font-size:15.5px;color:var(--gold-2);display:flex;align-items:center;gap:8px}
+      .st-card h3 svg{width:19px;height:19px;flex:0 0 19px}
+      .st-card p.hint{margin:0 0 10px;font-size:13px;color:#aeb9d6;line-height:1.8}
+      .up-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+      @media(max-width:520px){.up-grid{grid-template-columns:1fr}}
+      .up-btn{appearance:none;border:1px dashed rgba(201,162,39,.65);background:rgba(201,162,39,.07);color:#fff;border-radius:14px;padding:16px 12px;display:flex;flex-direction:column;align-items:center;gap:7px;font-size:14.5px;font-weight:700;line-height:1.6;transition:border-color .15s,background .15s;width:100%}
+      .up-btn:hover{border-color:var(--gold);background:rgba(201,162,39,.13)}
+      .up-btn svg{width:30px;height:30px;color:var(--gold-2)}
+      .up-btn small{font-weight:500;color:#aeb9d6;font-size:12px}
+      .cam-box{display:none;margin-top:12px}
+      .cam-box.open{display:block}
+      .cam-box video{width:100%;max-height:380px;object-fit:cover;border-radius:12px;background:#000;border:1px solid rgba(201,162,39,.4)}
+      .cam-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+      .btn-gold{appearance:none;border:1px solid rgba(255,255,255,.3);background:var(--gold-grad);color:#231a02;font-weight:700;font-size:14.5px;border-radius:11px;padding:10px 18px;box-shadow:0 6px 16px rgba(201,162,39,.35)}
+      .btn-gold:active{transform:scale(.98)}
+      .btn-ghost{appearance:none;border:1px solid rgba(201,162,39,.55);background:transparent;color:var(--gold-2);font-weight:700;font-size:14px;border-radius:11px;padding:10px 16px}
+      .btn-ghost.on{background:rgba(201,162,39,.18);color:#fff;border-color:var(--gold)}
+      .thumbs{display:none;gap:8px;flex-wrap:wrap;margin-top:12px}
+      .thumbs.show{display:flex}
+      .thumb{width:58px;height:70px;border-radius:9px;overflow:hidden;border:2px solid rgba(201,162,39,.3);padding:0;background:#0a1430;position:relative;flex:0 0 auto}
+      .thumb.sel{border-color:var(--gold)}
+      .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+      .thumb .del{position:absolute;top:2px;inset-inline-end:2px;width:19px;height:19px;border-radius:50%;background:rgba(0,0,0,.75);color:#fff;border:0;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;padding:0}
+      .studio-grid{display:grid;grid-template-columns:340px 1fr;gap:14px;align-items:start}
+      @media(max-width:820px){.studio-grid{grid-template-columns:1fr}}
+      .preview-wrap{position:sticky;top:76px}
+      @media(max-width:820px){.preview-wrap{position:static}}
+      .preview-stage{position:relative;margin:0 auto;width:min(320px,86vw);border-radius:12px;overflow:hidden;border:1px solid rgba(201,162,39,.5);background:repeating-conic-gradient(#1a2440 0% 25%,#121c38 0% 50%) 0 0/22px 22px;touch-action:none;cursor:grab}
+      .preview-stage:active{cursor:grabbing}
+      .preview-stage canvas{display:block;width:100%;height:auto}
+      .face-guide{position:absolute;left:50%;top:7%;transform:translateX(-50%);width:56%;height:52%;border:2px dashed rgba(232,200,116,.75);border-radius:50%;pointer-events:none}
+      .face-guide::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);width:150%;height:44%;border:2px dashed rgba(232,200,116,.45);border-bottom:0;border-radius:50% 50% 0 0}
+      .preview-empty{padding:52px 16px;text-align:center;color:#aeb9d6;font-size:14px;line-height:1.9}
+      .preview-meta{text-align:center;font-size:12.5px;color:#aeb9d6;margin-top:9px;line-height:1.8;direction:ltr}
+      .field{margin-bottom:13px}
+      .field:last-child{margin-bottom:0}
+      .field label{display:block;font-size:13.5px;font-weight:700;margin-bottom:6px;color:#e8ecf7}
+      .field select,.field input[type="color"]{width:100%;background:#0d1734;color:#fff;border:1px solid rgba(201,162,39,.45);border-radius:10px;padding:10px 12px;font-family:inherit;font-size:14px}
+      .field input[type="color"]{height:42px;padding:4px}
+      .field input[type="range"]{width:100%;accent-color:var(--gold)}
+      .range-row{display:flex;align-items:center;gap:10px}
+      .range-row output{font-size:12.5px;color:var(--gold-2);min-width:42px;text-align:end;direction:ltr}
+      .swatches{display:flex;gap:8px;flex-wrap:wrap}
+      .sw{width:40px;height:40px;border-radius:10px;border:2px solid rgba(255,255,255,.25);padding:0;position:relative}
+      .sw.sel{border-color:var(--gold);box-shadow:0 0 0 2px rgba(201,162,39,.4)}
+      .sw.transparent{background:repeating-conic-gradient(#888 0% 25%,#ccc 0% 50%) 0 0/12px 12px}
+      .toggle-row{display:flex;align-items:center;justify-content:space-between;gap:10px;background:rgba(255,255,255,.045);border:1px solid rgba(201,162,39,.25);border-radius:11px;padding:10px 12px;margin-bottom:12px}
+      .toggle-row b{font-size:14px}
+      .toggle-row small{display:block;color:#aeb9d6;font-weight:500;font-size:12px;line-height:1.6}
+      .switch{appearance:none;width:50px;height:28px;flex:0 0 50px;border-radius:999px;background:#2a3554;border:1px solid rgba(201,162,39,.4);position:relative;transition:background .15s;padding:0}
+      .switch::after{content:"";position:absolute;top:3px;inset-inline-start:4px;width:20px;height:20px;border-radius:50%;background:#d9deee;transition:transform .15s,background .15s}
+      .switch:checked{background:var(--gold)}
+      .switch:checked::after{transform:translateX(-20px);background:#231a02}
+      html[dir="ltr"] .switch:checked::after{transform:translateX(20px)}
+      .dl-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+      @media(max-width:520px){.dl-grid{grid-template-columns:1fr}}
+      .dl-grid .btn-gold,.dl-grid .btn-ghost{width:100%;text-align:center}
+      .st-note{background:rgba(255,255,255,.045);border:1px dashed rgba(201,162,39,.4);border-radius:12px;padding:11px 14px;font-size:13px;line-height:1.9;color:#d6dcee}
+      .st-status{font-size:13px;color:var(--gold-2);min-height:20px;text-align:center;line-height:1.7}
+
+      /* ---------- Smart Book Scanner ---------- */
+      .scan-stage{position:relative;margin:0 auto;max-width:640px;border-radius:12px;overflow:hidden;border:1px solid rgba(201,162,39,.5);background:#000}
+      .scan-stage canvas{display:block;width:100%;height:auto;touch-action:none}
+      .scan-stage video{display:block;width:100%;height:auto;max-height:52vh;object-fit:cover;background:#000}
+      .guide-frame{position:absolute;inset:7% 6%;border:2px dashed rgba(232,200,116,.8);border-radius:6px;pointer-events:none}
+      .guide-frame::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:0;border-inline-start:2px dashed rgba(232,200,116,.55)}
+      .guide-frame.single::before{display:none}
+      .seg{display:flex;gap:6px;background:#0d1734;border:1px solid rgba(201,162,39,.4);border-radius:12px;padding:5px}
+      .seg button{flex:1;appearance:none;border:0;background:transparent;color:#aeb9d6;font-weight:700;font-size:13.5px;border-radius:8px;padding:9px 6px;line-height:1.5}
+      .seg button.on{background:var(--gold-grad);color:#231a02}
+      .scan-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+      .scan-actions .btn-gold,.scan-actions .btn-ghost{flex:1 1 auto;text-align:center}
+      .big-capture{width:100%;font-size:16.5px;padding:13px 18px}
+      .page-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px}
+      .pg{position:relative;background:#0d1734;border:1px solid rgba(201,162,39,.35);border-radius:11px;overflow:hidden}
+      .pg img{width:100%;height:132px;object-fit:cover;display:block;background:#fff;cursor:zoom-in}
+      .pg .pg-num{position:absolute;top:5px;inset-inline-start:5px;background:rgba(4,6,12,.82);color:var(--gold-2);font-size:11.5px;font-weight:700;border-radius:999px;padding:2px 9px;border:1px solid rgba(201,162,39,.5)}
+      .pg .pg-ocr{position:absolute;top:5px;inset-inline-end:5px;background:rgba(4,6,12,.82);color:#9fe8b1;font-size:10.5px;font-weight:700;border-radius:999px;padding:2px 8px;border:1px solid rgba(80,200,120,.5)}
+      .pg .pg-bar{display:flex;border-top:1px solid rgba(201,162,39,.25)}
+      .pg .pg-bar button{flex:1;appearance:none;background:transparent;border:0;color:#d9deee;font-size:11.5px;font-weight:700;padding:7px 2px;line-height:1.4}
+      .pg .pg-bar button:hover{background:rgba(201,162,39,.14);color:#fff}
+      .pg .pg-bar button.danger{color:#ff9d9d}
+      .pg.drag-over{outline:2px solid var(--gold);outline-offset:-2px}
+      .scan-progress{height:9px;background:#0d1734;border:1px solid rgba(201,162,39,.4);border-radius:999px;overflow:hidden;display:none}
+      .scan-progress.show{display:block}
+      .scan-progress i{display:block;height:100%;width:0;background:var(--gold-grad);transition:width .25s}
+      .modal{position:fixed;inset:0;z-index:90;display:none;align-items:flex-start;justify-content:center;background:rgba(2,4,10,.78);padding:14px;overflow:auto}
+      .modal.open{display:flex}
+      .modal-box{background:linear-gradient(165deg,#13224e,#0a1430);border:1px solid rgba(201,162,39,.55);border-radius:16px;max-width:860px;width:100%;padding:16px;color:#fff;margin:auto 0}
+      .modal-box h3{margin:0 0 10px;font-size:16.5px;color:var(--gold-2)}
+      .cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+      @media(max-width:640px){.cmp-grid{grid-template-columns:1fr}}
+      .cmp-grid img{width:100%;border-radius:10px;border:1px solid rgba(201,162,39,.4);background:#fff}
+      .cmp-grid textarea{width:100%;min-height:300px;background:#0d1734;color:#fff;border:1px solid rgba(201,162,39,.45);border-radius:10px;padding:11px;font-family:inherit;font-size:14.5px;line-height:2;resize:vertical}
+      .uncertain{background:rgba(229,72,77,.16);border:1px dashed rgba(229,72,77,.65);border-radius:8px;padding:9px 12px;font-size:13px;line-height:1.9;color:#ffd9d9;margin-top:10px;display:none}
+      .uncertain.show{display:block}
+      .check-row{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;line-height:1.7;padding:4px 0}
+      .check-row input{width:19px;height:19px;accent-color:var(--gold);flex:0 0 19px}
+      .kv{display:flex;gap:8px;flex-wrap:wrap}
+      .kv span{background:rgba(201,162,39,.1);border:1px solid rgba(201,162,39,.3);border-radius:999px;padding:4px 12px;font-size:12.5px;font-weight:700;color:#edf0f9}
+
+      /* ---------- Certificate Designer ---------- */
+      .tin{width:100%;background:#0d1734;color:#fff;border:1px solid rgba(201,162,39,.45);border-radius:10px;padding:10px 12px;font-family:inherit;font-size:14px;line-height:1.7}
+      .tin:focus{outline:2px solid rgba(201,162,39,.55);outline-offset:0}
+      textarea.tin{resize:vertical;min-height:74px}
+      .f-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+      @media(max-width:560px){.f-grid{grid-template-columns:1fr}}
+      .f-grid .full{grid-column:1/-1}
+      .cert-stage{position:relative;margin:0 auto;max-width:880px;border-radius:8px;overflow:hidden;border:1px solid rgba(201,162,39,.55);box-shadow:0 16px 38px rgba(0,0,0,.45);background:#fff}
+      .cert-stage canvas{display:block;width:100%;height:auto;touch-action:none;cursor:grab}
+      .cert-stage canvas:active{cursor:grabbing}
+      .tpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:9px}
+      .tpl-btn{appearance:none;border:2px solid rgba(201,162,39,.3);background:#0d1734;color:#fff;border-radius:12px;padding:8px;cursor:pointer;text-align:center;transition:border-color .15s}
+      .tpl-btn:hover{border-color:rgba(201,162,39,.7)}
+      .tpl-btn.sel{border-color:var(--gold);box-shadow:0 0 0 2px rgba(201,162,39,.35)}
+      .tpl-btn .sw{display:block;height:56px;border-radius:8px;margin-bottom:7px;border:1px solid rgba(255,255,255,.18);position:relative;overflow:hidden}
+      .tpl-btn .sw::after{content:"";position:absolute;inset:6px;border:1.5px solid;border-color:inherit;border-radius:4px;opacity:.85}
+      .tpl-btn span{font-size:13px;font-weight:700;line-height:1.6;display:block}
+      .up-mini{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+      .img-chip{display:none;align-items:center;gap:8px;background:rgba(201,162,39,.1);border:1px solid rgba(201,162,39,.35);border-radius:10px;padding:5px 10px 5px 5px;font-size:12.5px;font-weight:700}
+      .img-chip.show{display:inline-flex}
+      .img-chip img{width:38px;height:38px;object-fit:contain;background:#fff;border-radius:7px}
+      .img-chip button{appearance:none;border:0;background:rgba(229,72,77,.2);color:#ff9d9d;border-radius:7px;font-size:11.5px;font-weight:700;padding:5px 9px;font-family:inherit}
+      .saved-row{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.045);border:1px solid rgba(201,162,39,.3);border-radius:11px;padding:8px 11px;margin-top:8px}
+      .saved-row b{flex:1;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+      .saved-row button{appearance:none;border:1px solid rgba(201,162,39,.5);background:transparent;color:var(--gold-2);border-radius:8px;font-size:12px;font-weight:700;padding:6px 11px;font-family:inherit}
+      .saved-row button.danger{color:#ff9d9d;border-color:rgba(229,72,77,.5)}
+      .sel-bar{display:none;background:rgba(201,162,39,.09);border:1px solid rgba(201,162,39,.45);border-radius:12px;padding:11px 12px;margin-top:12px}
+      .sel-bar.show{display:block}
+      .sel-bar h4{margin:0 0 9px;font-size:14px;color:var(--gold-2)}
+      .mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:9px}
+
+      /* ---------- CV Designer ---------- */
+      .cv-fit{position:relative;overflow:hidden;border:1px solid rgba(201,162,39,.55);border-radius:8px;background:#e9e9e9;box-shadow:0 14px 34px rgba(0,0,0,.4)}
+      .cv-page{position:absolute;top:0;width:794px;min-height:1123px;background:#ffffff;color:#1c2438;box-shadow:0 4px 18px rgba(0,0,0,.25)}
+      .cv-page h1,.cv-page h3,.cv-page p{margin:0}
+      .cv-page ul{margin:0;padding-inline-start:20px}
+      .cv-page li{margin-bottom:3px}
+      .cv-entry{margin-bottom:12px}
+      .cv-entry:last-child{margin-bottom:0}
+      .cv-pre{white-space:pre-line}
+      .entry-box{background:rgba(255,255,255,.045);border:1px solid rgba(201,162,39,.3);border-radius:12px;padding:12px;margin-bottom:11px}
+      .entry-box .entry-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}
+      .entry-box .entry-head b{font-size:13.5px;color:var(--gold-2)}
+      .entry-box .entry-head button{appearance:none;border:1px solid rgba(229,72,77,.55);background:rgba(229,72,77,.12);color:#ff9d9d;border-radius:8px;font-size:12px;font-weight:700;padding:5px 11px;font-family:inherit}
+      .add-btn{appearance:none;width:100%;border:1px dashed rgba(201,162,39,.6);background:rgba(201,162,39,.07);color:var(--gold-2);border-radius:11px;padding:10px;font-size:13.5px;font-weight:700;font-family:inherit}
+      .add-btn:hover{background:rgba(201,162,39,.14)}
+
       footer{margin-top:14px;text-align:center;color:var(--muted);font-size:12px;line-height:1.7;padding-bottom:4px}
       footer .latin{font-family:"Poppins",sans-serif;letter-spacing:.4px}
       footer b{color:var(--gold-2);font-weight:600}
@@ -313,79 +467,667 @@
         </section>
       </main>
 
-      <!-- ================= Tool: Passport Photo ================= -->
+      <!-- ================= Tool: Passport Photo Studio ================= -->
       <section class="view" id="view-photo">
         <button class="back-btn" data-goto="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg><span data-i18n="back">واپس ڈیش بورڈ</span></button>
-        <div class="panel">
-          <span class="pill"><span class="dia"></span><span class="latin">AL-MINHAJ CREATIVE STUDIO</span></span>
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-          <h2 data-i18n="t1Title">AI پاسپورٹ فوٹو اسٹوڈیو</h2>
-          <p data-i18n="t1Desc">عام تصویر اپلوڈ کریں — پس منظر خودکار صاف ہو کر معیاری پاسپورٹ سائز تصویر تیار۔</p>
-          <h3 class="feat" data-i18n="features">اہم خصوصیات</h3>
-          <div class="chips">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="t1f1">پس منظر خودکار ختم</span></span>
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="t1f2">سفید و نیلا پس منظر</span></span>
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="t1f3">پاسپورٹ و ویزا سائز</span></span>
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="t1f4">JPG و PNG ڈاؤن لوڈ</span></span>
+
+        <div class="studio">
+          <div class="studio-head">
+            <h2>AI پاسپورٹ فوٹو اسٹوڈیو</h2>
+            <p>اپنی عام تصویر اپلوڈ کریں یا کیمرے سے لیں — پس منظر صاف کر کے سرکاری معیار کی پاسپورٹ تصویر یہیں آپ کے فون میں تیار ہوگی۔ تصویر کہیں بھیجی نہیں جاتی، تمام کام براؤزر کے اندر ہوتا ہے۔</p>
           </div>
-          <div class="note" data-i18n="phaseNote">اس ٹول کا بنیادی صفحہ تیار ہے۔ اس کا مکمل اندرونی نظام آپ کی منظوری کے بعد اگلے مرحلے میں بنایا جائے گا۔</div>
+
+          <!-- Step 1: add photo -->
+          <div class="st-card">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/></svg>مرحلہ 1 — تصویر شامل کریں</h3>
+            <div class="up-grid">
+              <button type="button" class="up-btn" id="ppUploadBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                گیلری سے تصویر منتخب کریں
+                <small>ایک یا ایک سے زیادہ تصاویر — JPG، PNG یا WebP</small>
+              </button>
+              <button type="button" class="up-btn" id="ppCameraBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                کیمرے سے تصویر لیں
+                <small>موبائل کیمرے سے براہ راست تصویر کھینچیں</small>
+              </button>
+            </div>
+            <input type="file" id="ppFile" accept="image/jpeg,image/png,image/webp" multiple hidden />
+            <div class="cam-box" id="ppCamBox">
+              <video id="ppVideo" autoplay playsinline muted></video>
+              <div class="cam-actions">
+                <button type="button" class="btn-gold" id="ppCapture">تصویر کھینچیں</button>
+                <button type="button" class="btn-ghost" id="ppCamClose">کیمرہ بند کریں</button>
+              </div>
+            </div>
+            <div class="thumbs" id="ppThumbs" aria-label="شامل شدہ تصاویر"></div>
+          </div>
+
+          <div class="studio-grid">
+            <!-- Preview -->
+            <div class="st-card preview-wrap">
+              <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>تیار تصویر کا پیش منظر</h3>
+              <div class="preview-stage" id="ppStage">
+                <div class="preview-empty" id="ppEmpty">ابھی کوئی تصویر شامل نہیں کی گئی۔<br />اوپر سے تصویر منتخب کریں تو تیار تصویر یہاں نظر آئے گی۔</div>
+                <canvas id="ppCanvas" width="600" height="600" style="display:none"></canvas>
+                <div class="face-guide" id="ppGuide" style="display:none"></div>
+              </div>
+              <div class="preview-meta" id="ppMeta"></div>
+              <p class="hint" style="text-align:center;margin-top:8px">تصویر کو انگلی یا ماؤس سے گھسیٹ کر جگہ بدلیں — سنہری دائرہ چہرے کی درست پوزیشن دکھاتا ہے۔</p>
+              <div class="st-status" id="ppStatus" role="status"></div>
+            </div>
+
+            <!-- Controls -->
+            <div>
+              <div class="st-card">
+                <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 8.7 15.3 2.7a1 1 0 0 0-1.4 0l-11.2 11.2a1 1 0 0 0 0 1.4l6 6a1 1 0 0 0 1.4 0L21.3 10a1 1 0 0 0 0-1.3Z"/><path d="m7.5 10.5 2 2M10.5 7.5l2 2M13.5 4.5l2 2"/></svg>مرحلہ 2 — سائز منتخب کریں</h3>
+                <div class="field">
+                  <label for="ppPreset">تصویر کی ضرورت / ملک کا معیار</label>
+                  <select id="ppPreset">
+                    <option value="pk-passport">پاکستان پاسپورٹ — 2 × 2 انچ (51 × 51 ملی میٹر)</option>
+                    <option value="pk-cnic">پاکستان شناختی کارڈ (CNIC) — 35 × 45 ملی میٹر</option>
+                    <option value="us-visa">امریکہ پاسپورٹ / ویزا — 2 × 2 انچ (51 × 51 ملی میٹر)</option>
+                    <option value="uk-visa">برطانیہ ویزا — 35 × 45 ملی میٹر</option>
+                    <option value="schengen">یورپ (شینگن) ویزا — 35 × 45 ملی میٹر</option>
+                    <option value="india-visa">بھارت ویزا — 2 × 2 انچ (51 × 51 ملی میٹر)</option>
+                    <option value="uae-visa">متحدہ عرب امارات ویزا — 43 × 55 ملی میٹر</option>
+                    <option value="saudi-visa">سعودی عرب ویزا — 2 × 2 انچ (51 × 51 ملی میٹر)</option>
+                    <option value="id-1x1">عام شناختی تصویر — 1 × 1 انچ (25 × 25 ملی میٹر)</option>
+                    <option value="id-15x2">عام شناختی تصویر — 1.5 × 2 انچ (38 × 51 ملی میٹر)</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="ppDpi">پرنٹ ریزولوشن (DPI)</label>
+                  <select id="ppDpi">
+                    <option value="300" selected>300 DPI — معیاری پرنٹ کوالٹی</option>
+                    <option value="600">600 DPI — اعلیٰ پرنٹ کوالٹی (بڑی فائل)</option>
+                    <option value="200">200 DPI — صرف آن لائن جمع کرانے کے لیے</option>
+                  </select>
+                </div>
+                <p class="hint" id="ppSizeInfo"></p>
+              </div>
+
+              <div class="st-card">
+                <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 8.5 8.5a2.12 2.12 0 1 1-3 3L12 8l-5.5 5.5a2.12 2.12 0 1 1-3-3L12 2Z"/><path d="M5 21h14"/></svg>مرحلہ 3 — پس منظر</h3>
+                <div class="toggle-row">
+                  <span><b>پس منظر خودکار ختم کریں</b><small>سادہ پس منظر والی تصویر پر بہترین نتیجہ ملتا ہے</small></span>
+                  <input type="checkbox" class="switch" id="ppBgRemove" checked aria-label="پس منظر خودکار ختم کریں" />
+                </div>
+                <div class="field" id="ppTolField">
+                  <label for="ppTol">پس منظر ختم کرنے کی حساسیت</label>
+                  <div class="range-row"><input type="range" id="ppTol" min="10" max="120" value="42" /><output id="ppTolOut">42</output></div>
+                </div>
+                <div class="field">
+                  <label>نیا پس منظر منتخب کریں</label>
+                  <div class="swatches" id="ppSwatches">
+                    <button type="button" class="sw sel" data-bg="#ffffff" style="background:#ffffff" title="سفید" aria-label="سفید پس منظر"></button>
+                    <button type="button" class="sw" data-bg="#438edb" style="background:#438edb" title="سرکاری نیلا" aria-label="سرکاری نیلا پس منظر"></button>
+                    <button type="button" class="sw" data-bg="#1d4e9e" style="background:#1d4e9e" title="گہرا نیلا" aria-label="گہرا نیلا پس منظر"></button>
+                    <button type="button" class="sw" data-bg="#e8e8e8" style="background:#e8e8e8" title="ہلکا سرمئی" aria-label="ہلکا سرمئی پس منظر"></button>
+                    <button type="button" class="sw" data-bg="#d32f2f" style="background:#d32f2f" title="سرخ" aria-label="سرخ پس منظر"></button>
+                    <button type="button" class="sw transparent" data-bg="transparent" title="شفاف (صرف PNG)" aria-label="شفاف پس منظر"></button>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="ppBgCustom">اپنی پسند کا رنگ</label>
+                  <input type="color" id="ppBgCustom" value="#ffffff" />
+                </div>
+              </div>
+
+              <div class="st-card">
+                <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>مرحلہ 4 — روشنی و کوالٹی</h3>
+                <p class="hint">صرف روشنی اور رنگ بہتر ہوتے ہیں — چہرے کی شکل، ناک، آنکھیں اور اصل شناخت بالکل نہیں بدلتی۔</p>
+                <div class="field">
+                  <button type="button" class="btn-gold" id="ppAutoEnhance" style="width:100%">خودکار بہتری لگائیں</button>
+                </div>
+                <div class="field">
+                  <label for="ppBright">روشنی</label>
+                  <div class="range-row"><input type="range" id="ppBright" min="60" max="150" value="100" /><output id="ppBrightOut">100</output></div>
+                </div>
+                <div class="field">
+                  <label for="ppContrast">کنٹراسٹ</label>
+                  <div class="range-row"><input type="range" id="ppContrast" min="60" max="160" value="100" /><output id="ppContrastOut">100</output></div>
+                </div>
+                <div class="field">
+                  <label for="ppSat">رنگوں کی تازگی</label>
+                  <div class="range-row"><input type="range" id="ppSat" min="0" max="180" value="100" /><output id="ppSatOut">100</output></div>
+                </div>
+              </div>
+
+              <div class="st-card">
+                <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>مرحلہ 5 — سیدھ و زوم</h3>
+                <div class="field">
+                  <label for="ppZoom">زوم (قریب / دور)</label>
+                  <div class="range-row"><input type="range" id="ppZoom" min="100" max="350" value="100" /><output id="ppZoomOut">100%</output></div>
+                </div>
+                <div class="field">
+                  <label for="ppRotate">تصویر سیدھی کریں (جھکاؤ درست کریں)</label>
+                  <div class="range-row"><input type="range" id="ppRotate" min="-15" max="15" value="0" step="0.5" /><output id="ppRotateOut">0°</output></div>
+                </div>
+                <button type="button" class="btn-ghost" id="ppReset" style="width:100%">اس تصویر کی تمام ترتیبات واپس اصل پر رکھیں</button>
+              </div>
+
+              <div class="st-card">
+                <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>مرحلہ 6 — ڈاؤن لوڈ و پرنٹ</h3>
+                <div class="field">
+                  <label for="ppFormat">فائل کی قسم</label>
+                  <select id="ppFormat">
+                    <option value="jpeg">JPG — پاسپورٹ و ویزا جمع کرانے کے لیے موزوں</option>
+                    <option value="png">PNG — اعلیٰ کوالٹی، شفاف پس منظر کے لیے</option>
+                  </select>
+                </div>
+                <div class="dl-grid">
+                  <button type="button" class="btn-gold" id="ppDownload">تیار تصویر ڈاؤن لوڈ کریں</button>
+                  <button type="button" class="btn-gold" id="ppSheet">پرنٹ شیٹ ڈاؤن لوڈ کریں (4 × 6 انچ)</button>
+                  <button type="button" class="btn-ghost" id="ppDownloadAll">تمام تصاویر ایک ایک کر کے ڈاؤن لوڈ کریں</button>
+                  <button type="button" class="btn-ghost" id="ppClear">تمام تصاویر ہٹائیں</button>
+                </div>
+                <p class="hint" style="margin-top:10px">پرنٹ شیٹ 4 × 6 انچ کے فوٹو پیپر پر منتخب سائز کی متعدد کاپیاں ترتیب سے لگاتی ہے — اسٹوڈیو سے براہ راست پرنٹ کرانے کے لیے موزوں ہے۔</p>
+              </div>
+
+              <div class="st-note">شناخت کی حفاظت: اس ٹول میں چہرہ بدلنے، خدوخال تراشنے یا شناخت تبدیل کرنے کا کوئی عمل نہیں ہے۔ صرف پس منظر، روشنی اور سائز درست ہوتا ہے، تاکہ تصویر سرکاری جانچ میں اصل شخص سے مطابقت رکھے۔ بہترین نتیجے کے لیے سادہ، ہلکے رنگ کے پس منظر والی تصویر استعمال کریں اور چہرہ دائرے کے اندر رکھیں۔</div>
+            </div>
+          </div>
         </div>
       </section>
 
       <!-- ================= Tool: Book Scanner ================= -->
       <section class="view" id="view-scanner">
         <button class="back-btn" data-goto="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg><span data-i18n="back">واپس ڈیش بورڈ</span></button>
-        <div class="panel">
-          <span class="pill"><span class="dia"></span><span class="latin">AL-MINHAJ CREATIVE STUDIO</span></span>
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 8h4M7 12h10M7 16h6"/></svg></div>
-          <h2 data-i18n="t2Title">اسمارٹ بک اسکینر</h2>
-          <p data-i18n="t2Desc">کھلی کتاب کے دونوں صفحات ایک ساتھ اسکین — سیدھے، صاف صفحات اور مکمل PDF کتاب۔</p>
-          <h3 class="feat" data-i18n="features">اہم خصوصیات</h3>
-          <div class="chips">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="t2f1">دونوں صفحات ایک اسکین میں</span></span>
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="t2f2">صفحہ سیدھا و سایہ ختم</span></span>
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="t2f3">اردو، عربی و انگریزی OCR</span></span>
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="t2f4">مکمل کتاب کی PDF</span></span>
+
+        <div class="studio">
+          <div class="studio-head">
+            <h2>اسمارٹ بک اسکینر</h2>
+            <p>کھلی کتاب کو موبائل کے نیچے رکھیں — دونوں صفحات ایک تصویر میں اسکین ہو کر خودکار الگ، سیدھے اور صاف سفید صفحات بن جائیں گے، اور آخر میں پوری کتاب ایک PDF میں تیار ہوگی۔ تمام پروسیسنگ آپ کے فون کے براؤزر میں ہوتی ہے؛ تصاویر کہیں بھیجی نہیں جاتیں۔</p>
           </div>
-          <div class="note" data-i18n="phaseNote">اس ٹول کا بنیادی صفحہ تیار ہے۔ اس کا مکمل اندرونی نظام آپ کی منظوری کے بعد اگلے مرحلے میں بنایا جائے گا۔</div>
+
+          <!-- Book info + session -->
+          <div class="st-card">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>کتاب اور نشست</h3>
+            <div class="field">
+              <label for="bkTitle">کتاب کا نام (PDF فائل اسی نام سے بنے گی)</label>
+              <input type="text" id="bkTitle" placeholder="مثلاً: تفسیر ابن کثیر — جلد اول" style="width:100%;background:#0d1734;color:#fff;border:1px solid rgba(201,162,39,.45);border-radius:10px;padding:10px 12px;font-family:inherit;font-size:14px" />
+            </div>
+            <div class="kv" style="margin-top:10px">
+              <span id="bkCount">اسکین شدہ صفحات: ۰</span>
+              <span id="bkSpreads">پھیلاؤ: ۰</span>
+              <span>تمام کام براؤزر کے اندر — انٹرنیٹ صرف پہلی بار OCR انجن لوڈ کرنے کے لیے درکار ہے</span>
+            </div>
+            <div class="field" style="margin-top:12px">
+              <label>اسکین کا طریقہ</label>
+              <div class="seg" id="bkMode">
+                <button type="button" class="on" data-mode="spread">کھلی کتاب — دونوں صفحات ایک ساتھ</button>
+                <button type="button" data-mode="single">ایک صفحہ ایک بار</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Capture -->
+          <div class="st-card">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>مرحلہ 1 — اسکین کریں</h3>
+            <p class="hint">اچھی روشنی میں کتاب کو ہموار جگہ پر رکھیں، موبائل کتاب کے بالکل اوپر متوازی پکڑیں اور سایہ صفحات پر نہ پڑنے دیں۔ کتاب کے چاروں کنارے دائرے والے خانے کے اندر رکھیں۔</p>
+            <div class="up-grid">
+              <button type="button" class="up-btn" id="bkCameraBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                کیمرہ کھولیں
+                <small>پچھلا کیمرہ — مسلسل اسکیننگ کے لیے</small>
+              </button>
+              <button type="button" class="up-btn" id="bkUploadBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                گیلری سے تصاویر منتخب کریں
+                <small>پہلے سے لی گئی کتاب کی تصاویر — ایک یا کئی</small>
+              </button>
+            </div>
+            <input type="file" id="bkFile" accept="image/*" multiple hidden />
+
+            <div class="cam-box" id="bkCamBox">
+              <div class="scan-stage">
+                <video id="bkVideo" autoplay playsinline muted></video>
+                <div class="guide-frame" id="bkGuide"></div>
+              </div>
+              <div class="scan-actions">
+                <button type="button" class="btn-gold big-capture" id="bkCapture">یہ پھیلاؤ اسکین کریں</button>
+                <button type="button" class="btn-ghost" id="bkTorch">روشنی (ٹارچ)</button>
+                <button type="button" class="btn-ghost" id="bkCamClose">کیمرہ بند کریں</button>
+              </div>
+            </div>
+
+            <!-- Corner adjust -->
+            <div class="cam-box" id="bkAdjBox">
+              <p class="hint">سنہری نقطے کتاب کے چاروں کونوں پر انگلی سے گھسیٹ کر درست کریں — درمیانی لکیر کتاب کی جلد (درمیان) پر رکھیں۔ اس کے بعد «صفحات تیار کریں» دبائیں؛ کنارے خودکار بھی پہچانے گئے ہیں، ضرورت ہو تو ہی بدلیں۔</p>
+              <div class="scan-stage">
+                <canvas id="bkAdjCanvas" width="640" height="480"></canvas>
+              </div>
+              <div class="scan-actions">
+                <button type="button" class="btn-gold big-capture" id="bkProcess">صفحات تیار کریں</button>
+                <button type="button" class="btn-ghost" id="bkAutoEdges">خودکار کنارے دوبارہ پہچانیں</button>
+                <button type="button" class="btn-ghost" id="bkFullFrame">مکمل تصویر رکھیں</button>
+                <button type="button" class="btn-ghost" id="bkDiscard">یہ تصویر رد کریں</button>
+              </div>
+            </div>
+            <div class="st-status" id="bkStatus" role="status" style="margin-top:10px"></div>
+            <div class="scan-progress" id="bkProgWrap"><i id="bkProg"></i></div>
+          </div>
+
+          <!-- Quality settings -->
+          <div class="st-card">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3"/><path d="M1 14h6M9 8h6M17 16h6"/></svg>مرحلہ 2 — صفائی و معیار</h3>
+            <div class="field">
+              <label for="bkFilter">صفحے کا انداز</label>
+              <select id="bkFilter">
+                <option value="bw" selected>صاف سفید — سیاہ تحریر (کتاب جیسی طباعت، پرنٹ کے لیے بہترین)</option>
+                <option value="color">رنگین صاف — سایہ ختم، سفید پس منظر، اصل رنگ برقرار</option>
+                <option value="gray">سرمئی صاف — ہلکی فائل، نرم تحریر</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="bkDewarp">خمیدہ صفحے کی درستی (جلد کے قریب خم سیدھا کرنا)</label>
+              <div class="range-row"><input type="range" id="bkDewarp" min="0" max="100" value="45" /><output id="bkDewarpOut">45</output></div>
+            </div>
+            <div class="field">
+              <label for="bkEnhance">تحریر کی وضاحت و کنٹراسٹ</label>
+              <div class="range-row"><input type="range" id="bkEnhance" min="0" max="100" value="55" /><output id="bkEnhanceOut">55</output></div>
+            </div>
+            <label class="check-row"><input type="checkbox" id="bkShadow" checked /> سایہ اور ناہموار روشنی خودکار ختم کریں</label>
+            <label class="check-row"><input type="checkbox" id="bkAutoNum" checked /> صفحات پر خودکار نمبر لگائیں (PDF میں صفحہ نمبر شامل ہوگا)</label>
+            <p class="hint">ترتیبات بدلیں تو «تمام صفحات پر نئی ترتیبات لگائیں» سے پہلے سے اسکین شدہ صفحات بھی اسی معیار پر دوبارہ تیار ہو جائیں گے — اصل اسکین محفوظ رہتا ہے۔</p>
+            <button type="button" class="btn-ghost" id="bkReprocess" style="width:100%">تمام صفحات پر نئی ترتیبات لگائیں</button>
+          </div>
+
+          <!-- Pages -->
+          <div class="st-card">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>مرحلہ 3 — اسکین شدہ صفحات</h3>
+            <p class="hint" id="bkEmptyHint">ابھی کوئی صفحہ اسکین نہیں ہوا۔ اوپر سے کیمرہ کھول کر پہلا پھیلاؤ اسکین کریں — صفحات یہاں نمبروں کے ساتھ جمع ہوتے جائیں گے۔ ہر صفحے کو بڑا دیکھنے کے لیے اس کی تصویر پر دبائیں؛ ترتیب بدلنے کے لیے تیر والے بٹن یا گھسیٹنے کا استعمال کریں؛ غلط صفحہ «دوبارہ» سے اسی نمبر پر ازسرِ نو اسکین ہوگا۔</p>
+            <div class="page-grid" id="bkPages"></div>
+            <div class="scan-actions" id="bkBulkBar" style="display:none">
+              <button type="button" class="btn-ghost danger" id="bkClearAll" style="color:#ff9d9d;border-color:rgba(229,72,77,.55)">تمام صفحات حذف کریں</button>
+            </div>
+          </div>
+
+          <!-- OCR + PDF -->
+          <div class="st-card">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5a2 2 0 0 1 2-2h2"/><path d="M16 3h2a2 2 0 0 1 2 2v2"/><path d="M20 17v2a2 2 0 0 1-2 2h-2"/><path d="M8 21H6a2 2 0 0 1-2-2v-2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>مرحلہ 4 — تحریر کی شناخت (OCR) اور PDF</h3>
+            <p class="hint">OCR اردو، عربی اور انگریزی تحریر کو پڑھتا ہے۔ عربی عبارت میں اعراب و حواشی کی حفاظت کے لیے اصل اسکین ہی اصل سند ہے — OCR متن صرف تلاش و نقل کے لیے ہے۔ جس لفظ کی شناخت کمزور ہوگی، نظام اسے خود سے نہیں بنائے گا بلکہ نیچے «غیر یقینی الفاظ» میں دکھائے گا تاکہ آپ اصل صفحے سے ملا کر جانچ سکیں۔ ہر صفحے کے «جانچ» بٹن سے اصل اسکین اور OCR عبارت آمنے سامنے دیکھی جا سکتی ہے۔</p>
+            <div class="field">
+              <label for="bkOcrLang">OCR زبان</label>
+              <select id="bkOcrLang">
+                <option value="urd+ara+eng" selected>اردو + عربی + انگریزی (مخلوط کتابوں کے لیے)</option>
+                <option value="ara">صرف عربی</option>
+                <option value="urd">صرف اردو</option>
+                <option value="eng">صرف انگریزی</option>
+              </select>
+            </div>
+            <div class="scan-actions">
+              <button type="button" class="btn-gold" id="bkOcrAll">تمام صفحات کا OCR کریں</button>
+              <button type="button" class="btn-ghost" id="bkCopyText">مکمل کتاب کا متن نقل کریں</button>
+              <button type="button" class="btn-ghost" id="bkDownloadText">متن فائل ڈاؤن لوڈ کریں (.txt)</button>
+            </div>
+            <div class="field" style="margin-top:14px">
+              <label for="bkPageSize">PDF صفحے کا سائز</label>
+              <select id="bkPageSize">
+                <option value="a4" selected>A4 — پرنٹ کے لیے معیاری</option>
+                <option value="a5">A5 — چھوٹی کتابی شکل</option>
+                <option value="fit">اصل تناسب — صفحے کے ناپ کے مطابق</option>
+              </select>
+            </div>
+            <label class="check-row"><input type="checkbox" id="bkSearchable" checked /> قابلِ تلاش PDF بنائیں (OCR متن ہر صفحے کے ساتھ پوشیدہ تہہ میں شامل ہو — صرف ان صفحات کا جن کا OCR ہو چکا ہو)</label>
+            <button type="button" class="btn-gold big-capture" id="bkMakePdf" style="width:100%;margin-top:8px">مکمل کتاب کی PDF بنائیں اور ڈاؤن لوڈ کریں</button>
+            <p class="hint" style="margin-top:9px">بڑی کتابوں (سینکڑوں صفحات) میں PDF مرحلہ وار بنتی ہے اور پیش رفت اوپر نظر آئے گی۔ میموری بچانے کے لیے صفحات مناسب ریزولوشن پر محفوظ ہوتے ہیں؛ بہت لمبی نشست میں بیچ بیچ میں PDF بنا کر صفحات حذف کرنا بہتر رہتا ہے۔ رفتار کا انحصار آپ کے فون پر ہے — اس بارے میں کوئی ضمانت نہیں دی جا سکتی۔</p>
+          </div>
+
+          <div class="st-note">معیار کی وضاحت: اس نظام میں کناروں کی خودکار شناخت، پرسپیکٹو درستی (Perspective Correction)، سایہ ختم کرنا (Shadow Removal)، خم کی مناسب درستی (Dewarping) اور کنٹراسٹ بہتری — سب آپ کے براؤزر میں مفت اوپن سورس طریقوں سے ہوتی ہے۔ کوئی ادا شدہ AI سروس استعمال نہیں ہوتی، اس لیے مشکل روشنی یا بہت خمیدہ جلد والی کتابوں میں نتیجہ کامل نہ ہو تو کونوں کو ہاتھ سے درست کر کے دوبارہ «صفحات تیار کریں» دبائیں۔ اصل تحریر، اعراب اور الفاظ تصویری صفحے میں ویسے ہی محفوظ رہتے ہیں جیسے اسکین ہوئے — پروسیسنگ صرف تصویر صاف کرتی ہے، عبارت نہیں بدلتی۔</div>
         </div>
       </section>
 
-      <!-- ================= Tool: Certificate ================= -->
+      <!-- OCR compare / page view modal -->
+      <div class="modal" id="bkModal" role="dialog" aria-modal="true">
+        <div class="modal-box">
+          <h3 id="bkModalTitle">صفحہ</h3>
+          <div class="cmp-grid">
+            <div><img id="bkModalImg" alt="اسکین شدہ صفحہ" /></div>
+            <div>
+              <textarea id="bkModalText" placeholder="اس صفحے کا OCR متن یہاں آئے گا۔ «OCR کریں» دبائیں، یا متن خود لکھ/درست کر لیں — یہی متن قابلِ تلاش PDF میں شامل ہوگا۔"></textarea>
+              <div class="uncertain" id="bkModalUnc"></div>
+            </div>
+          </div>
+          <div class="scan-actions">
+            <button type="button" class="btn-gold" id="bkModalOcr">اس صفحے کا OCR کریں</button>
+            <button type="button" class="btn-ghost" id="bkModalRotate">صفحہ گھمائیں</button>
+            <button type="button" class="btn-ghost" id="bkModalSave">متن محفوظ کریں</button>
+            <button type="button" class="btn-ghost" id="bkModalClose">بند کریں</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= Tool: Certificate Designer ================= -->
       <section class="view" id="view-certificate">
         <button class="back-btn" data-goto="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg><span data-i18n="back">واپس ڈیش بورڈ</span></button>
-        <div class="panel">
-          <span class="pill"><span class="dia"></span><span class="latin">AL-MINHAJ CREATIVE STUDIO</span></span>
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
-          <h2 data-i18n="t3Title">سرٹیفکیٹ و اسناد ڈیزائنر</h2>
-          <p data-i18n="t3Desc">سنہری و اسلامی ڈیزائنوں کے ساتھ خوبصورت اسناد و سرٹیفکیٹ — PDF ڈاؤن لوڈ کے ساتھ۔</p>
-          <h3 class="feat" data-i18n="features">اہم خصوصیات</h3>
-          <div class="chips">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="t3f1">اسلامی و جدید ڈیزائن</span></span>
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="t3f2">لوگو، دستخط و مہر</span></span>
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="t3f3">اردو، عربی و انگریزی</span></span>
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="t3f4">PDF و تصویر ڈاؤن لوڈ</span></span>
+
+        <div class="studio">
+          <div class="studio-head">
+            <h2>سرٹیفکیٹ و اسناد ڈیزائنر</h2>
+            <p>اپنے ادارے کی خوبصورت، پرنٹ کے قابل اسناد و سرٹیفکیٹ خود تیار کریں — اسلامی و روایتی سنہری ڈیزائن اور جدید پروفیشنل انداز، اردو، عربی و انگریزی تحریر کے ساتھ۔ تمام کام آپ کے براؤزر میں ہوتا ہے؛ کوئی معلومات کہیں بھیجی نہیں جاتیں۔ تمام خانے خالی ہیں — اپنی معلومات خود درج کریں۔</p>
           </div>
-          <div class="note" data-i18n="phaseNote">اس ٹول کا بنیادی صفحہ تیار ہے۔ اس کا مکمل اندرونی نظام آپ کی منظوری کے بعد اگلے مرحلے میں بنایا جائے گا۔</div>
+
+          <!-- Live preview + element editor -->
+          <div class="st-card">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>سرٹیفکیٹ کا پیش منظر و ایڈیٹر</h3>
+            <p class="hint">کسی بھی تحریر، لوگو، مہر یا دستخط کو منتقل کرنے کے لیے اسے انگلی یا ماؤس سے گھسیٹیں۔ ترمیم کے لیے اس پر دبائیں — نیچے اس کی ترتیبات کھل جائیں گی۔ ہلکی دھندلی تحریریں صرف رہنمائی کے لیے ہیں؛ خانہ بھرتے ہی اصل تحریر آ جائے گی اور یہ رہنما تحریریں ڈاؤن لوڈ میں شامل نہیں ہوتیں۔</p>
+            <div class="cert-stage"><canvas id="ctCanvas" width="1122" height="794"></canvas></div>
+            <div class="field" style="margin-top:12px">
+              <label for="ctSelList">ترمیم کے لیے جزو منتخب کریں</label>
+              <select id="ctSelList">
+                <option value="">— جزو چنیں —</option>
+                <option value="logo">لوگو</option>
+                <option value="institution">ادارے کا نام</option>
+                <option value="title">سند کا عنوان</option>
+                <option value="intro">تعارفی سطر</option>
+                <option value="name">حاصل کنندہ کا نام</option>
+                <option value="father">والد کا نام</option>
+                <option value="body">تفصیلی عبارت</option>
+                <option value="date">تاریخ</option>
+                <option value="serial">سند نمبر</option>
+                <option value="seal">مہر</option>
+                <option value="sig1">دستخط (پہلے)</option>
+                <option value="sig2">دستخط (دوسرے)</option>
+              </select>
+            </div>
+            <div class="sel-bar" id="ctSelBar">
+              <h4 id="ctSelName">منتخب جزو</h4>
+              <div class="mini-grid">
+                <div class="field" style="margin:0">
+                  <label for="ctElFont">فونٹ / خط</label>
+                  <select id="ctElFont">
+                    <option value="nastaliq">نستعلیق (اردو)</option>
+                    <option value="naskh">نسخ (اردو و عربی)</option>
+                    <option value="amiri">امیری (عربی خطاطی)</option>
+                    <option value="ruqaa">رقعہ (دستخطی انداز)</option>
+                    <option value="poppins">انگریزی (Poppins)</option>
+                  </select>
+                </div>
+                <div class="field" style="margin:0">
+                  <label for="ctElSize">تحریر کا سائز</label>
+                  <div class="range-row"><input type="range" id="ctElSize" min="10" max="120" value="24" /><output id="ctElSizeOut">24</output></div>
+                </div>
+                <div class="field" style="margin:0">
+                  <label for="ctElColor">تحریر کا رنگ</label>
+                  <input type="color" id="ctElColor" value="#c9a227" />
+                </div>
+                <div class="field" style="margin:0">
+                  <label>انداز و ترتیب</label>
+                  <div style="display:flex;gap:6px">
+                    <button type="button" class="btn-ghost" id="ctElBold" style="flex:1">موٹا</button>
+                    <button type="button" class="btn-ghost" id="ctElAutoColor" style="flex:1">رنگ خودکار</button>
+                    <button type="button" class="btn-ghost" id="ctElResetPos" style="flex:1">جگہ اصل پر</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="st-status" id="ctStatus" role="status" style="margin-top:10px"></div>
+          </div>
+
+          <!-- Design / template -->
+          <div class="st-card">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".8"/><circle cx="17.5" cy="10.5" r=".8"/><circle cx="8.5" cy="7.5" r=".8"/><circle cx="6.5" cy="12.5" r=".8"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>مرحلہ 1 — ڈیزائن منتخب کریں</h3>
+            <div class="tpl-grid" id="ctTplGrid"></div>
+            <div class="f-grid" style="margin-top:13px">
+              <div class="field" style="margin:0">
+                <label>صفحے کی سمت</label>
+                <div class="seg" id="ctOrient">
+                  <button type="button" class="on" data-o="landscape">افقی (Landscape)</button>
+                  <button type="button" data-o="portrait">عمودی (Portrait)</button>
+                </div>
+              </div>
+              <div class="field" style="margin:0">
+                <label for="ctBorder">بارڈر کا انداز</label>
+                <select id="ctBorder">
+                  <option value="ornate">آرائشی سنہری کونے</option>
+                  <option value="double">دوہری سنہری لکیر</option>
+                  <option value="pattern">اسلامی نقش والی پٹی</option>
+                  <option value="single">سادہ لکیر</option>
+                  <option value="modern">جدید پٹی (اوپر)</option>
+                  <option value="none">بارڈر نہیں</option>
+                </select>
+              </div>
+              <div class="field" style="margin:0">
+                <label for="ctBgColor">پس منظر کا رنگ (اپنی مرضی)</label>
+                <div style="display:flex;gap:6px">
+                  <input type="color" id="ctBgColor" value="#0a1430" style="flex:1" />
+                  <button type="button" class="btn-ghost" id="ctBgReset">ڈیزائن والا رنگ</button>
+                </div>
+              </div>
+              <div class="field" style="margin:0">
+                <label for="ctAccentColor">نمایاں (سنہری) رنگ</label>
+                <div style="display:flex;gap:6px">
+                  <input type="color" id="ctAccentColor" value="#c9a227" style="flex:1" />
+                  <button type="button" class="btn-ghost" id="ctAccentReset">ڈیزائن والا رنگ</button>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:12px">
+              <label class="check-row"><input type="checkbox" id="ctPattern" checked /> پس منظر میں ہلکا اسلامی نقش (جیومیٹرک)</label>
+              <label class="check-row"><input type="checkbox" id="ctArch" checked /> اوپر محرابی نقش (اسلامی محراب)</label>
+              <label class="check-row"><input type="checkbox" id="ctDivider" checked /> نام کے نیچے سنہری پھول والی جداکار لکیر</label>
+            </div>
+          </div>
+
+          <!-- Certificate data -->
+          <div class="st-card">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>مرحلہ 2 — سند کی معلومات درج کریں</h3>
+            <div class="f-grid">
+              <div class="field full" style="margin:0">
+                <label for="ctInstitution">ادارے کا نام</label>
+                <input type="text" class="tin" id="ctInstitution" placeholder="اپنے ادارے کا مکمل نام لکھیں" />
+              </div>
+              <div class="field full" style="margin:0">
+                <label for="ctTitle">سند / سرٹیفکیٹ کا عنوان</label>
+                <input type="text" class="tin" id="ctTitle" placeholder="مثلاً: سندِ تکمیل، سرٹیفکیٹ آف اچیومنٹ، Certificate of Completion" />
+              </div>
+              <div class="field full" style="margin:0">
+                <label for="ctIntro">تعارفی سطر (عنوان کے نیچے)</label>
+                <input type="text" class="tin" id="ctIntro" placeholder="مثلاً: یہ سند اس بات کی تصدیق کے لیے عطا کی جاتی ہے کہ" />
+              </div>
+              <div class="field" style="margin:0">
+                <label for="ctName">حاصل کنندہ کا نام</label>
+                <input type="text" class="tin" id="ctName" placeholder="جسے سند دی جا رہی ہے اس کا نام" />
+              </div>
+              <div class="field" style="margin:0">
+                <label for="ctFather">والد کا نام</label>
+                <input type="text" class="tin" id="ctFather" placeholder="والد کا نام (نام کے نیچے «ولد» کے ساتھ آئے گا)" />
+              </div>
+              <div class="field full" style="margin:0">
+                <label for="ctBody">تفصیلی عبارت (سند کی وجہ / تفصیل)</label>
+                <textarea class="tin" id="ctBody" placeholder="مثلاً: موصوف نے ہمارے ادارے میں … کورس / تربیت کامیابی سے مکمل کی، اس اعتراف میں یہ سند عطا کی جاتی ہے۔"></textarea>
+              </div>
+              <div class="field" style="margin:0">
+                <label for="ctDate">تاریخِ اجرا</label>
+                <input type="text" class="tin" id="ctDate" placeholder="مثلاً: 8 نومبر 2026ء" />
+              </div>
+              <div class="field" style="margin:0">
+                <label for="ctSerial">سند نمبر</label>
+                <input type="text" class="tin" id="ctSerial" placeholder="مثلاً: 2026-001" dir="ltr" style="text-align:end" />
+              </div>
+              <div class="field" style="margin:0">
+                <label for="ctSig1Name">دستخط کنندہ ۱ — نام</label>
+                <input type="text" class="tin" id="ctSig1Name" placeholder="نام (دستخطی خط میں آئے گا)" />
+              </div>
+              <div class="field" style="margin:0">
+                <label for="ctSig1Title">دستخط کنندہ ۱ — عہدہ</label>
+                <input type="text" class="tin" id="ctSig1Title" placeholder="مثلاً: پرنسپل / مہتمم" />
+              </div>
+              <div class="field" style="margin:0">
+                <label for="ctSig2Name">دستخط کنندہ ۲ — نام</label>
+                <input type="text" class="tin" id="ctSig2Name" placeholder="نام (اختیاری)" />
+              </div>
+              <div class="field" style="margin:0">
+                <label for="ctSig2Title">دستخط کنندہ ۲ — عہدہ</label>
+                <input type="text" class="tin" id="ctSig2Title" placeholder="مثلاً: ناظمِ تعلیمات" />
+              </div>
+              <div class="field full" style="margin:0">
+                <label for="ctSealText">مہر پر لکھائی (ادارے کے نام کے علاوہ کچھ اور چاہیں تو)</label>
+                <input type="text" class="tin" id="ctSealText" placeholder="خالی چھوڑیں تو مہر پر ادارے کا نام خود آئے گا" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Logo, signature, seal -->
+          <div class="st-card">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7l1.7 3.4L17.5 11l-2.8 2.6.7 3.8L12 15.7l-3.4 1.7.7-3.8L6.5 11l3.8-.6z"/></svg>مرحلہ 3 — لوگو، دستخط اور مہر</h3>
+            <div class="f-grid">
+              <div class="field" style="margin:0">
+                <label>ادارے کا لوگو</label>
+                <div class="up-mini">
+                  <button type="button" class="btn-ghost" id="ctLogoBtn">لوگو منتخب کریں</button>
+                  <span class="img-chip" id="ctLogoChip"><img id="ctLogoThumb" alt="لوگو" /><button type="button" id="ctLogoDel">ہٹائیں</button></span>
+                </div>
+                <input type="file" id="ctLogoFile" accept="image/*" hidden />
+              </div>
+              <div class="field" style="margin:0">
+                <label>دستخط کی تصویر (دستخط کنندہ ۱ کے لیے)</label>
+                <div class="up-mini">
+                  <button type="button" class="btn-ghost" id="ctSigBtn">دستخط منتخب کریں</button>
+                  <span class="img-chip" id="ctSigChip"><img id="ctSigThumb" alt="دستخط" /><button type="button" id="ctSigDel">ہٹائیں</button></span>
+                </div>
+                <input type="file" id="ctSigFile" accept="image/*" hidden />
+                <p class="hint" style="margin-top:7px">سفید کاغذ پر کیے گئے دستخط کی تصویر بہترین رہتی ہے۔ تصویر نہ ہو تو لکھا ہوا نام دستخطی خط میں آئے گا۔</p>
+              </div>
+              <div class="field" style="margin:0">
+                <label>مہر کی تصویر (اختیاری)</label>
+                <div class="up-mini">
+                  <button type="button" class="btn-ghost" id="ctStampBtn">مہر منتخب کریں</button>
+                  <span class="img-chip" id="ctStampChip"><img id="ctStampThumb" alt="مہر" /><button type="button" id="ctStampDel">ہٹائیں</button></span>
+                </div>
+                <input type="file" id="ctStampFile" accept="image/*" hidden />
+                <p class="hint" style="margin-top:7px">مہر کی تصویر نہ ہو تو ادارے کے نام والی خوبصورت سنہری مہر خودکار بنے گی۔</p>
+              </div>
+              <div class="field" style="margin:0">
+                <label>نمایاں جگہیں</label>
+                <label class="check-row"><input type="checkbox" id="ctShowSeal" checked /> مہر دکھائیں</label>
+                <label class="check-row"><input type="checkbox" id="ctShowSig1" checked /> دستخط کنندہ ۱ کی جگہ دکھائیں</label>
+                <label class="check-row"><input type="checkbox" id="ctShowSig2" checked /> دستخط کنندہ ۲ کی جگہ دکھائیں</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Save + download -->
+          <div class="st-card">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>مرحلہ 4 — ڈیزائن محفوظ کریں اور ڈاؤن لوڈ</h3>
+            <p class="hint">ڈیزائن محفوظ کرنے سے وہ اسی نشست میں نیچے فہرست میں آ جائے گا اور آپ اسے دوبارہ کھول کر ترمیم کر سکیں گے۔ مستقل نقل کے لیے «ڈیزائن فائل» ڈاؤن لوڈ کر لیں — وہ فائل دوبارہ یہیں کھول کر ڈیزائن ویسا کا ویسا واپس آ جائے گا۔</p>
+            <div class="field">
+              <label for="ctDesignName">ڈیزائن کا نام (محفوظ کرنے کے لیے)</label>
+              <div style="display:flex;gap:7px;flex-wrap:wrap">
+                <input type="text" class="tin" id="ctDesignName" placeholder="مثلاً: سالانہ اسناد 2026" style="flex:1 1 180px;width:auto" />
+                <button type="button" class="btn-gold" id="ctSaveDesign">ڈیزائن محفوظ کریں</button>
+              </div>
+            </div>
+            <div id="ctSavedList"></div>
+            <div class="scan-actions" style="margin-top:12px">
+              <button type="button" class="btn-ghost" id="ctExportDesign">ڈیزائن فائل ڈاؤن لوڈ کریں</button>
+              <button type="button" class="btn-ghost" id="ctImportBtn">محفوظ ڈیزائن فائل کھولیں</button>
+              <button type="button" class="btn-ghost" id="ctNewDesign" style="color:#ff9d9d;border-color:rgba(229,72,77,.5)">نیا ڈیزائن (سب خالی کریں)</button>
+            </div>
+            <input type="file" id="ctImportFile" accept=".json,application/json" hidden />
+            <div class="field" style="margin-top:14px">
+              <label>تیار سند ڈاؤن لوڈ کریں — پرنٹ معیار (300 DPI, A4)</label>
+              <div class="dl-grid">
+                <button type="button" class="btn-gold" id="ctDlPdf">PDF ڈاؤن لوڈ کریں</button>
+                <button type="button" class="btn-ghost" id="ctDlPng">تصویر (PNG) ڈاؤن لوڈ کریں</button>
+                <button type="button" class="btn-ghost" id="ctDlJpg">تصویر (JPG) ڈاؤن لوڈ کریں</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="st-note">معیار و رازداری: سند A4 سائز میں 300 DPI پر تیار ہوتی ہے، اس لیے اسے باقاعدہ پرنٹ کر کے ادارے کی سند کے طور پر پیش کیا جا سکتا ہے۔ تمام ترمیم و تیاری آپ کے براؤزر میں ہوتی ہے — نام، لوگو، دستخط اور مہر کی تصاویر کہیں اپلوڈ نہیں ہوتیں۔ اس ٹول میں کوئی ادا شدہ سروس یا AI API استعمال نہیں ہوتی۔</div>
         </div>
       </section>
 
-      <!-- ================= Tool: CV ================= -->
+      <!-- ================= Tool: CV Designer ================= -->
       <section class="view" id="view-cv">
         <button class="back-btn" data-goto="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg><span data-i18n="back">واپس ڈیش بورڈ</span></button>
-        <div class="panel">
-          <span class="pill"><span class="dia"></span><span class="latin">AL-MINHAJ CREATIVE STUDIO</span></span>
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg></div>
-          <h2 data-i18n="t4Title">اردو و انگلش CV ڈیزائنر</h2>
-          <p data-i18n="t4Desc">اردو RTL اور انگریزی LTR — پروفیشنل ٹیمپلیٹس کے ساتھ A4 سائز CV تیار کریں۔</p>
-          <h3 class="feat" data-i18n="features">اہم خصوصیات</h3>
-          <div class="chips">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="t4f1">اردو و انگریزی الگ حصے</span></span>
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="t4f2">پروفیشنل ٹیمپلیٹس</span></span>
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="t4f3">تصویر شامل کرنے کا اختیار</span></span>
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="t4f4">A4 PDF ڈاؤن لوڈ</span></span>
+
+        <div class="studio">
+          <div class="studio-head">
+            <h2>اردو و انگلش CV ڈیزائنر</h2>
+            <p>اپنی معلومات خود درج کریں اور پروفیشنل ٹیمپلیٹ میں خوبصورت A4 سائز CV تیار کریں — اردو CV مکمل RTL اور English CV مکمل LTR ترتیب میں۔ تمام کام آپ کے براؤزر میں ہوتا ہے؛ کوئی معلومات کہیں بھیجی نہیں جاتیں اور کوئی فرضی معلومات شامل نہیں ہوتیں — تمام خانے خالی ہیں۔</p>
           </div>
-          <div class="note" data-i18n="phaseNote">اس ٹول کا بنیادی صفحہ تیار ہے۔ اس کا مکمل اندرونی نظام آپ کی منظوری کے بعد اگلے مرحلے میں بنایا جائے گا۔</div>
+
+          <!-- Language choice -->
+          <div class="st-card">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>CV کی زبان منتخب کریں</h3>
+            <div class="seg" id="cvLangSeg">
+              <button type="button" class="on" data-cvlang="ur">اردو CV — مکمل RTL</button>
+              <button type="button" data-cvlang="en">English CV — Full LTR</button>
+            </div>
+            <p class="hint" style="margin-top:9px">دونوں CV الگ الگ ہیں: اردو حصے میں درج معلومات اردو CV میں اور انگریزی حصے کی معلومات English CV میں آئیں گی۔ ڈیزائن، رنگ اور فونٹ بھی ہر CV کے لیے الگ منتخب کیا جا سکتا ہے۔</p>
+          </div>
+
+          <!-- Design -->
+          <div class="st-card">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".8"/><circle cx="17.5" cy="10.5" r=".8"/><circle cx="8.5" cy="7.5" r=".8"/><circle cx="6.5" cy="12.5" r=".8"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>مرحلہ 1 — ٹیمپلیٹ، رنگ، فونٹ و تصویر</h3>
+            <div class="field">
+              <label>پروفیشنل ٹیمپلیٹ منتخب کریں</label>
+              <div class="tpl-grid" id="cvTplGrid"></div>
+            </div>
+            <div class="f-grid">
+              <div class="field" style="margin:0">
+                <label>نمایاں رنگ</label>
+                <div class="swatches" id="cvAccents">
+                  <button type="button" class="sw sel" data-accent="#16265c" style="background:#16265c" title="گہرا نیوی" aria-label="گہرا نیوی رنگ"></button>
+                  <button type="button" class="sw" data-accent="#a97f14" style="background:#a97f14" title="سنہری" aria-label="سنہری رنگ"></button>
+                  <button type="button" class="sw" data-accent="#0f766e" style="background:#0f766e" title="فیروزی" aria-label="فیروزی رنگ"></button>
+                  <button type="button" class="sw" data-accent="#7a1f2b" style="background:#7a1f2b" title="عنابی" aria-label="عنابی رنگ"></button>
+                  <button type="button" class="sw" data-accent="#0b5240" style="background:#0b5240" title="زمردی" aria-label="زمردی رنگ"></button>
+                  <button type="button" class="sw" data-accent="#334155" style="background:#334155" title="سرمئی نیلا" aria-label="سرمئی نیلا رنگ"></button>
+                </div>
+                <div style="display:flex;gap:6px;margin-top:9px">
+                  <input type="color" id="cvAccentCustom" value="#16265c" style="flex:1" aria-label="اپنی پسند کا رنگ" />
+                </div>
+              </div>
+              <div class="field" style="margin:0">
+                <label for="cvFont">فونٹ / خط</label>
+                <select id="cvFont"></select>
+              </div>
+              <div class="field" style="margin:0">
+                <label for="cvFontSize">تحریر کا سائز</label>
+                <div class="range-row"><input type="range" id="cvFontSize" min="13" max="18" step="1" value="15" /><output id="cvFontSizeOut">15</output></div>
+              </div>
+              <div class="field" style="margin:0">
+                <label>تصویر</label>
+                <div class="toggle-row" style="margin-bottom:9px">
+                  <span><b>CV میں تصویر شامل کریں</b><small>تصویر نہ چاہیں تو بند کر دیں — بغیر تصویر کے بھی مکمل CV بنے گا</small></span>
+                  <input type="checkbox" class="switch" id="cvShowPhoto" checked aria-label="CV میں تصویر شامل کریں" />
+                </div>
+                <div class="up-mini">
+                  <button type="button" class="btn-ghost" id="cvPhotoBtn">تصویر منتخب کریں</button>
+                  <span class="img-chip" id="cvPhotoChip"><img id="cvPhotoThumb" alt="CV تصویر" /><button type="button" id="cvPhotoDel">ہٹائیں</button></span>
+                </div>
+                <input type="file" id="cvPhotoFile" accept="image/*" hidden />
+              </div>
+            </div>
+          </div>
+
+          <!-- Data form (built by script, per language) -->
+          <div class="st-card">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg><span id="cvFormTitle">مرحلہ 2 — اپنی معلومات درج کریں (اردو CV)</span></h3>
+            <p class="hint">جو خانہ خالی چھوڑیں گے وہ CV میں شامل نہیں ہوگا۔ تعلیم و تجربے کے مزید خانے نیچے والے بٹن سے جتنے چاہیں شامل کریں۔</p>
+            <div id="cvFormUr"></div>
+            <div id="cvFormEn" dir="ltr" style="display:none;text-align:left"></div>
+          </div>
+
+          <!-- Preview + download -->
+          <div class="st-card">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>مرحلہ 3 — تیار CV کا پیش منظر، PDF و پرنٹ</h3>
+            <p class="hint">پیش منظر اصل A4 صفحے کی درست شکل ہے — معلومات لکھتے ہی یہ ساتھ ساتھ تازہ ہوتا جاتا ہے۔ PDF عین اسی A4 سائز میں بنے گی، پرنٹ کے لیے تیار۔</p>
+            <div class="cv-fit" id="cvFit"><div class="cv-page" id="cvPage"></div></div>
+            <div class="st-status" id="cvStatus" role="status" style="margin-top:10px"></div>
+            <div class="dl-grid" style="margin-top:6px">
+              <button type="button" class="btn-gold" id="cvDlPdf">PDF ڈاؤن لوڈ کریں (A4)</button>
+              <button type="button" class="btn-ghost" id="cvDlPng">تصویر (PNG) ڈاؤن لوڈ کریں</button>
+              <button type="button" class="btn-ghost" id="cvClear" style="color:#ff9d9d;border-color:rgba(229,72,77,.5)">اس CV کے تمام خانے خالی کریں</button>
+            </div>
+          </div>
+
+          <div class="st-note">رازداری و درستگی: اس CV میں صرف وہی معلومات آتی ہیں جو آپ خود درج کرتے ہیں — کوئی فرضی نام، تعلیم یا تجربہ شامل نہیں ہوتا۔ تمام تیاری آپ کے براؤزر میں مفت لائبریریوں سے ہوتی ہے؛ معلومات اور تصویر کہیں اپلوڈ نہیں ہوتیں۔ CV اسی نشست کے لیے ہے — مستقل نقل کے لیے PDF یا PNG ڈاؤن لوڈ کر لیں۔</div>
         </div>
       </section>
 
@@ -598,6 +1340,2073 @@
 
       // Always open in the dark (black / navy) theme as specified;
       // light mode is available only through the theme toggle button.
+    </script>
+    <script>
+    (function(){
+      "use strict";
+      var PRESETS = {
+        "pk-passport": { wmm: 51, hmm: 51, label: "Pakistan Passport 2x2in" },
+        "pk-cnic":     { wmm: 35, hmm: 45, label: "Pakistan CNIC 35x45mm" },
+        "us-visa":     { wmm: 51, hmm: 51, label: "US Passport Visa 2x2in" },
+        "uk-visa":     { wmm: 35, hmm: 45, label: "UK Visa 35x45mm" },
+        "schengen":    { wmm: 35, hmm: 45, label: "Schengen Visa 35x45mm" },
+        "india-visa":  { wmm: 51, hmm: 51, label: "India Visa 2x2in" },
+        "uae-visa":    { wmm: 43, hmm: 55, label: "UAE Visa 43x55mm" },
+        "saudi-visa":  { wmm: 51, hmm: 51, label: "Saudi Visa 2x2in" },
+        "id-1x1":      { wmm: 25.4, hmm: 25.4, label: "ID 1x1in" },
+        "id-15x2":     { wmm: 38, hmm: 51, label: "ID 1.5x2in" }
+      };
+      var photos = []; // {img, url, zoom, rot, ox, oy, cut}
+      var sel = -1;
+      var bgColor = "#ffffff";
+      var stream = null;
+      var renderTimer = null;
+
+      function $(id){ return document.getElementById(id); }
+      var canvas = $("ppCanvas"), ctx = canvas.getContext("2d");
+      var stage = $("ppStage"), emptyEl = $("ppEmpty"), guide = $("ppGuide");
+
+      function preset(){ return PRESETS[$("ppPreset").value] || PRESETS["pk-passport"]; }
+      function dpi(){ return parseInt($("ppDpi").value, 10) || 300; }
+      function targetPx(){
+        var p = preset();
+        return { w: Math.round(p.wmm / 25.4 * dpi()), h: Math.round(p.hmm / 25.4 * dpi()) };
+      }
+      function setStatus(msg){ $("ppStatus").textContent = msg || ""; }
+      function current(){ return sel >= 0 ? photos[sel] : null; }
+
+      function updateSizeInfo(){
+        var p = preset(), t = targetPx();
+        $("ppSizeInfo").textContent = "تیار تصویر کا سائز: " + p.wmm + " × " + p.hmm + " ملی میٹر — " + t.w + " × " + t.h + " پکسل (" + dpi() + " DPI پر)";
+        $("ppMeta").textContent = t.w + " × " + t.h + " px · " + p.wmm + " × " + p.hmm + " mm · " + dpi() + " DPI";
+      }
+
+      /* ---------- background removal: corner-colour distance, fully in-browser ---------- */
+      function buildCutout(ph){
+        var img = ph.img;
+        var maxSide = 1100;
+        var scale = Math.min(1, maxSide / Math.max(img.naturalWidth, img.naturalHeight));
+        var w = Math.max(2, Math.round(img.naturalWidth * scale));
+        var h = Math.max(2, Math.round(img.naturalHeight * scale));
+        var c = document.createElement("canvas"); c.width = w; c.height = h;
+        var cx = c.getContext("2d", { willReadFrequently: true });
+        cx.filter = "brightness(" + $("ppBright").value + "%) contrast(" + $("ppContrast").value + "%) saturate(" + $("ppSat").value + "%)";
+        cx.drawImage(img, 0, 0, w, h);
+        cx.filter = "none";
+        if (!$("ppBgRemove").checked) { ph.cut = c; return; }
+        var data;
+        try { data = cx.getImageData(0, 0, w, h); } catch(e){ ph.cut = c; return; }
+        var d = data.data;
+        // average the four corner patches as the background colour
+        var br = 0, bg2 = 0, bb = 0, n = 0, patch = Math.max(2, Math.floor(Math.min(w, h) * 0.06));
+        function sample(x0, y0){
+          for (var y = y0; y < Math.min(y0 + patch, h); y++)
+            for (var x = x0; x < Math.min(x0 + patch, w); x++){
+              var i = (y * w + x) * 4; br += d[i]; bg2 += d[i+1]; bb += d[i+2]; n++;
+            }
+        }
+        sample(0, 0); sample(w - patch, 0); sample(0, h - patch); sample(w - patch, h - patch);
+        if (n) { br /= n; bg2 /= n; bb /= n; }
+        var tol = parseInt($("ppTol").value, 10) || 42;
+        var hard = tol * 2.2, soft = tol * 3.4;
+        for (var i2 = 0; i2 < d.length; i2 += 4){
+          var dr = d[i2] - br, dg = d[i2+1] - bg2, db = d[i2+2] - bb;
+          var dist = Math.sqrt(dr*dr + dg*dg + db*db);
+          if (dist < hard) d[i2+3] = 0;
+          else if (dist < soft) d[i2+3] = Math.round(d[i2+3] * (dist - hard) / (soft - hard));
+        }
+        cx.putImageData(data, 0, 0);
+        ph.cut = c;
+      }
+
+      function invalidateCuts(){ for (var i = 0; i < photos.length; i++) photos[i].cut = null; }
+
+      function render(){
+        updateSizeInfo();
+        var ph = current();
+        if (!ph){
+          canvas.style.display = "none"; guide.style.display = "none"; emptyEl.style.display = "";
+          return;
+        }
+        emptyEl.style.display = "none"; canvas.style.display = ""; guide.style.display = "";
+        var t = targetPx();
+        // preview canvas capped for speed; export re-renders at full size
+        var pw = Math.min(t.w, 700), phgt = Math.round(pw * t.h / t.w);
+        drawTo(canvas, pw, phgt, ph);
+      }
+
+      function drawTo(out, W, H, ph){
+        out.width = W; out.height = H;
+        var octx = out.getContext("2d");
+        octx.clearRect(0, 0, W, H);
+        if (bgColor !== "transparent"){ octx.fillStyle = bgColor; octx.fillRect(0, 0, W, H); }
+        if (!ph.cut) buildCutout(ph);
+        var src = ph.cut; if (!src) return;
+        var cover = Math.max(W / src.width, H / src.height);
+        var scale = cover * (ph.zoom / 100);
+        var dw = src.width * scale, dh = src.height * scale;
+        octx.save();
+        octx.translate(W/2 + ph.ox * W, H/2 + ph.oy * H);
+        octx.rotate(ph.rot * Math.PI / 180);
+        octx.drawImage(src, -dw/2, -dh/2, dw, dh);
+        octx.restore();
+      }
+
+      function scheduleRender(){
+        if (renderTimer) clearTimeout(renderTimer);
+        renderTimer = setTimeout(render, 60);
+      }
+      function scheduleRebuild(){
+        invalidateCuts(); scheduleRender();
+      }
+
+      /* ---------- thumbnails ---------- */
+      function renderThumbs(){
+        var box = $("ppThumbs"); box.innerHTML = "";
+        box.classList.toggle("show", photos.length > 0);
+        photos.forEach(function(ph, idx){
+          var b = document.createElement("button");
+          b.type = "button"; b.className = "thumb" + (idx === sel ? " sel" : "");
+          b.setAttribute("aria-label", "تصویر " + (idx + 1));
+          var im = document.createElement("img"); im.src = ph.url; im.alt = "";
+          var del = document.createElement("span"); del.className = "del"; del.textContent = "×";
+          del.addEventListener("click", function(ev){
+            ev.stopPropagation();
+            URL.revokeObjectURL(ph.url);
+            photos.splice(idx, 1);
+            if (sel >= photos.length) sel = photos.length - 1;
+            syncTransformControls(); renderThumbs(); render();
+          });
+          b.appendChild(im); b.appendChild(del);
+          b.addEventListener("click", function(){ sel = idx; syncTransformControls(); renderThumbs(); render(); });
+          box.appendChild(b);
+        });
+      }
+
+      function addImage(img, url){
+        photos.push({ img: img, url: url, zoom: 100, rot: 0, ox: 0, oy: 0, cut: null });
+        sel = photos.length - 1;
+        syncTransformControls(); renderThumbs(); render();
+        setStatus("تصویر شامل ہو گئی ہے۔ اب سائز، پس منظر اور روشنی اپنی ضرورت کے مطابق ترتیب دیں۔");
+      }
+
+      function loadFile(file){
+        if (!file || file.type.indexOf("image/") !== 0) return;
+        var url = URL.createObjectURL(file);
+        var img = new Image();
+        img.onload = function(){ addImage(img, url); };
+        img.onerror = function(){ URL.revokeObjectURL(url); setStatus("یہ فائل بطور تصویر نہیں کھل سکی۔ JPG یا PNG تصویر منتخب کریں۔"); };
+        img.src = url;
+      }
+
+      function syncTransformControls(){
+        var ph = current();
+        $("ppZoom").value = ph ? ph.zoom : 100;
+        $("ppZoomOut").textContent = (ph ? ph.zoom : 100) + "%";
+        $("ppRotate").value = ph ? ph.rot : 0;
+        $("ppRotateOut").textContent = (ph ? ph.rot : 0) + "°";
+      }
+
+      /* ---------- events: upload & camera ---------- */
+      $("ppUploadBtn").addEventListener("click", function(){ $("ppFile").click(); });
+      $("ppFile").addEventListener("change", function(){
+        for (var i = 0; i < this.files.length; i++) loadFile(this.files[i]);
+        this.value = "";
+      });
+      stage.addEventListener("dragover", function(e){ e.preventDefault(); });
+      stage.addEventListener("drop", function(e){
+        e.preventDefault();
+        if (e.dataTransfer) for (var i = 0; i < e.dataTransfer.files.length; i++) loadFile(e.dataTransfer.files[i]);
+      });
+
+      function stopCamera(){
+        if (stream){ stream.getTracks().forEach(function(tr){ tr.stop(); }); stream = null; }
+        $("ppCamBox").classList.remove("open");
+      }
+      $("ppCameraBtn").addEventListener("click", function(){
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+          setStatus("اس براؤزر میں کیمرہ دستیاب نہیں — گیلری سے تصویر منتخب کر لیں۔");
+          return;
+        }
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false })
+          .then(function(s){
+            stream = s;
+            $("ppVideo").srcObject = s;
+            $("ppCamBox").classList.add("open");
+            setStatus("کیمرہ کھل گیا ہے — چہرہ دائرے کے سامنے رکھ کر تصویر کھینچیں۔");
+          })
+          .catch(function(){ setStatus("کیمرے کی اجازت نہیں ملی — گیلری سے تصویر منتخب کر لیں۔"); });
+      });
+      $("ppCamClose").addEventListener("click", stopCamera);
+      $("ppCapture").addEventListener("click", function(){
+        var v = $("ppVideo");
+        if (!v.videoWidth) return;
+        var c = document.createElement("canvas");
+        c.width = v.videoWidth; c.height = v.videoHeight;
+        c.getContext("2d").drawImage(v, 0, 0);
+        c.toBlob(function(blob){
+          if (blob) loadFile(new File([blob], "camera.jpg", { type: "image/jpeg" }));
+          stopCamera();
+        }, "image/jpeg", 0.95);
+      });
+
+      /* ---------- events: controls ---------- */
+      $("ppPreset").addEventListener("change", render);
+      $("ppDpi").addEventListener("change", render);
+      $("ppBgRemove").addEventListener("change", function(){
+        $("ppTolField").style.display = this.checked ? "" : "none";
+        scheduleRebuild();
+      });
+      $("ppTol").addEventListener("input", function(){ $("ppTolOut").textContent = this.value; scheduleRebuild(); });
+      ["ppBright","ppContrast","ppSat"].forEach(function(id){
+        $(id).addEventListener("input", function(){
+          $(id + "Out").textContent = this.value; scheduleRebuild();
+        });
+      });
+      $("ppAutoEnhance").addEventListener("click", function(){
+        $("ppBright").value = 108; $("ppBrightOut").textContent = "108";
+        $("ppContrast").value = 112; $("ppContrastOut").textContent = "112";
+        $("ppSat").value = 108; $("ppSatOut").textContent = "108";
+        scheduleRebuild();
+        setStatus("خودکار بہتری لگ گئی ہے — روشنی، کنٹراسٹ اور رنگ متوازن کر دیے گئے ہیں۔");
+      });
+      $("ppZoom").addEventListener("input", function(){
+        var ph = current(); if (!ph) return;
+        ph.zoom = parseInt(this.value, 10); $("ppZoomOut").textContent = this.value + "%"; scheduleRender();
+      });
+      $("ppRotate").addEventListener("input", function(){
+        var ph = current(); if (!ph) return;
+        ph.rot = parseFloat(this.value); $("ppRotateOut").textContent = this.value + "°"; scheduleRender();
+      });
+      $("ppReset").addEventListener("click", function(){
+        var ph = current(); if (!ph) return;
+        ph.zoom = 100; ph.rot = 0; ph.ox = 0; ph.oy = 0;
+        $("ppBright").value = 100; $("ppBrightOut").textContent = "100";
+        $("ppContrast").value = 100; $("ppContrastOut").textContent = "100";
+        $("ppSat").value = 100; $("ppSatOut").textContent = "100";
+        syncTransformControls(); scheduleRebuild();
+      });
+
+      var swatches = $("ppSwatches").querySelectorAll(".sw");
+      swatches.forEach(function(sw){
+        sw.addEventListener("click", function(){
+          swatches.forEach(function(s){ s.classList.remove("sel"); });
+          sw.classList.add("sel");
+          bgColor = sw.getAttribute("data-bg");
+          if (bgColor !== "transparent") $("ppBgCustom").value = bgColor;
+          if (bgColor === "transparent" && $("ppFormat").value === "jpeg") $("ppFormat").value = "png";
+          scheduleRender();
+        });
+      });
+      $("ppBgCustom").addEventListener("input", function(){
+        bgColor = this.value;
+        swatches.forEach(function(s){ s.classList.remove("sel"); });
+        scheduleRender();
+      });
+
+      /* ---------- drag to reposition ---------- */
+      var dragging = false, lastX = 0, lastY = 0;
+      function ptrDown(e){ var ph = current(); if (!ph) return; dragging = true; lastX = e.clientX; lastY = e.clientY; stage.setPointerCapture(e.pointerId); }
+      function ptrMove(e){
+        if (!dragging) return;
+        var ph = current(); if (!ph) return;
+        var r = stage.getBoundingClientRect();
+        ph.ox += (e.clientX - lastX) / r.width;
+        ph.oy += (e.clientY - lastY) / r.height;
+        lastX = e.clientX; lastY = e.clientY;
+        scheduleRender();
+      }
+      stage.addEventListener("pointerdown", ptrDown);
+      stage.addEventListener("pointermove", ptrMove);
+      stage.addEventListener("pointerup", function(){ dragging = false; });
+      stage.addEventListener("pointercancel", function(){ dragging = false; });
+
+      /* ---------- download & print sheet ---------- */
+      function downloadCanvas(out, name){
+        var fmt = $("ppFormat").value;
+        var mime = fmt === "png" ? "image/png" : "image/jpeg";
+        out.toBlob(function(blob){
+          if (!blob) return;
+          var a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = name + "." + (fmt === "png" ? "png" : "jpg");
+          document.body.appendChild(a); a.click(); a.remove();
+          setTimeout(function(){ URL.revokeObjectURL(a.href); }, 4000);
+        }, mime, 0.95);
+      }
+      function exportOne(ph, idx){
+        var t = targetPx();
+        var out = document.createElement("canvas");
+        drawTo(out, t.w, t.h, ph);
+        downloadCanvas(out, "passport-photo-" + (idx + 1) + "-" + $("ppPreset").value);
+      }
+      $("ppDownload").addEventListener("click", function(){
+        var ph = current();
+        if (!ph){ setStatus("پہلے کوئی تصویر شامل کریں۔"); return; }
+        exportOne(ph, sel);
+        setStatus("تیار تصویر ڈاؤن لوڈ ہو رہی ہے۔");
+      });
+      $("ppDownloadAll").addEventListener("click", function(){
+        if (!photos.length){ setStatus("پہلے تصاویر شامل کریں۔"); return; }
+        photos.forEach(function(ph, idx){
+          setTimeout(function(){ exportOne(ph, idx); }, idx * 700);
+        });
+        setStatus(photos.length + " تصاویر ایک ایک کر کے ڈاؤن لوڈ ہو رہی ہیں۔");
+      });
+      $("ppSheet").addEventListener("click", function(){
+        var ph = current();
+        if (!ph){ setStatus("پہلے کوئی تصویر شامل کریں۔"); return; }
+        var d = dpi();
+        var SW = Math.round(4 * d), SH = Math.round(6 * d); // 4x6 inch sheet
+        var t = targetPx();
+        var single = document.createElement("canvas");
+        drawTo(single, t.w, t.h, ph);
+        var sheet = document.createElement("canvas"); sheet.width = SW; sheet.height = SH;
+        var sx = sheet.getContext("2d");
+        sx.fillStyle = "#ffffff"; sx.fillRect(0, 0, SW, SH);
+        var gap = Math.round(0.08 * d);
+        var cols = Math.max(1, Math.floor((SW + gap) / (t.w + gap)));
+        var rows = Math.max(1, Math.floor((SH + gap) / (t.h + gap)));
+        var x0 = Math.round((SW - (cols * t.w + (cols - 1) * gap)) / 2);
+        var y0 = Math.round((SH - (rows * t.h + (rows - 1) * gap)) / 2);
+        sx.strokeStyle = "#bbbbbb"; sx.lineWidth = 1;
+        for (var r = 0; r < rows; r++)
+          for (var c = 0; c < cols; c++){
+            var x = x0 + c * (t.w + gap), y = y0 + r * (t.h + gap);
+            sx.drawImage(single, x, y);
+            sx.strokeRect(x + 0.5, y + 0.5, t.w - 1, t.h - 1);
+          }
+        var fmt = $("ppFormat").value;
+        sheet.toBlob(function(blob){
+          if (!blob) return;
+          var a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = "print-sheet-4x6." + (fmt === "png" ? "png" : "jpg");
+          document.body.appendChild(a); a.click(); a.remove();
+          setTimeout(function(){ URL.revokeObjectURL(a.href); }, 4000);
+        }, fmt === "png" ? "image/png" : "image/jpeg", 0.95);
+        setStatus("پرنٹ شیٹ تیار ہے — اس میں " + (cols * rows) + " کاپیاں شامل ہیں۔");
+      });
+      $("ppClear").addEventListener("click", function(){
+        photos.forEach(function(ph){ URL.revokeObjectURL(ph.url); });
+        photos = []; sel = -1;
+        syncTransformControls(); renderThumbs(); render();
+        setStatus("تمام تصاویر ہٹا دی گئی ہیں۔");
+      });
+
+      // stop the camera when the user leaves this tool
+      document.addEventListener("click", function(e){
+        var g = e.target.closest("[data-goto]");
+        if (g && g.getAttribute("data-goto") !== "photo") stopCamera();
+      });
+
+      updateSizeInfo();
+      render();
+    })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.0/dist/tesseract.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script>
+    (function(){
+      "use strict";
+      function $(id){ return document.getElementById(id); }
+      function urNum(n){ return String(n).replace(/\d/g, function(d){ return "۰۱۲۳۴۵۶۷۸۹"[+d]; }); }
+      function setStatus(m){ $("bkStatus").textContent = m || ""; }
+      function setProg(p){ // -1 hide
+        var w = $("bkProgWrap");
+        if (p < 0){ w.classList.remove("show"); $("bkProg").style.width = "0"; return; }
+        w.classList.add("show"); $("bkProg").style.width = Math.round(p) + "%";
+      }
+      function loadImg(src){ return new Promise(function(res, rej){ var i = new Image(); i.onload = function(){ res(i); }; i.onerror = rej; i.src = src; }); }
+      function mkCanvas(w, h){ var c = document.createElement("canvas"); c.width = w; c.height = h; return c; }
+
+      var mode = "spread";
+      var stream = null, track = null;
+      var pages = [];       // {id, flat(dataURL pre-filter), view(dataURL), ocr, words:[{text,conf}], rot}
+      var spreads = 0;
+      var nextId = 1;
+      var captured = null;  // canvas of current shot
+      var quad = null;      // [{x,y}x4] in captured coords TL,TR,BR,BL
+      var spineX = 0.5;     // fraction of captured width
+      var replaceAt = -1;   // rescan target index
+      var modalIdx = -1;
+      var ocrWorker = null, ocrWorkerLang = "";
+
+      /* =============== camera =============== */
+      function stopBkCamera(){
+        if (stream){ stream.getTracks().forEach(function(t){ t.stop(); }); stream = null; track = null; }
+        $("bkCamBox").classList.remove("open");
+      }
+      $("bkCameraBtn").addEventListener("click", function(){
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){ setStatus("اس براؤزر میں کیمرہ دستیاب نہیں — گیلری سے تصاویر منتخب کر لیں۔"); return; }
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment", width: { ideal: 2560 }, height: { ideal: 1920 } }, audio: false })
+          .then(function(s){
+            stream = s; track = s.getVideoTracks()[0];
+            $("bkVideo").srcObject = s;
+            $("bkCamBox").classList.add("open");
+            $("bkAdjBox").classList.remove("open");
+            setStatus("کیمرہ کھل گیا ہے — کتاب خانے کے اندر رکھ کر «یہ پھیلاؤ اسکین کریں» دبائیں۔");
+          })
+          .catch(function(){ setStatus("کیمرے کی اجازت نہیں ملی — براؤزر کی ترتیبات سے اجازت دے کر دوبارہ کوشش کریں، یا گیلری استعمال کریں۔"); });
+      });
+      $("bkCamClose").addEventListener("click", stopBkCamera);
+      $("bkTorch").addEventListener("click", function(){
+        if (!track || !track.getCapabilities){ setStatus("اس فون پر ٹارچ کنٹرول دستیاب نہیں۔"); return; }
+        var caps = track.getCapabilities();
+        if (!caps.torch){ setStatus("اس کیمرے میں ٹارچ کی سہولت نہیں ملی۔"); return; }
+        var cur = track.getSettings && track.getSettings().torch;
+        track.applyConstraints({ advanced: [{ torch: !cur }] }).catch(function(){ setStatus("ٹارچ نہیں جل سکی۔"); });
+      });
+      $("bkCapture").addEventListener("click", function(){
+        var v = $("bkVideo");
+        if (!v.videoWidth){ setStatus("کیمرہ ابھی تیار نہیں — لمحہ رکیں۔"); return; }
+        var maxW = 2600, sc = Math.min(1, maxW / v.videoWidth);
+        var c = mkCanvas(Math.round(v.videoWidth * sc), Math.round(v.videoHeight * sc));
+        c.getContext("2d").drawImage(v, 0, 0, c.width, c.height);
+        beginAdjust(c);
+      });
+
+      /* =============== gallery =============== */
+      $("bkUploadBtn").addEventListener("click", function(){ $("bkFile").click(); });
+      $("bkFile").addEventListener("change", function(){
+        var files = Array.prototype.slice.call(this.files || []);
+        this.value = "";
+        if (!files.length) return;
+        processFiles(files);
+      });
+      function processFiles(files){
+        var i = 0;
+        setStatus("گیلری کی تصاویر پروسیس ہو رہی ہیں…");
+        (function next(){
+          if (i >= files.length){ setProg(-1); setStatus(files.length + " تصاویر سے صفحات تیار ہو گئے۔ فہرست میں جانچ لیں — کسی صفحے کے کونے ٹھیک نہ ہوں تو وہ صفحہ حذف کر کے کیمرے سے دوبارہ اسکین کر لیں۔"); return; }
+          var f = files[i]; i++;
+          setProg(i / files.length * 100);
+          var url = URL.createObjectURL(f);
+          loadImg(url).then(function(img){
+            var maxW = 2600, sc = Math.min(1, maxW / img.naturalWidth);
+            var c = mkCanvas(Math.round(img.naturalWidth * sc), Math.round(img.naturalHeight * sc));
+            c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+            URL.revokeObjectURL(url);
+            var det = detectEdges(c);
+            makePages(c, det.quad, det.spine);
+            next();
+          }).catch(function(){ next(); });
+        })();
+      }
+
+      /* =============== edge detection =============== */
+      // Bright-region (page) detection on a small copy + spine valley search.
+      function detectEdges(src){
+        var W = 480, H = Math.max(2, Math.round(480 * src.height / src.width));
+        var c = mkCanvas(W, H), cx = c.getContext("2d", { willReadFrequently: true });
+        cx.drawImage(src, 0, 0, W, H);
+        var d;
+        try { d = cx.getImageData(0, 0, W, H).data; } catch(e){ return fallbackQuad(src); }
+        var lum = new Float32Array(W * H), hist = new Array(256).fill(0);
+        for (var i = 0, j = 0; i < d.length; i += 4, j++){
+          var l = 0.299 * d[i] + 0.587 * d[i+1] + 0.114 * d[i+2];
+          lum[j] = l; hist[Math.max(0, Math.min(255, l | 0))]++;
+        }
+        // Otsu
+        var total = W * H, sum = 0, t = 127;
+        for (var k = 0; k < 256; k++) sum += k * hist[k];
+        var sumB = 0, wB = 0, max = -1;
+        for (k = 0; k < 256; k++){
+          wB += hist[k]; if (!wB) continue;
+          var wF = total - wB; if (!wF) break;
+          sumB += k * hist[k];
+          var mB = sumB / wB, mF = (sum - sumB) / wF, between = wB * wF * (mB - mF) * (mB - mF);
+          if (between > max){ max = between; t = k; }
+        }
+        var thr = Math.max(70, t - 12);
+        var minX = W, minY = H, maxX = -1, maxY = -1, cnt = 0;
+        for (var y = 0; y < H; y++) for (var x = 0; x < W; x++){
+          if (lum[y * W + x] > thr){ cnt++; if (x < minX) minX = x; if (x > maxX) maxX = x; if (y < minY) minY = y; if (y > maxY) maxY = y; }
+        }
+        if (cnt < total * 0.18 || maxX < 0){ return fallbackQuad(src); }
+        // corners: extreme bright pixels near bbox corners
+        function corner(tx, ty, sx, sy){
+          var bx = -1, by = -1, best = 1e18;
+          var x0 = sx > 0 ? minX : Math.max(minX, tx - (maxX - minX) * 0.45), x1 = sx > 0 ? Math.min(maxX, tx + (maxX - minX) * 0.45) : maxX;
+          var y0 = sy > 0 ? minY : Math.max(minY, ty - (maxY - minY) * 0.45), y1 = sy > 0 ? Math.min(maxY, ty + (maxY - minY) * 0.45) : maxY;
+          for (var yy = y0; yy <= y1; yy++) for (var xx = x0; xx <= x1; xx++){
+            if (lum[yy * W + xx] > thr){ var dd = (xx - tx) * (xx - tx) + (yy - ty) * (yy - ty); if (dd < best){ best = dd; bx = xx; by = yy; } }
+          }
+          return bx < 0 ? { x: tx, y: ty } : { x: bx, y: by };
+        }
+        var tl = corner(minX, minY, -1, -1), tr = corner(maxX, minY, 1, -1), br = corner(maxX, maxY, 1, 1), bl = corner(minX, maxY, -1, 1);
+        var fx = src.width / W, fy = src.height / H;
+        var q = [tl, tr, br, bl].map(function(p){ return { x: p.x * fx, y: p.y * fy }; });
+        // spine: darkest column-average in middle band of bbox
+        var spine = (minX + maxX) / 2;
+        if (mode === "spread"){
+          var bestV = 1e18;
+          for (var cxp = Math.round(minX + (maxX - minX) * 0.38); cxp <= minX + (maxX - minX) * 0.62; cxp++){
+            var s = 0, n = 0;
+            for (var yp = minY + 4; yp < maxY - 4; yp += 3){ s += lum[yp * W + cxp]; n++; }
+            var avg = s / n; if (avg < bestV){ bestV = avg; spine = cxp; }
+          }
+        }
+        return { quad: q, spine: spine * fx / src.width };
+      }
+      function fallbackQuad(src){
+        var ix = src.width * 0.03, iy = src.height * 0.03;
+        return { quad: [ {x:ix,y:iy}, {x:src.width-ix,y:iy}, {x:src.width-ix,y:src.height-iy}, {x:ix,y:src.height-iy} ], spine: 0.5 };
+      }
+
+      /* =============== corner adjust UI =============== */
+      var adjScale = 1, dragPt = -1; // 0..3 corners, 4 spine-top, 5 spine-bottom
+      function beginAdjust(c){
+        captured = c;
+        var det = detectEdges(c);
+        quad = det.quad; spineX = det.spine;
+        drawAdjust();
+        $("bkAdjBox").classList.add("open");
+        setStatus("کونے جانچ لیں — پھر «صفحات تیار کریں» دبائیں۔");
+      }
+      function drawAdjust(){
+        var cv = $("bkAdjCanvas"); if (!captured) return;
+        var DW = 640, DH = Math.round(DW * captured.height / captured.width);
+        cv.width = DW; cv.height = DH; adjScale = DW / captured.width;
+        var x = cv.getContext("2d");
+        x.drawImage(captured, 0, 0, DW, DH);
+        x.strokeStyle = "#e8c874"; x.lineWidth = 2.5; x.beginPath();
+        quad.forEach(function(p, i){ var px = p.x * adjScale, py = p.y * adjScale; i ? x.lineTo(px, py) : x.moveTo(px, py); });
+        x.closePath(); x.stroke();
+        if (mode === "spread"){
+          var tl = quad[0], tr = quad[1], br = quad[2], bl = quad[3];
+          var txx = tl.x + (tr.x - tl.x) * spineRatioInQuad(), bxx = bl.x + (br.x - bl.x) * spineRatioInQuad();
+          x.strokeStyle = "rgba(232,200,116,.85)"; x.setLineDash([7, 5]); x.beginPath();
+          x.moveTo(txx * adjScale, (tl.y + (tr.y - tl.y) * spineRatioInQuad()) * adjScale);
+          x.lineTo(bxx * adjScale, (bl.y + (br.y - bl.y) * spineRatioInQuad()) * adjScale);
+          x.stroke(); x.setLineDash([]);
+        }
+        quad.forEach(function(p){ handle(x, p.x * adjScale, p.y * adjScale); });
+        if (mode === "spread"){
+          var r = spineRatioInQuad(), tl2 = quad[0], tr2 = quad[1], br2 = quad[2], bl2 = quad[3];
+          handle(x, (tl2.x + (tr2.x - tl2.x) * r) * adjScale, (tl2.y + (tr2.y - tl2.y) * r) * adjScale);
+          handle(x, (bl2.x + (br2.x - bl2.x) * r) * adjScale, (bl2.y + (br2.y - bl2.y) * r) * adjScale);
+        }
+        function handle(c2, hx, hy){ c2.fillStyle = "#c9a227"; c2.strokeStyle = "#231a02"; c2.lineWidth = 2; c2.beginPath(); c2.arc(hx, hy, 13, 0, 7); c2.fill(); c2.stroke(); }
+      }
+      function spineRatioInQuad(){
+        // spine position as ratio along top edge, approximated from image fraction
+        var tl = quad[0], tr = quad[1];
+        var topLen = Math.max(1, tr.x - tl.x);
+        return Math.max(0.15, Math.min(0.85, (spineX * captured.width - tl.x) / topLen));
+      }
+      function adjPos(e){
+        var r = $("bkAdjCanvas").getBoundingClientRect();
+        return { x: (e.clientX - r.left) / r.width * $("bkAdjCanvas").width / adjScale, y: (e.clientY - r.top) / r.height * $("bkAdjCanvas").height / adjScale };
+      }
+      $("bkAdjCanvas").addEventListener("pointerdown", function(e){
+        if (!quad) return;
+        var p = adjPos(e), best = 46 / adjScale, bi = -1;
+        quad.forEach(function(q, i){ var d = Math.hypot(q.x - p.x, q.y - p.y); if (d < best){ best = d; bi = i; } });
+        if (bi < 0 && mode === "spread"){
+          var r = spineRatioInQuad(), tl = quad[0], tr = quad[1], bl = quad[3], br = quad[2];
+          var pts = [ { x: tl.x + (tr.x - tl.x) * r, y: tl.y + (tr.y - tl.y) * r }, { x: bl.x + (br.x - bl.x) * r, y: bl.y + (br.y - bl.y) * r } ];
+          pts.forEach(function(q, i){ var d = Math.hypot(q.x - p.x, q.y - p.y); if (d < best){ best = d; bi = 4 + i; } });
+        }
+        if (bi >= 0){ dragPt = bi; this.setPointerCapture(e.pointerId); }
+      });
+      $("bkAdjCanvas").addEventListener("pointermove", function(e){
+        if (dragPt < 0 || !quad) return;
+        var p = adjPos(e);
+        p.x = Math.max(0, Math.min(captured.width, p.x)); p.y = Math.max(0, Math.min(captured.height, p.y));
+        if (dragPt < 4) quad[dragPt] = p;
+        else { // spine: set fraction from nearest top edge interpolation
+          var tl = quad[0], tr = quad[1];
+          spineX = Math.max(0.2, Math.min(0.8, p.x / captured.width));
+          if (tl && tr) spineX = Math.max(0.2, Math.min(0.8, (tl.x + Math.max(0.1, Math.min(0.9, (p.x - tl.x) / Math.max(1, tr.x - tl.x))) * (tr.x - tl.x)) / captured.width));
+        }
+        drawAdjust();
+      });
+      ["pointerup","pointercancel"].forEach(function(ev){ $("bkAdjCanvas").addEventListener(ev, function(){ dragPt = -1; }); });
+      $("bkAutoEdges").addEventListener("click", function(){ if (!captured) return; var d = detectEdges(captured); quad = d.quad; spineX = d.spine; drawAdjust(); });
+      $("bkFullFrame").addEventListener("click", function(){ if (!captured) return; quad = fallbackQuad(captured).quad; spineX = 0.5; drawAdjust(); });
+      $("bkDiscard").addEventListener("click", function(){ captured = null; replaceAt = -1; $("bkAdjBox").classList.remove("open"); setStatus("تصویر رد کر دی گئی۔"); });
+      $("bkProcess").addEventListener("click", function(){
+        if (!captured || !quad) return;
+        setStatus("صفحات تیار ہو رہے ہیں — پرسپیکٹو درستی، سایہ ختم اور صفائی جاری ہے…");
+        setTimeout(function(){
+          makePages(captured, quad, spineX);
+          $("bkAdjBox").classList.remove("open");
+          captured = null;
+          setStatus("صفحات تیار ہو کر فہرست میں شامل ہو گئے۔ اگلا پھیلاؤ اسکین کریں — کیمرہ کھلا ہے تو صرف کتاب کا صفحہ پلٹ کر دوبارہ بٹن دبائیں۔");
+          if (stream) $("bkCamBox").scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 30);
+      });
+
+      /* =============== perspective warp =============== */
+      function homography(src, dst){
+        // solve 8x8 for h mapping src->dst
+        var A = [], b = [];
+        for (var i = 0; i < 4; i++){
+          var x = src[i].x, y = src[i].y, X = dst[i].x, Y = dst[i].y;
+          A.push([x, y, 1, 0, 0, 0, -X * x, -X * y]); b.push(X);
+          A.push([0, 0, 0, x, y, 1, -Y * x, -Y * y]); b.push(Y);
+        }
+        for (var c = 0; c < 8; c++){
+          var piv = c; for (var r = c + 1; r < 8; r++) if (Math.abs(A[r][c]) > Math.abs(A[piv][c])) piv = r;
+          var tmp = A[c]; A[c] = A[piv]; A[piv] = tmp; var tb = b[c]; b[c] = b[piv]; b[piv] = tb;
+          var div = A[c][c] || 1e-9;
+          for (var k = c; k < 8; k++) A[c][k] /= div; b[c] /= div;
+          for (r = 0; r < 8; r++){ if (r === c) continue; var f = A[r][c]; if (!f) continue; for (k = c; k < 8; k++) A[r][k] -= f * A[c][k]; b[r] -= f * b[c]; }
+        }
+        return b; // h0..h7, h8=1
+      }
+      function warp(srcCanvas, q, outW, outH){
+        var dst = [ {x:0,y:0}, {x:outW-1,y:0}, {x:outW-1,y:outH-1}, {x:0,y:outH-1} ];
+        var h = homography(dst, q); // inverse: out -> src
+        var sx = srcCanvas.getContext("2d", { willReadFrequently: true });
+        var sd; try { sd = sx.getImageData(0, 0, srcCanvas.width, srcCanvas.height); } catch(e){ return null; }
+        var out = mkCanvas(outW, outH), ox = out.getContext("2d");
+        var od = ox.createImageData(outW, outH);
+        var S = sd.data, SW = srcCanvas.width, SH = srcCanvas.height, O = od.data;
+        for (var y = 0; y < outH; y++){
+          for (var x = 0; x < outW; x++){
+            var den = h[6] * x + h[7] * y + 1;
+            var px = (h[0] * x + h[1] * y + h[2]) / den, py = (h[3] * x + h[4] * y + h[5]) / den;
+            var o = (y * outW + x) * 4;
+            if (px < 0 || py < 0 || px >= SW - 1 || py >= SH - 1){ O[o+3] = 255; continue; }
+            var x0 = px | 0, y0 = py | 0, fx = px - x0, fy = py - y0;
+            var i00 = (y0 * SW + x0) * 4, i10 = i00 + 4, i01 = i00 + SW * 4, i11 = i01 + 4;
+            for (var ch = 0; ch < 3; ch++){
+              O[o+ch] = (S[i00+ch] * (1-fx) + S[i10+ch] * fx) * (1-fy) + (S[i01+ch] * (1-fx) + S[i11+ch] * fx) * fy;
+            }
+            O[o+3] = 255;
+          }
+        }
+        ox.putImageData(od, 0, 0);
+        return out;
+      }
+      function lerpPt(a, b, t){ return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t }; }
+
+      var flatCache = {}; // id -> {canvas}  (pre-filter warped page, kept so settings can be re-applied)
+
+      /* =============== page construction =============== */
+      function makePages(srcCanvas, q, spineFrac){
+        spreads++;
+        var topLen = Math.hypot(q[1].x - q[0].x, q[1].y - q[0].y), sideLen = Math.hypot(q[3].x - q[0].x, q[3].y - q[0].y);
+        var aspect = topLen / Math.max(1, sideLen);
+        var made = [];
+        if (mode === "spread"){
+          var r = Math.max(0.2, Math.min(0.8, (spineFrac * srcCanvas.width - q[0].x) / Math.max(1, q[1].x - q[0].x)));
+          var midT = lerpPt(q[0], q[1], r), midB = lerpPt(q[3], q[2], r);
+          var halves = [ [q[0], midT, midB, q[3], 1], [midT, q[1], q[2], midB, 0] ]; // spineSide: 1=right edge, 0=left edge
+          halves.forEach(function(hf){
+            var pw = 1100, ph = Math.round(pw / Math.max(0.4, (aspect * r) / 1) * (hf[4] ? 1 : 1));
+            // height from side length ratio
+            ph = Math.round(pw * (sideLen / Math.max(1, topLen * (hf[4] ? r : 1 - r))));
+            ph = Math.max(500, Math.min(2000, ph));
+            var flat = warp(srcCanvas, [hf[0], hf[1], hf[2], hf[3]], pw, ph);
+            if (flat) made.push({ flat: flat, spineSide: hf[4] });
+          });
+        } else {
+          var pw2 = 1100, ph2 = Math.max(500, Math.min(2000, Math.round(pw2 / Math.max(0.3, aspect))));
+          var flat2 = warp(srcCanvas, q, pw2, ph2);
+          if (flat2) made.push({ flat: flat2, spineSide: -1 });
+        }
+        var newPages = made.map(function(m){
+          var pg = { id: nextId++, spineSide: m.spineSide, view: "", ocr: "", words: [], rot: 0 };
+          flatCache[pg.id] = { canvas: m.flat };
+          pg.view = renderPage(pg);
+          return pg;
+        });
+        if (replaceAt >= 0 && pages[replaceAt]){
+          var n = mode === "spread" ? Math.min(2, pages.length - replaceAt) : 1;
+          pages.splice.apply(pages, [replaceAt, n].concat(newPages));
+          replaceAt = -1;
+        } else {
+          pages = pages.concat(newPages);
+        }
+        renderList();
+      }
+
+      /* =============== per-page rendering: dewarp + shadow + filter =============== */
+      function renderPage(pg, forOcr){
+        var entry = flatCache[pg.id];
+        if (!entry) return pg.view || "";
+        var flat = entry.canvas;
+        // rotation
+        var src = flat;
+        if (pg.rot){
+          var rc = mkCanvas(pg.rot % 180 ? flat.height : flat.width, pg.rot % 180 ? flat.width : flat.height);
+          var rx = rc.getContext("2d");
+          rx.translate(rc.width / 2, rc.height / 2); rx.rotate(pg.rot * Math.PI / 180);
+          rx.drawImage(flat, -flat.width / 2, -flat.height / 2);
+          src = rc;
+        }
+        var work = dewarp(src, pg.spineSide, parseInt($("bkDewarp").value, 10) || 0);
+        if ($("bkShadow").checked) work = shadowFix(work);
+        var f = forOcr ? "gray" : $("bkFilter").value;
+        var out = applyFilter(work, f, parseInt($("bkEnhance").value, 10) || 0);
+        return out.toDataURL("image/jpeg", 0.88);
+      }
+
+      function dewarp(src, spineSide, amt){
+        if (!amt || spineSide < 0) return src;
+        var W = src.width, H = src.height;
+        var sx = src.getContext("2d", { willReadFrequently: true });
+        var sd; try { sd = sx.getImageData(0, 0, W, H); } catch(e){ return src; }
+        var out = mkCanvas(W, H), ox = out.getContext("2d"), od = ox.createImageData(W, H);
+        var S = sd.data, O = od.data, k = amt / 100;
+        for (var y = 0; y < H; y++){
+          var vCenter = 1 - Math.abs(y / H - 0.5) * 2; // stronger mid-height
+          for (var x = 0; x < W; x++){
+            var t = spineSide === 1 ? (W - 1 - x) / W : x / W; // 0 at spine, 1 at outer edge
+            var g = Math.pow(1 - t, 2);
+            var px = x + (spineSide === 1 ? 1 : -1) * g * k * W * 0.045;
+            var py = y - g * k * H * 0.05 * vCenter;
+            var o = (y * W + x) * 4;
+            px = Math.max(0, Math.min(W - 1.001, px)); py = Math.max(0, Math.min(H - 1.001, py));
+            var x0 = px | 0, y0 = py | 0, fx = px - x0, fy = py - y0;
+            var i00 = (y0 * W + x0) * 4, i10 = i00 + 4, i01 = i00 + W * 4, i11 = i01 + 4;
+            if (i11 + 3 >= S.length){ O[o] = O[o+1] = O[o+2] = 255; O[o+3] = 255; continue; }
+            for (var ch = 0; ch < 3; ch++) O[o+ch] = (S[i00+ch] * (1-fx) + S[i10+ch] * fx) * (1-fy) + (S[i01+ch] * (1-fx) + S[i11+ch] * fx) * fy;
+            O[o+3] = 255;
+          }
+        }
+        ox.putImageData(od, 0, 0);
+        return out;
+      }
+      function shadowFix(src){
+        var W = src.width, H = src.height;
+        var small = mkCanvas(Math.max(2, W >> 4), Math.max(2, H >> 4));
+        var smx = small.getContext("2d", { willReadFrequently: true });
+        smx.filter = "blur(6px)"; smx.drawImage(src, 0, 0, small.width, small.height); smx.filter = "none";
+        var bg = mkCanvas(W, H), bx = bg.getContext("2d");
+        bx.imageSmoothingEnabled = true; bx.drawImage(small, 0, 0, W, H);
+        var sx = src.getContext("2d", { willReadFrequently: true }), gx = bg.getContext("2d", { willReadFrequently: true });
+        var sd, gd;
+        try { sd = sx.getImageData(0, 0, W, H); gd = gx.getImageData(0, 0, W, H); } catch(e){ return src; }
+        var S = sd.data, G = gd.data;
+        for (var i = 0; i < S.length; i += 4){
+          for (var ch = 0; ch < 3; ch++){
+            var bgv = G[i+ch] || 1;
+            var v = S[i+ch] / bgv * 242;
+            S[i+ch] = v > 255 ? 255 : v;
+          }
+        }
+        sx.putImageData(sd, 0, 0);
+        return src;
+      }
+      function applyFilter(src, filter, enhance){
+        var W = src.width, H = src.height;
+        var cx = src.getContext("2d", { willReadFrequently: true });
+        var img; try { img = cx.getImageData(0, 0, W, H); } catch(e){ return src; }
+        var d = img.data, i, j, l;
+        if (filter === "color"){
+          var gain = 1 + enhance / 100 * 0.35, off = -8 - enhance * 0.12;
+          for (i = 0; i < d.length; i += 4) for (var ch = 0; ch < 3; ch++){ var v = d[i+ch] * gain + off; d[i+ch] = v < 0 ? 0 : v > 255 ? 255 : v; }
+          cx.putImageData(img, 0, 0); return src;
+        }
+        // grayscale values
+        var gray = new Uint8Array(W * H);
+        for (i = 0, j = 0; i < d.length; i += 4, j++) gray[j] = 0.299 * d[i] + 0.587 * d[i+1] + 0.114 * d[i+2];
+        if (filter === "gray"){
+          var g2 = 1 + enhance / 100 * 0.5;
+          for (var j = 0; j < gray.length; j++){ var v2 = (gray[j] - 128) * g2 + 128 + 14; gray[j] = v2 < 0 ? 0 : v2 > 255 ? 255 : v2; }
+        } else { // bw adaptive threshold with integral image
+          var win = Math.max(15, (W / 26) | 1), half = win >> 1;
+          var integ = new Float64Array((W + 1) * (H + 1));
+          for (var y = 0; y < H; y++){
+            var rowSum = 0;
+            for (var x = 0; x < W; x++){
+              rowSum += gray[y * W + x];
+              integ[(y + 1) * (W + 1) + x + 1] = integ[y * (W + 1) + x + 1] + rowSum;
+            }
+          }
+          var C = 16 - enhance * 0.11; // higher enhance -> keeps fainter text/diacritics
+          if (C < 5) C = 5;
+          for (y = 0; y < H; y++){
+            var y0 = Math.max(0, y - half), y1 = Math.min(H - 1, y + half);
+            for (x = 0; x < W; x++){
+              var x0 = Math.max(0, x - half), x1 = Math.min(W - 1, x + half);
+              var area = (x1 - x0 + 1) * (y1 - y0 + 1);
+              var s = integ[(y1 + 1) * (W + 1) + x1 + 1] - integ[y0 * (W + 1) + x1 + 1] - integ[(y1 + 1) * (W + 1) + x0] + integ[y0 * (W + 1) + x0];
+              var mean = s / area;
+              gray[y * W + x] = gray[y * W + x] < mean - C ? 0 : 255;
+            }
+          }
+        }
+        for (i = 0, j = 0; i < d.length; i += 4, j++){ d[i] = d[i+1] = d[i+2] = gray[j]; }
+        cx.putImageData(img, 0, 0);
+        return src;
+      }
+
+      /* =============== page list UI =============== */
+      function renderList(){
+        $("bkCount").textContent = "اسکین شدہ صفحات: " + urNum(pages.length);
+        $("bkSpreads").textContent = "پھیلاؤ: " + urNum(spreads);
+        $("bkEmptyHint").style.display = pages.length ? "none" : "";
+        $("bkBulkBar").style.display = pages.length ? "" : "none";
+        var box = $("bkPages"); box.innerHTML = "";
+        pages.forEach(function(pg, idx){
+          var el = document.createElement("div");
+          el.className = "pg"; el.draggable = true; el.dataset.idx = idx;
+          var im = document.createElement("img"); im.src = pg.view; im.alt = "صفحہ " + (idx + 1);
+          im.addEventListener("click", function(){ openModal(idx); });
+          var num = document.createElement("span"); num.className = "pg-num"; num.textContent = "صفحہ " + urNum(idx + 1);
+          el.appendChild(im); el.appendChild(num);
+          if (pg.ocr){ var oc = document.createElement("span"); oc.className = "pg-ocr"; oc.textContent = "OCR ہو گیا"; el.appendChild(oc); }
+          var bar = document.createElement("div"); bar.className = "pg-bar";
+          bar.innerHTML =
+            '<button type="button" data-act="up">اوپر</button>' +
+            '<button type="button" data-act="down">نیچے</button>' +
+            '<button type="button" data-act="rescan">دوبارہ</button>' +
+            '<button type="button" data-act="view">جانچ</button>' +
+            '<button type="button" data-act="del" class="danger">حذف</button>';
+          bar.addEventListener("click", function(e){
+            var b = e.target.closest("button"); if (!b) return;
+            var act = b.getAttribute("data-act");
+            if (act === "del"){ delete flatCache[pg.id]; pages.splice(idx, 1); renderList(); }
+            else if (act === "up" && idx > 0){ var t = pages[idx-1]; pages[idx-1] = pg; pages[idx] = t; renderList(); }
+            else if (act === "down" && idx < pages.length - 1){ var t2 = pages[idx+1]; pages[idx+1] = pg; pages[idx] = t2; renderList(); }
+            else if (act === "view"){ openModal(idx); }
+            else if (act === "rescan"){
+              replaceAt = idx;
+              setStatus("دوبارہ اسکین: صفحہ " + urNum(idx + 1) + " کے لیے نیا پھیلاؤ اسکین کریں — نیا صفحہ اسی نمبر پر آ جائے گا۔ منسوخ کرنے کے لیے تصویر «رد کریں» دبائیں۔");
+              if (!stream) $("bkCameraBtn").click();
+              $("bkCamBox").scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+          });
+          el.appendChild(bar);
+          el.addEventListener("dragstart", function(e){ e.dataTransfer.setData("text/plain", String(idx)); });
+          el.addEventListener("dragover", function(e){ e.preventDefault(); el.classList.add("drag-over"); });
+          el.addEventListener("dragleave", function(){ el.classList.remove("drag-over"); });
+          el.addEventListener("drop", function(e){
+            e.preventDefault(); el.classList.remove("drag-over");
+            var from = parseInt(e.dataTransfer.getData("text/plain"), 10);
+            if (isNaN(from) || from === idx) return;
+            var mv = pages.splice(from, 1)[0]; pages.splice(idx, 0, mv); renderList();
+          });
+          box.appendChild(el);
+        });
+      }
+      $("bkClearAll").addEventListener("click", function(){
+        pages = []; flatCache = {}; spreads = 0; renderList();
+        setStatus("تمام صفحات حذف کر دیے گئے۔");
+      });
+      ["bkDewarp","bkEnhance"].forEach(function(id){
+        $(id).addEventListener("input", function(){ $(id + "Out").textContent = this.value; });
+      });
+      $("bkReprocess").addEventListener("click", function(){
+        if (!pages.length){ setStatus("ابھی کوئی صفحہ نہیں ہے۔"); return; }
+        setStatus("تمام صفحات نئی ترتیبات سے دوبارہ تیار ہو رہے ہیں…");
+        setTimeout(function(){
+          pages.forEach(function(pg){ pg.view = renderPage(pg); });
+          renderList(); setStatus("تمام صفحات اپ ڈیٹ ہو گئے۔");
+        }, 30);
+      });
+      $("bkFilter").addEventListener("change", function(){ if (pages.length) $("bkReprocess").click(); });
+      $("bkMode").addEventListener("click", function(e){
+        var b = e.target.closest("button"); if (!b) return;
+        mode = b.getAttribute("data-mode");
+        this.querySelectorAll("button").forEach(function(x){ x.classList.toggle("on", x === b); });
+        $("bkGuide").classList.toggle("single", mode === "single");
+        $("bkCapture").textContent = mode === "spread" ? "یہ پھیلاؤ اسکین کریں" : "یہ صفحہ اسکین کریں";
+      });
+
+      /* =============== modal: view / OCR compare =============== */
+      function openModal(idx){
+        modalIdx = idx; var pg = pages[idx]; if (!pg) return;
+        $("bkModalTitle").textContent = "صفحہ " + urNum(idx + 1) + " — اصل اسکین اور OCR عبارت کی جانچ";
+        $("bkModalImg").src = pg.view;
+        $("bkModalText").value = pg.ocr || "";
+        showUncertain(pg);
+        $("bkModal").classList.add("open");
+      }
+      function showUncertain(pg){
+        var box = $("bkModalUnc");
+        var bad = (pg.words || []).filter(function(w){ return w.conf < 60; });
+        if (!pg.words || !pg.words.length){ box.classList.remove("show"); box.textContent = ""; return; }
+        box.classList.add("show");
+        box.textContent = bad.length
+          ? "غیر یقینی الفاظ (شناخت کمزور — اصل اسکین سے ملا کر خود درست کریں، نظام نے خود سے کوئی لفظ نہیں بنایا): " + bad.slice(0, 40).map(function(w){ return "«" + w.text + "»"; }).join("، ")
+          : "اس صفحے کے تمام الفاظ مناسب اعتماد سے پہچانے گئے — پھر بھی اہم عبارت اصل اسکین سے ملا کر جانچ لینا بہتر ہے۔";
+      }
+      $("bkModalClose").addEventListener("click", function(){ $("bkModal").classList.remove("open"); modalIdx = -1; });
+      $("bkModal").addEventListener("click", function(e){ if (e.target === this){ this.classList.remove("open"); modalIdx = -1; } });
+      $("bkModalSave").addEventListener("click", function(){
+        var pg = pages[modalIdx]; if (!pg) return;
+        pg.ocr = $("bkModalText").value; renderList(); setStatus("صفحہ " + urNum(modalIdx + 1) + " کا متن محفوظ ہو گیا۔");
+      });
+      $("bkModalRotate").addEventListener("click", function(){
+        var pg = pages[modalIdx]; if (!pg) return;
+        pg.rot = (pg.rot + 90) % 360; pg.view = renderPage(pg);
+        $("bkModalImg").src = pg.view; renderList();
+      });
+      $("bkModalOcr").addEventListener("click", function(){ if (modalIdx >= 0) ocrPage(modalIdx, true); });
+
+      /* =============== OCR (Tesseract.js, free, in-browser) =============== */
+      function getWorker(lang){
+        if (typeof Tesseract === "undefined") return Promise.reject(new Error("noload"));
+        if (ocrWorker && ocrWorkerLang === lang) return Promise.resolve(ocrWorker);
+        return Tesseract.createWorker(lang.split("+")).then(function(w){ ocrWorker = w; ocrWorkerLang = lang; return w; });
+      }
+      function ocrPage(idx, inModal){
+        var pg = pages[idx]; if (!pg) return Promise.resolve();
+        var lang = $("bkOcrLang").value;
+        setStatus("صفحہ " + urNum(idx + 1) + " کا OCR ہو رہا ہے… (پہلی بار انجن و زبان کا ڈیٹا لوڈ ہوگا، اس میں وقت لگ سکتا ہے)");
+        var ocrURL = renderPage(pg, true);
+        return getWorker(lang).then(function(w){
+          return w.recognize(ocrURL);
+        }).then(function(res){
+          var d = res.data;
+          pg.ocr = (d.text || "").trim();
+          pg.words = (d.words || []).map(function(w){ return { text: w.text, conf: Math.round(w.confidence) }; });
+          if (inModal && modalIdx === idx){ $("bkModalText").value = pg.ocr; showUncertain(pg); }
+          renderList();
+          setStatus("صفحہ " + urNum(idx + 1) + " کا OCR مکمل — «جانچ» سے اصل اسکین سے ملا کر دیکھیں۔");
+        }).catch(function(){
+          setStatus("OCR انجن لوڈ نہیں ہو سکا — انٹرنیٹ کنکشن جانچ کر دوبارہ کوشش کریں۔ اسکین شدہ صفحات اور PDF کی سہولت اس کے بغیر بھی مکمل دستیاب ہے۔");
+        });
+      }
+      $("bkOcrAll").addEventListener("click", function(){
+        if (!pages.length){ setStatus("پہلے صفحات اسکین کریں۔"); return; }
+        var i = 0;
+        (function next(){
+          if (i >= pages.length){ setProg(-1); setStatus("تمام صفحات کا OCR مکمل ہو گیا۔"); return; }
+          setProg(i / pages.length * 100);
+          var idx = i; i++;
+          ocrPage(idx, false).then(next, next);
+        })();
+      });
+      function bookText(){
+        return pages.map(function(pg, i){ return "—— صفحہ " + (i + 1) + " ——\n" + (pg.ocr || "(اس صفحے کا OCR نہیں ہوا)"); }).join("\n\n");
+      }
+      $("bkCopyText").addEventListener("click", function(){
+        if (!pages.length){ setStatus("پہلے صفحات اسکین کریں۔"); return; }
+        var t = bookText();
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(function(){ setStatus("مکمل کتاب کا متن نقل ہو گیا۔"); }, function(){ setStatus("نقل نہیں ہو سکی — کسی صفحے کی «جانچ» سے متن منتخب کر کے نقل کریں۔"); });
+        else setStatus("اس براؤزر میں خودکار نقل دستیاب نہیں — «جانچ» سے متن نقل کریں۔");
+      });
+      $("bkDownloadText").addEventListener("click", function(){
+        if (!pages.length){ setStatus("پہلے صفحات اسکین کریں۔"); return; }
+        var blob = new Blob([bookText()], { type: "text/plain;charset=utf-8" });
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = ($("bkTitle").value.trim() || "al-minhaj-book") + "-text.txt";
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function(){ URL.revokeObjectURL(a.href); }, 4000);
+      });
+
+      /* =============== PDF (jsPDF) =============== */
+      $("bkMakePdf").addEventListener("click", function(){
+        if (!pages.length){ setStatus("پہلے کم از کم ایک صفحہ اسکین کریں۔"); return; }
+        if (!window.jspdf || !window.jspdf.jsPDF){ setStatus("PDF انجن لوڈ نہیں ہو سکا — انٹرنیٹ جانچ کر صفحہ دوبارہ کھولیں۔"); return; }
+        var jsPDF = window.jspdf.jsPDF;
+        var sizeMode = $("bkPageSize").value;
+        var searchable = $("bkSearchable").checked;
+        var withNums = $("bkAutoNum").checked;
+        var doc = null;
+        var i = 0;
+        setStatus("PDF بن رہی ہے…");
+        (function step(){
+          if (i >= pages.length){
+            setProg(-1);
+            var name = ($("bkTitle").value.trim() || "al-minhaj-book").replace(/[\\/:*?"<>|]/g, " ").trim() + ".pdf";
+            doc.save(name);
+            setStatus("PDF تیار و ڈاؤن لوڈ ہو گئی — " + urNum(pages.length) + " صفحات۔");
+            return;
+          }
+          setProg((i + 1) / pages.length * 100);
+          var pg = pages[i], idx = i; i++;
+          loadImg(pg.view).then(function(img){
+            var iw = img.naturalWidth, ih = img.naturalHeight, ratio = iw / ih;
+            var pw, ph;
+            if (sizeMode === "a4"){ pw = 210; ph = 297; }
+            else if (sizeMode === "a5"){ pw = 148; ph = 210; }
+            else { pw = 210; ph = 210 / ratio; }
+            if (!doc) doc = new jsPDF({ unit: "mm", format: [pw, ph], orientation: ph >= pw ? "portrait" : "landscape" });
+            else doc.addPage([pw, ph], ph >= pw ? "portrait" : "landscape");
+            // fit image inside page with small margin
+            var m = sizeMode === "fit" ? 0 : 6;
+            var aw = pw - m * 2, ah = ph - m * 2 - (withNums && sizeMode !== "fit" ? 8 : 0);
+            var w = aw, h = w / ratio;
+            if (h > ah){ h = ah; w = h * ratio; }
+            var x = (pw - w) / 2, y = m + (ah - h) / 2;
+            doc.addImage(pg.view, "JPEG", x, y, w, h, undefined, "FAST");
+            if (searchable && pg.ocr){
+              try {
+                doc.saveGraphicsState();
+                if (doc.setGState && window.jspdf.GState) doc.setGState(new window.jspdf.GState({ opacity: 0 }));
+                doc.setFontSize(9); doc.setTextColor(255, 255, 255);
+                var lines = doc.splitTextToSize(pg.ocr, aw);
+                doc.text(lines.slice(0, Math.floor(ah / 4)), x, y + 4, { renderingMode: "invisible" });
+                doc.restoreGraphicsState();
+              } catch(e){ /* text layer is best-effort; image book remains complete */ }
+            }
+            if (withNums){
+              doc.setFontSize(10); doc.setTextColor(120, 120, 120);
+              doc.text(String(idx + 1), pw / 2, ph - 4, { align: "center" });
+            }
+            setTimeout(step, 10);
+          }).catch(function(){ setTimeout(step, 10); });
+        })();
+      });
+
+      // stop camera when leaving the scanner
+      document.addEventListener("click", function(e){
+        var g = e.target.closest("[data-goto]");
+        if (g && g.getAttribute("data-goto") !== "scanner") stopBkCamera();
+      });
+
+      renderList();
+    })();
+    </script>
+    <script>
+    (function(){
+      "use strict";
+      function $(id){ return document.getElementById(id); }
+      function setStatus(m){ var s = $("ctStatus"); if (s) s.textContent = m || ""; }
+
+      var FONTS = {
+        nastaliq: '"Noto Nastaliq Urdu","Noto Naskh Arabic",serif',
+        naskh: '"Noto Naskh Arabic",serif',
+        amiri: '"Amiri","Noto Naskh Arabic",serif',
+        ruqaa: '"Aref Ruqaa","Noto Naskh Arabic",serif',
+        poppins: '"Poppins",sans-serif'
+      };
+      var TEMPLATES = {
+        "islamic-navy":  { name:"اسلامی سنہری — گہرا نیوی", bg1:"#0a1430", bg2:"#1a2f66", accent:"#c9a227", accent2:"#e8c874", text:"#ffffff", sub:"#c7d2ee", border:"ornate", pattern:true, arch:true },
+        "islamic-ivory": { name:"روایتی اسلامی — سفید و سنہری", bg1:"#fffdf5", bg2:"#f6ecd2", accent:"#a97f14", accent2:"#8f6d0e", text:"#22304f", sub:"#5d6a8c", border:"ornate", pattern:true, arch:true },
+        "emerald":       { name:"زمردی اسلامی — سبز و سنہری", bg1:"#04352a", bg2:"#0b5240", accent:"#c9a227", accent2:"#ecd28a", text:"#ffffff", sub:"#cdeadd", border:"pattern", pattern:true, arch:true },
+        "maroon":        { name:"عنابی کلاسک — مرون و سنہری", bg1:"#36060f", bg2:"#631628", accent:"#d4af37", accent2:"#f0d48a", text:"#ffffff", sub:"#ecd9d9", border:"double", pattern:false, arch:false },
+        "modern-navy":   { name:"جدید پروفیشنل — نیوی", bg1:"#ffffff", bg2:"#e9edf6", accent:"#16265c", accent2:"#c9a227", text:"#16265c", sub:"#5d6a8c", border:"modern", pattern:false, arch:false },
+        "modern-teal":   { name:"جدید پروفیشنل — فیروزی", bg1:"#f7fbfa", bg2:"#dff0eb", accent:"#0f766e", accent2:"#c9a227", text:"#123332", sub:"#52706c", border:"modern", pattern:false, arch:false }
+      };
+      var EL_NAMES = { logo:"لوگو", institution:"ادارے کا نام", title:"سند کا عنوان", intro:"تعارفی سطر", name:"حاصل کنندہ کا نام", father:"والد کا نام", body:"تفصیلی عبارت", date:"تاریخ", serial:"سند نمبر", seal:"مہر", sig1:"دستخط (پہلے)", sig2:"دستخط (دوسرے)" };
+      var HINTS = { institution:"ادارے کا نام یہاں لکھیں", title:"سند کا عنوان یہاں لکھیں", intro:"تعارفی سطر یہاں لکھیں", name:"حاصل کنندہ کا نام یہاں لکھیں", father:"والد کا نام یہاں لکھیں", body:"تفصیلی عبارت یہاں لکھیں", date:"تاریخ", serial:"سند نمبر" };
+      var FIELD_IDS = { institution:"ctInstitution", title:"ctTitle", intro:"ctIntro", name:"ctName", father:"ctFather", body:"ctBody", date:"ctDate", serial:"ctSerial", sig1Name:"ctSig1Name", sig1Title:"ctSig1Title", sig2Name:"ctSig2Name", sig2Title:"ctSig2Title", sealText:"ctSealText" };
+
+      function defaultEls(o, W, H){
+        var cx = W / 2, land = (o === "landscape");
+        return {
+          logo:        { x:cx, y:land?58:64,  size:84,  font:"naskh", color:null, bold:false },
+          institution: { x:cx, y:land?158:170, size:31, font:"naskh", color:null, bold:true },
+          title:       { x:cx, y:land?212:238, size:56, font:"nastaliq", color:null, bold:true },
+          intro:       { x:cx, y:land?318:352, size:20, font:"naskh", color:null, bold:false },
+          name:        { x:cx, y:land?352:392, size:60, font:"nastaliq", color:null, bold:true },
+          father:      { x:cx, y:land?486:548, size:22, font:"naskh", color:null, bold:false },
+          body:        { x:cx, y:land?528:606, size:20, font:"naskh", color:null, bold:false, w:Math.round(W*0.78) },
+          date:        { x:Math.round(W*0.80), y:H-(land?96:110), size:17, font:"naskh", color:null, bold:false },
+          serial:      { x:Math.round(W*0.20), y:H-(land?96:110), size:17, font:"naskh", color:null, bold:false },
+          seal:        { x:cx, y:H-(land?104:118), size:57, font:"naskh", color:null, bold:true },
+          sig1:        { x:Math.round(W*0.79), y:H-(land?140:158), size:200, font:"ruqaa", color:null, bold:false },
+          sig2:        { x:Math.round(W*0.21), y:H-(land?140:158), size:200, font:"ruqaa", color:null, bold:false }
+        };
+      }
+
+      var S = {
+        template:"islamic-navy", orientation:"landscape",
+        border:"ornate", bgOverride:null, accentOverride:null,
+        pattern:true, arch:true, divider:true,
+        showSeal:true, showSig1:true, showSig2:true,
+        fields:{ institution:"", title:"", intro:"", name:"", father:"", body:"", date:"", serial:"", sig1Name:"", sig1Title:"", sig2Name:"", sig2Title:"", sealText:"" },
+        elsByOrient:{},
+        logoData:null, sigData:null, stampData:null,
+        logoImg:null, sigImg:null, stampImg:null
+      };
+      function pageW(){ return S.orientation === "landscape" ? 1122 : 794; }
+      function pageH(){ return S.orientation === "landscape" ? 794 : 1122; }
+      function els(){
+        if (!S.elsByOrient[S.orientation]) S.elsByOrient[S.orientation] = defaultEls(S.orientation, pageW(), pageH());
+        return S.elsByOrient[S.orientation];
+      }
+      function tpl(){ return TEMPLATES[S.template]; }
+      function accent(){ return S.accentOverride || tpl().accent; }
+      function accent2(){ return S.accentOverride || tpl().accent2; }
+      function elColor(el, fallback){ return el.color || fallback; }
+
+      var canvas = $("ctCanvas"), ctx = canvas.getContext("2d");
+      var PREVIEW_SCALE = 1.5;
+      var ctBoxes = {};
+      var selected = null;
+      var savedDesigns = [];
+
+      /* ---------------- drawing helpers ---------------- */
+      function fontStr(el){ return (el.bold ? "700 " : "400 ") + el.size + "px " + FONTS[el.font]; }
+      function lineFactor(el){ return el.font === "nastaliq" ? 2.0 : el.font === "ruqaa" ? 1.9 : el.font === "amiri" ? 1.8 : el.font === "poppins" ? 1.4 : 1.65; }
+      function star(c, cx, cy, r, color){
+        c.save(); c.beginPath();
+        for (var i = 0; i < 16; i++){
+          var ang = (Math.PI / 8) * i - Math.PI / 2, rad = (i % 2 === 0) ? r : r * 0.45;
+          var px = cx + Math.cos(ang) * rad, py = cy + Math.sin(ang) * rad;
+          if (i === 0) c.moveTo(px, py); else c.lineTo(px, py);
+        }
+        c.closePath(); c.fillStyle = color; c.fill(); c.restore();
+      }
+      function diamond(c, cx, cy, r, color){
+        c.save(); c.beginPath(); c.moveTo(cx, cy - r); c.lineTo(cx + r, cy); c.lineTo(cx, cy + r); c.lineTo(cx - r, cy); c.closePath();
+        c.fillStyle = color; c.fill(); c.restore();
+      }
+      function wrapText(c, text, maxW){
+        var words = String(text).replace(/\s+/g, " ").trim().split(" "), lines = [], cur = "";
+        for (var i = 0; i < words.length; i++){
+          var test = cur ? cur + " " + words[i] : words[i];
+          if (c.measureText(test).width > maxW && cur){ lines.push(cur); cur = words[i]; }
+          else cur = test;
+        }
+        if (cur) lines.push(cur);
+        return lines;
+      }
+      function drawTextEl(c, id, text, opts){
+        var E = els(), el = E[id], W = pageW();
+        var isHint = !text;
+        var shown = isHint ? (opts.hints ? HINTS[id] : "") : text;
+        if (!shown) return;
+        c.save();
+        c.font = fontStr(el);
+        var col = elColor(el, opts.color);
+        c.fillStyle = col;
+        if (isHint) c.globalAlpha = 0.4;
+        c.textAlign = "center"; c.textBaseline = "middle";
+        var maxW = id === "body" ? (el.w || W * 0.78) : W * 0.86;
+        var lines = wrapText(c, shown, maxW);
+        var lh = el.size * lineFactor(el);
+        for (var i = 0; i < lines.length; i++) c.fillText(lines[i], el.x, el.y + lh * (i + 0.5));
+        var wMax = 0; for (var j = 0; j < lines.length; j++) wMax = Math.max(wMax, c.measureText(lines[j]).width);
+        ctBoxes[id] = { x: el.x - wMax / 2 - 8, y: el.y - 4, w: wMax + 16, h: lh * lines.length + 8 };
+        c.restore();
+        return lines.length;
+      }
+      function drawCorner(c, x, y, sx, sy, col){
+        c.save(); c.translate(x, y); c.scale(sx, sy);
+        c.strokeStyle = col; c.lineWidth = 2;
+        [20, 34, 48].forEach(function(r){ c.beginPath(); c.arc(0, 0, r, 0, Math.PI / 2); c.stroke(); });
+        c.restore();
+        diamond(c, x + sx * 62, y + sy * 62, 7, col);
+        c.save(); c.fillStyle = col;
+        c.beginPath(); c.arc(x + sx * 52, y + sy * 20, 3, 0, 7); c.fill();
+        c.beginPath(); c.arc(x + sx * 20, y + sy * 52, 3, 0, 7); c.fill();
+        c.restore();
+      }
+      function drawFlourish(c, cx, y, w, col){
+        c.save(); c.strokeStyle = col; c.fillStyle = col; c.lineWidth = 2; c.lineCap = "round";
+        diamond(c, cx, y, 8, col);
+        star(c, cx, y, 15, col);
+        [-1, 1].forEach(function(s){
+          c.beginPath(); c.moveTo(cx + s * 22, y);
+          c.quadraticCurveTo(cx + s * w * 0.30, y - 13, cx + s * w * 0.46, y);
+          c.quadraticCurveTo(cx + s * w * 0.30, y + 9, cx + s * w * 0.20, y + 1);
+          c.stroke();
+          c.save(); c.translate(cx + s * w * 0.33, y - 6); c.rotate(s * 0.6);
+          c.beginPath(); c.ellipse(0, 0, 10, 4.2, 0, 0, 7); c.fill(); c.restore();
+          c.beginPath(); c.arc(cx + s * w * 0.5, y, 3.2, 0, 7); c.fill();
+          c.beginPath(); c.moveTo(cx + s * w * 0.52, y); c.lineTo(cx + s * w * 0.58, y); c.stroke();
+          c.beginPath(); c.arc(cx + s * w * 0.6, y, 2.2, 0, 7); c.fill();
+        });
+        c.restore();
+      }
+
+      /* ---------------- main draw ---------------- */
+      function draw(c, forExport){
+        var W = pageW(), H = pageH(), T = tpl(), E = els(), F = S.fields;
+        var ac = accent(), ac2 = accent2();
+        ctBoxes = {};
+        // background
+        var g = c.createLinearGradient(0, 0, W, H);
+        if (S.bgOverride){ g.addColorStop(0, S.bgOverride); g.addColorStop(1, S.bgOverride); }
+        else { g.addColorStop(0, T.bg1); g.addColorStop(1, T.bg2); }
+        c.fillStyle = g; c.fillRect(0, 0, W, H);
+        // geometric pattern
+        if (S.pattern){
+          c.save(); c.beginPath(); c.rect(44, 44, W - 88, H - 88); c.clip();
+          c.strokeStyle = ac; c.globalAlpha = 0.055; c.lineWidth = 1.4;
+          var sp = 96;
+          for (var yy = -sp; yy < H + sp; yy += sp){
+            for (var xx = -sp; xx < W + sp; xx += sp){
+              var ox = xx + ((Math.round(yy / sp) % 2) ? sp / 2 : 0);
+              c.save(); c.translate(ox, yy); c.rotate(Math.PI / 4); c.strokeRect(-24, -24, 48, 48); c.restore();
+              star(c, ox, yy, 7, ac);
+            }
+          }
+          c.restore();
+        }
+        // border
+        if (S.border === "double" || S.border === "ornate"){
+          c.strokeStyle = ac; c.lineWidth = 3; c.strokeRect(24, 24, W - 48, H - 48);
+          c.lineWidth = 1.2; c.strokeRect(35, 35, W - 70, H - 70);
+          if (S.border === "ornate"){
+            drawCorner(c, 35, 35, 1, 1, ac); drawCorner(c, W - 35, 35, -1, 1, ac);
+            drawCorner(c, 35, H - 35, 1, -1, ac); drawCorner(c, W - 35, H - 35, -1, -1, ac);
+          }
+        } else if (S.border === "single"){
+          c.strokeStyle = ac; c.lineWidth = 2; c.strokeRect(26, 26, W - 52, H - 52);
+        } else if (S.border === "pattern"){
+          c.save();
+          c.fillStyle = T.dark === false ? ac : ac;
+          c.globalAlpha = 0.92;
+          c.fillRect(18, 18, W - 36, 26); c.fillRect(18, H - 44, W - 36, 26);
+          c.fillRect(18, 18, 26, H - 36); c.fillRect(W - 44, 18, 26, H - 36);
+          c.restore();
+          var step = 37, i;
+          c.save();
+          for (i = 44; i < W - 30; i += step){ star(c, i, 31, 7.5, T.bg1); star(c, i, H - 31, 7.5, T.bg1); }
+          for (i = 44; i < H - 30; i += step){ star(c, 31, i, 7.5, T.bg1); star(c, W - 31, i, 7.5, T.bg1); }
+          c.restore();
+          c.strokeStyle = ac; c.lineWidth = 1.4; c.strokeRect(50, 50, W - 100, H - 100);
+        } else if (S.border === "modern"){
+          c.fillStyle = ac; c.fillRect(0, 0, W, 20);
+          c.fillStyle = ac2; c.fillRect(0, 20, W, 5);
+          c.fillStyle = ac; c.globalAlpha = 0.55; c.fillRect(40, H - 30, W - 80, 2); c.globalAlpha = 1;
+        }
+        // mihrab arch
+        if (S.arch){
+          var cx = W / 2, hw = Math.min(295, W * 0.30);
+          c.save(); c.strokeStyle = ac; c.globalAlpha = 0.75; c.lineWidth = 2.2;
+          function archPath(off){
+            c.beginPath();
+            c.moveTo(cx - hw + off, H * 0.415);
+            c.lineTo(cx - hw + off, H * 0.235);
+            c.quadraticCurveTo(cx - hw + off, H * 0.115, cx, H * 0.085 + off * 0.4);
+            c.quadraticCurveTo(cx + hw - off, H * 0.115, cx + hw - off, H * 0.235);
+            c.lineTo(cx + hw - off, H * 0.415);
+            c.stroke();
+          }
+          archPath(0); c.globalAlpha = 0.35; c.lineWidth = 1.2; archPath(11);
+          c.restore();
+          star(c, cx, H * 0.062, 9, ac);
+        }
+        // logo
+        if (S.logoImg){
+          var le = E.logo, lh2 = le.size, lw2 = lh2 * (S.logoImg.width / S.logoImg.height);
+          if (lw2 > 250){ lw2 = 250; lh2 = lw2 * (S.logoImg.height / S.logoImg.width); }
+          c.drawImage(S.logoImg, le.x - lw2 / 2, le.y, lw2, lh2);
+          ctBoxes.logo = { x: le.x - lw2 / 2 - 4, y: le.y - 4, w: lw2 + 8, h: lh2 + 8 };
+        }
+        // texts
+        drawTextEl(c, "institution", F.institution, { color: ac2, hints: !forExport });
+        drawTextEl(c, "title", F.title, { color: T.text, hints: !forExport });
+        drawTextEl(c, "intro", F.intro, { color: T.sub, hints: !forExport });
+        var nameLines = drawTextEl(c, "name", F.name, { color: ac2, hints: !forExport }) || 0;
+        if (S.divider){
+          var ne = E.name, ny = ne.y + nameLines * ne.size * lineFactor(ne) + 8;
+          drawFlourish(c, ne.x, ny, Math.min(430, W * 0.42), ac);
+        }
+        drawTextEl(c, "father", F.father ? ("ولد " + F.father) : "", { color: T.text, hints: !forExport });
+        drawTextEl(c, "body", F.body, { color: T.text, hints: !forExport });
+        drawTextEl(c, "date", F.date ? ("تاریخ: " + F.date) : "", { color: T.sub, hints: !forExport });
+        drawTextEl(c, "serial", F.serial ? ("سند نمبر: " + F.serial) : "", { color: T.sub, hints: !forExport });
+        // seal
+        if (S.showSeal){
+          var se = E.seal, r = se.size;
+          if (S.stampImg){
+            c.save(); c.beginPath(); c.arc(se.x, se.y, r, 0, 7); c.clip();
+            var sr = Math.max((2 * r) / S.stampImg.width, (2 * r) / S.stampImg.height);
+            c.drawImage(S.stampImg, se.x - S.stampImg.width * sr / 2, se.y - S.stampImg.height * sr / 2, S.stampImg.width * sr, S.stampImg.height * sr);
+            c.restore();
+            c.save(); c.strokeStyle = ac; c.lineWidth = 1.6; c.beginPath(); c.arc(se.x, se.y, r, 0, 7); c.stroke(); c.restore();
+          } else {
+            c.save();
+            c.beginPath(); c.arc(se.x, se.y, r, 0, 7);
+            c.fillStyle = T.text === "#ffffff" ? "rgba(0,0,0,.28)" : "rgba(255,255,255,.6)"; c.fill();
+            c.strokeStyle = elColor(se, ac); c.lineWidth = 3; c.stroke();
+            c.lineWidth = 1.2; c.beginPath(); c.arc(se.x, se.y, r - 7, 0, 7); c.stroke();
+            c.beginPath(); c.arc(se.x, se.y, r * 0.66, 0, 7); c.globalAlpha = 0.55; c.stroke(); c.globalAlpha = 1;
+            var label = (F.sealText || F.institution || "").trim();
+            star(c, se.x, se.y - r * 0.47, r * 0.11, elColor(se, ac));
+            star(c, se.x, se.y + r * 0.47, r * 0.11, elColor(se, ac));
+            if (label){
+              var fs = r * 0.30;
+              c.font = "700 " + fs + "px " + FONTS.naskh;
+              while (fs > 9 && c.measureText(label).width > r * 1.24){ fs -= 1; c.font = "700 " + fs + "px " + FONTS.naskh; }
+              var lns = wrapText(c, label, r * 1.24);
+              c.fillStyle = elColor(se, ac); c.textAlign = "center"; c.textBaseline = "middle";
+              for (var li = 0; li < lns.length && li < 2; li++) c.fillText(lns[li], se.x, se.y + (li - (Math.min(lns.length, 2) - 1) / 2) * fs * 1.5);
+            } else {
+              star(c, se.x, se.y, r * 0.30, elColor(se, ac));
+              diamond(c, se.x, se.y, r * 0.10, T.bg1 === "#fffdf5" ? ac : ac2());
+            }
+            c.restore();
+          }
+          ctBoxes.seal = { x: se.x - r - 4, y: se.y - r - 4, w: 2 * r + 8, h: 2 * r + 8 };
+        }
+        // signatures
+        [["sig1", S.showSig1, F.sig1Name, F.sig1Title, true], ["sig2", S.showSig2, F.sig2Name, F.sig2Title, false]].forEach(function(cfg){
+          var id = cfg[0]; if (!cfg[1]) return;
+          var el = E[id], w = el.size, nm = cfg[2], tt = cfg[3];
+          c.save();
+          if (cfg[4] && S.sigImg){
+            var sh = 46, sw = sh * (S.sigImg.width / S.sigImg.height);
+            if (sw > w){ sw = w; sh = sw * (S.sigImg.height / S.sigImg.width); }
+            c.drawImage(S.sigImg, el.x - sw / 2, el.y + 46 - sh, sw, sh);
+          } else if (nm){
+            c.font = fontStr({ font: el.font, size: 27, bold: false });
+            c.fillStyle = elColor(el, T.text); c.textAlign = "center"; c.textBaseline = "middle";
+            c.fillText(nm, el.x, el.y + 24);
+          }
+          c.strokeStyle = elColor(el, ac); c.lineWidth = 1.6;
+          c.beginPath(); c.moveTo(el.x - w / 2, el.y + 52); c.lineTo(el.x + w / 2, el.y + 52); c.stroke();
+          diamond(c, el.x - w / 2, el.y + 52, 3.5, elColor(el, ac));
+          diamond(c, el.x + w / 2, el.y + 52, 3.5, elColor(el, ac));
+          if (tt){
+            c.font = "400 15px " + FONTS.naskh; c.fillStyle = elColor(el, T.sub);
+            c.textAlign = "center"; c.textBaseline = "middle";
+            c.fillText(tt, el.x, el.y + 72);
+          } else if (!forExport){
+            c.font = "400 13px " + FONTS.naskh; c.fillStyle = T.sub; c.globalAlpha = 0.45;
+            c.textAlign = "center"; c.textBaseline = "middle";
+            c.fillText("دستخط و عہدہ", el.x, el.y + 72); c.globalAlpha = 1;
+          }
+          c.restore();
+          ctBoxes[id] = { x: el.x - w / 2 - 6, y: el.y - 4, w: w + 12, h: 96 };
+        });
+        // selection outline (preview only)
+        if (!forExport && selected && ctBoxes[selected]){
+          var b = ctBoxes[selected];
+          c.save(); c.strokeStyle = "#ff5470"; c.lineWidth = 2; c.setLineDash([8, 6]);
+          c.strokeRect(b.x, b.y, b.w, b.h); c.restore();
+        }
+      }
+
+      function render(){
+        canvas.width = Math.round(pageW() * PREVIEW_SCALE);
+        canvas.height = Math.round(pageH() * PREVIEW_SCALE);
+        ctx.setTransform(PREVIEW_SCALE, 0, 0, PREVIEW_SCALE, 0, 0);
+        draw(ctx, false);
+      }
+      function renderExportCanvas(){
+        var scale = 3508 / Math.max(pageW(), pageH());
+        var c2 = document.createElement("canvas");
+        c2.width = Math.round(pageW() * scale); c2.height = Math.round(pageH() * scale);
+        var x = c2.getContext("2d"); x.scale(scale, scale);
+        draw(x, true);
+        render(); // restore preview boxes/state after the export draw
+        return c2;
+      }
+
+      /* ---------------- selection & dragging ---------------- */
+      function syncSelBar(){
+        var bar = $("ctSelBar");
+        if (!selected || !els()[selected]){ bar.classList.remove("show"); return; }
+        var el = els()[selected];
+        bar.classList.add("show");
+        $("ctSelName").textContent = "منتخب جزو: " + EL_NAMES[selected];
+        $("ctElFont").value = el.font;
+        var slider = $("ctElSize");
+        slider.max = (selected === "logo" || selected === "seal" || selected === "sig1" || selected === "sig2") ? 340 : 120;
+        slider.value = el.size;
+        $("ctElSizeOut").textContent = el.size;
+        if (el.color) $("ctElColor").value = el.color;
+        $("ctElBold").classList.toggle("on", !!el.bold);
+        $("ctSelList").value = selected;
+      }
+      function select(id){ selected = id || null; syncSelBar(); render(); }
+      $("ctSelList").addEventListener("change", function(){ select(this.value || null); });
+      $("ctElFont").addEventListener("change", function(){ if (selected){ els()[selected].font = this.value; render(); } });
+      $("ctElSize").addEventListener("input", function(){ if (selected){ els()[selected].size = +this.value; $("ctElSizeOut").textContent = this.value; render(); } });
+      $("ctElColor").addEventListener("input", function(){ if (selected){ els()[selected].color = this.value; render(); } });
+      $("ctElAutoColor").addEventListener("click", function(){ if (selected){ els()[selected].color = null; render(); setStatus("رنگ ڈیزائن کے مطابق خودکار کر دیا گیا۔"); } });
+      $("ctElBold").addEventListener("click", function(){ if (selected){ var el = els()[selected]; el.bold = !el.bold; this.classList.toggle("on", el.bold); render(); } });
+      $("ctElResetPos").addEventListener("click", function(){
+        if (!selected) return;
+        var d = defaultEls(S.orientation, pageW(), pageH())[selected], el = els()[selected];
+        el.x = d.x; el.y = d.y; render(); setStatus("جگہ اصل مقام پر واپس کر دی گئی۔");
+      });
+
+      var drag = null;
+      function toDU(e){
+        var r = canvas.getBoundingClientRect();
+        return { x: (e.clientX - r.left) / r.width * pageW(), y: (e.clientY - r.top) / r.height * pageH() };
+      }
+      var HIT_ORDER = ["seal", "sig1", "sig2", "serial", "date", "body", "father", "name", "intro", "title", "institution", "logo"];
+      canvas.addEventListener("pointerdown", function(e){
+        var p = toDU(e);
+        for (var i = 0; i < HIT_ORDER.length; i++){
+          var id = HIT_ORDER[i], b = ctBoxes[id];
+          if (b && p.x >= b.x && p.x <= b.x + b.w && p.y >= b.y && p.y <= b.y + b.h){
+            var el = els()[id];
+            drag = { id: id, dx: p.x - el.x, dy: p.y - el.y, moved: false };
+            canvas.setPointerCapture(e.pointerId);
+            if (selected !== id) select(id); else render();
+            e.preventDefault();
+            return;
+          }
+        }
+        select(null);
+      });
+      canvas.addEventListener("pointermove", function(e){
+        if (!drag) return;
+        var p = toDU(e), el = els()[drag.id];
+        el.x = Math.round(Math.max(20, Math.min(pageW() - 20, p.x - drag.dx)));
+        el.y = Math.round(Math.max(8, Math.min(pageH() - 20, p.y - drag.dy)));
+        drag.moved = true;
+        render();
+      });
+      canvas.addEventListener("pointerup", function(){ drag = null; });
+      canvas.addEventListener("pointercancel", function(){ drag = null; });
+
+      /* ---------------- form binding ---------------- */
+      Object.keys(FIELD_IDS).forEach(function(key){
+        $(FIELD_IDS[key]).addEventListener("input", function(){ S.fields[key] = this.value; render(); });
+      });
+      $("ctPattern").addEventListener("change", function(){ S.pattern = this.checked; render(); });
+      $("ctArch").addEventListener("change", function(){ S.arch = this.checked; render(); });
+      $("ctDivider").addEventListener("change", function(){ S.divider = this.checked; render(); });
+      $("ctShowSeal").addEventListener("change", function(){ S.showSeal = this.checked; if (!this.checked && selected === "seal") select(null); render(); });
+      $("ctShowSig1").addEventListener("change", function(){ S.showSig1 = this.checked; render(); });
+      $("ctShowSig2").addEventListener("change", function(){ S.showSig2 = this.checked; render(); });
+      $("ctBorder").addEventListener("change", function(){ S.border = this.value; render(); });
+      $("ctBgColor").addEventListener("input", function(){ S.bgOverride = this.value; render(); });
+      $("ctBgReset").addEventListener("click", function(){ S.bgOverride = null; render(); setStatus("پس منظر کا رنگ ڈیزائن کے مطابق کر دیا گیا۔"); });
+      $("ctAccentColor").addEventListener("input", function(){ S.accentOverride = this.value; render(); });
+      $("ctAccentReset").addEventListener("click", function(){ S.accentOverride = null; render(); setStatus("نمایاں رنگ ڈیزائن کے مطابق کر دیا گیا۔"); });
+      $("ctOrient").addEventListener("click", function(e){
+        var b = e.target.closest("button"); if (!b) return;
+        var btns = this.querySelectorAll("button");
+        for (var i = 0; i < btns.length; i++) btns[i].classList.toggle("on", btns[i] === b);
+        if (S.orientation !== b.getAttribute("data-o")){ S.orientation = b.getAttribute("data-o"); els(); select(null); render(); }
+      });
+
+      /* ---------------- templates ---------------- */
+      function buildTplGrid(){
+        var grid = $("ctTplGrid"); grid.innerHTML = "";
+        Object.keys(TEMPLATES).forEach(function(key){
+          var t = TEMPLATES[key];
+          var b = document.createElement("button");
+          b.type = "button"; b.className = "tpl-btn" + (key === S.template ? " sel" : "");
+          b.setAttribute("data-tpl", key);
+          var sw = document.createElement("span"); sw.className = "sw";
+          sw.style.background = "linear-gradient(135deg," + t.bg1 + "," + t.bg2 + ")";
+          sw.style.borderColor = t.accent; sw.style.color = t.accent;
+          var nm = document.createElement("span"); nm.textContent = t.name;
+          b.appendChild(sw); b.appendChild(nm);
+          b.addEventListener("click", function(){ applyTemplate(key); });
+          grid.appendChild(b);
+        });
+      }
+      function applyTemplate(key){
+        S.template = key;
+        var t = tpl();
+        S.border = t.border; S.pattern = t.pattern; S.arch = t.arch;
+        S.bgOverride = null; S.accentOverride = null;
+        $("ctBorder").value = t.border;
+        $("ctPattern").checked = t.pattern;
+        $("ctArch").checked = t.arch;
+        var E = els(); Object.keys(E).forEach(function(k){ E[k].color = null; });
+        buildTplGrid();
+        render();
+        setStatus("ڈیزائن «" + t.name + "» لگ گیا — اب اپنی معلومات درج کریں۔");
+      }
+
+      /* ---------------- uploads ---------------- */
+      function loadImgFromData(data){
+        return new Promise(function(res){ var i = new Image(); i.onload = function(){ res(i); }; i.onerror = function(){ res(null); }; i.src = data; });
+      }
+      function bindUpload(btnId, fileId, chipId, thumbId, delId, key){
+        $(btnId).addEventListener("click", function(){ $(fileId).click(); });
+        $(fileId).addEventListener("change", function(){
+          var f = this.files && this.files[0]; this.value = "";
+          if (!f) return;
+          var rd = new FileReader();
+          rd.onload = function(){
+            S[key + "Data"] = rd.result;
+            loadImgFromData(rd.result).then(function(img){
+              S[key + "Img"] = img;
+              $(thumbId).src = rd.result;
+              $(chipId).classList.add("show");
+              render();
+              setStatus("تصویر شامل ہو گئی — اسے سرٹیفکیٹ پر گھسیٹ کر جگہ بھی بدلی جا سکتی ہے۔");
+            });
+          };
+          rd.readAsDataURL(f);
+        });
+        $(delId).addEventListener("click", function(){
+          S[key + "Data"] = null; S[key + "Img"] = null;
+          $(chipId).classList.remove("show");
+          render();
+        });
+      }
+      bindUpload("ctLogoBtn", "ctLogoFile", "ctLogoChip", "ctLogoThumb", "ctLogoDel", "logo");
+      bindUpload("ctSigBtn", "ctSigFile", "ctSigChip", "ctSigThumb", "ctSigDel", "sig");
+      bindUpload("ctStampBtn", "ctStampFile", "ctStampChip", "ctStampThumb", "ctStampDel", "stamp");
+
+      /* ---------------- save / load designs ---------------- */
+      function collect(){
+        return {
+          v: 1, template: S.template, orientation: S.orientation, border: S.border,
+          bgOverride: S.bgOverride, accentOverride: S.accentOverride,
+          pattern: S.pattern, arch: S.arch, divider: S.divider,
+          showSeal: S.showSeal, showSig1: S.showSig1, showSig2: S.showSig2,
+          fields: JSON.parse(JSON.stringify(S.fields)),
+          elsByOrient: JSON.parse(JSON.stringify(S.elsByOrient)),
+          logoData: S.logoData, sigData: S.sigData, stampData: S.stampData
+        };
+      }
+      function applyDesign(d){
+        if (!d || typeof d !== "object") return;
+        S.template = TEMPLATES[d.template] ? d.template : "islamic-navy";
+        S.orientation = d.orientation === "portrait" ? "portrait" : "landscape";
+        S.border = d.border || tpl().border;
+        S.bgOverride = d.bgOverride || null; S.accentOverride = d.accentOverride || null;
+        S.pattern = d.pattern !== false; S.arch = d.arch !== false; S.divider = d.divider !== false;
+        S.showSeal = d.showSeal !== false; S.showSig1 = d.showSig1 !== false; S.showSig2 = d.showSig2 !== false;
+        S.fields = Object.assign({ institution:"", title:"", intro:"", name:"", father:"", body:"", date:"", serial:"", sig1Name:"", sig1Title:"", sig2Name:"", sig2Title:"", sealText:"" }, d.fields || {});
+        S.elsByOrient = d.elsByOrient || {};
+        S.logoData = d.logoData || null; S.sigData = d.sigData || null; S.stampData = d.stampData || null;
+        // sync form
+        Object.keys(FIELD_IDS).forEach(function(k){ $(FIELD_IDS[k]).value = S.fields[k] || ""; });
+        $("ctBorder").value = S.border;
+        $("ctPattern").checked = S.pattern; $("ctArch").checked = S.arch; $("ctDivider").checked = S.divider;
+        $("ctShowSeal").checked = S.showSeal; $("ctShowSig1").checked = S.showSig1; $("ctShowSig2").checked = S.showSig2;
+        var ob = $("ctOrient").querySelectorAll("button");
+        for (var i = 0; i < ob.length; i++) ob[i].classList.toggle("on", ob[i].getAttribute("data-o") === S.orientation);
+        select(null);
+        buildTplGrid();
+        var jobs = [];
+        [["logo", "ctLogoChip", "ctLogoThumb"], ["sig", "ctSigChip", "ctSigThumb"], ["stamp", "ctStampChip", "ctStampThumb"]].forEach(function(cfg){
+          var data = S[cfg[0] + "Data"];
+          if (data){
+            $(cfg[2]).src = data; $(cfg[1]).classList.add("show");
+            jobs.push(loadImgFromData(data).then(function(img){ S[cfg[0] + "Img"] = img; }));
+          } else { S[cfg[0] + "Img"] = null; $(cfg[1]).classList.remove("show"); }
+        });
+        Promise.all(jobs).then(function(){ els(); render(); });
+        els(); render();
+      }
+      function renderSavedList(){
+        var box = $("ctSavedList"); box.innerHTML = "";
+        savedDesigns.forEach(function(item, idx){
+          var row = document.createElement("div"); row.className = "saved-row";
+          var b = document.createElement("b"); b.textContent = item.name;
+          var open = document.createElement("button"); open.type = "button"; open.textContent = "کھولیں";
+          open.addEventListener("click", function(){ applyDesign(JSON.parse(JSON.stringify(item.data))); setStatus("ڈیزائن «" + item.name + "» کھل گیا — مزید ترمیم کی جا سکتی ہے۔"); });
+          var del = document.createElement("button"); del.type = "button"; del.className = "danger"; del.textContent = "حذف کریں";
+          del.addEventListener("click", function(){ savedDesigns.splice(idx, 1); renderSavedList(); });
+          row.appendChild(b); row.appendChild(open); row.appendChild(del);
+          box.appendChild(row);
+        });
+      }
+      $("ctSaveDesign").addEventListener("click", function(){
+        var nm = $("ctDesignName").value.trim();
+        if (!nm){ setStatus("پہلے ڈیزائن کا نام لکھیں، پھر محفوظ کریں۔"); $("ctDesignName").focus(); return; }
+        savedDesigns.push({ name: nm, data: collect() });
+        renderSavedList();
+        setStatus("ڈیزائن «" + nm + "» محفوظ ہو گیا — نیچے فہرست سے دوبارہ کھولا جا سکتا ہے۔");
+      });
+      function downloadBlob(blob, filename){
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(blob); a.download = filename;
+        document.body.appendChild(a); a.click();
+        setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 800);
+      }
+      function fileBase(){
+        var n = (S.fields.name || S.fields.institution || "certificate").trim().replace(/[\\/:*?"<>|\s]+/g, "-").slice(0, 40);
+        return "certificate-" + (n || "design");
+      }
+      $("ctExportDesign").addEventListener("click", function(){
+        var blob = new Blob([JSON.stringify(collect(), null, 2)], { type: "application/json" });
+        downloadBlob(blob, fileBase() + "-design.json");
+        setStatus("ڈیزائن فائل ڈاؤن لوڈ ہو گئی — اسے محفوظ رکھیں، دوبارہ کھولنے پر ڈیزائن واپس آ جائے گا۔");
+      });
+      $("ctImportBtn").addEventListener("click", function(){ $("ctImportFile").click(); });
+      $("ctImportFile").addEventListener("change", function(){
+        var f = this.files && this.files[0]; this.value = "";
+        if (!f) return;
+        var rd = new FileReader();
+        rd.onload = function(){
+          try { applyDesign(JSON.parse(rd.result)); setStatus("محفوظ ڈیزائن کھل گیا۔"); }
+          catch(e){ setStatus("یہ فائل درست ڈیزائن فائل نہیں لگی — دوبارہ جانچیں۔"); }
+        };
+        rd.readAsText(f);
+      });
+      var newArmed = false, newTimer = null;
+      $("ctNewDesign").addEventListener("click", function(){
+        if (!newArmed){
+          newArmed = true; this.textContent = "یقینی؟ دوبارہ دبائیں — سب خانے خالی ہو جائیں گے";
+          newTimer = setTimeout(function(){ newArmed = false; $("ctNewDesign").textContent = "نیا ڈیزائن (سب خالی کریں)"; }, 3500);
+          return;
+        }
+        clearTimeout(newTimer); newArmed = false; this.textContent = "نیا ڈیزائن (سب خالی کریں)";
+        applyDesign({ template: "islamic-navy", orientation: S.orientation });
+        setStatus("نیا ڈیزائن شروع — تمام خانے خالی ہیں۔");
+      });
+
+      /* ---------------- downloads ---------------- */
+      $("ctDlPng").addEventListener("click", function(){
+        renderExportCanvas().toBlob(function(b){ if (b) downloadBlob(b, fileBase() + ".png"); }, "image/png");
+        setStatus("PNG تصویر تیار ہو رہی ہے…");
+      });
+      $("ctDlJpg").addEventListener("click", function(){
+        renderExportCanvas().toBlob(function(b){ if (b) downloadBlob(b, fileBase() + ".jpg"); }, "image/jpeg", 0.94);
+        setStatus("JPG تصویر تیار ہو رہی ہے…");
+      });
+      $("ctDlPdf").addEventListener("click", function(){
+        if (!window.jspdf || !window.jspdf.jsPDF){ setStatus("PDF انجن لوڈ نہیں ہو سکا — انٹرنیٹ جانچ کر صفحہ دوبارہ کھولیں۔"); return; }
+        setStatus("PDF تیار ہو رہی ہے…");
+        var c2 = renderExportCanvas();
+        var img = c2.toDataURL("image/jpeg", 0.94);
+        var land = S.orientation === "landscape";
+        var doc = new window.jspdf.jsPDF({ unit: "mm", format: "a4", orientation: land ? "landscape" : "portrait", compress: true });
+        doc.addImage(img, "JPEG", 0, 0, land ? 297 : 210, land ? 210 : 297);
+        doc.save(fileBase() + ".pdf");
+        setStatus("PDF ڈاؤن لوڈ ہو گئی — پرنٹ کے لیے تیار ہے۔");
+      });
+
+      /* ---------------- init ---------------- */
+      buildTplGrid();
+      $("ctBorder").value = S.border;
+      if (document.fonts && document.fonts.ready){
+        document.fonts.ready.then(function(){ render(); });
+        ["700 40px 'Noto Nastaliq Urdu'", "700 30px 'Noto Naskh Arabic'", "700 30px 'Amiri'", "400 27px 'Aref Ruqaa'", "600 20px 'Poppins'"].forEach(function(f){
+          if (document.fonts.load) document.fonts.load(f).catch(function(){});
+        });
+      }
+      render();
+    })();
+    </script>
+    <script>
+    (function(){
+      "use strict";
+      function $(id){ return document.getElementById(id); }
+      function esc(s){ return String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+      function setStatus(m){ var s = $("cvStatus"); if (s) s.textContent = m || ""; }
+
+      var FONT_STACKS = {
+        nastaliq: '"Noto Nastaliq Urdu","Noto Naskh Arabic",serif',
+        naskh: '"Noto Naskh Arabic",serif',
+        amiri: '"Amiri","Noto Naskh Arabic",serif',
+        poppins: '"Poppins",sans-serif',
+        georgia: 'Georgia,"Times New Roman",serif',
+        segoe: '"Segoe UI",Arial,sans-serif'
+      };
+      var FONT_OPTS = {
+        ur: [["nastaliq","نستعلیق (اردو)"],["naskh","نسخ (اردو و عربی)"],["amiri","امیری (عربی خط)"]],
+        en: [["poppins","Poppins (Modern)"],["georgia","Georgia (Serif)"],["segoe","Segoe UI / Arial"]]
+      };
+      var L = {
+        ur: { dir:"rtl", personal:"ذاتی معلومات", summary:"مختصر تعارف", education:"تعلیم", experience:"تجربہ", skills:"مہارتیں", languages:"زبانیں", other:"دیگر معلومات", contact:"رابطہ", father:"والد کا نام", address:"پتہ", mobile:"موبائل نمبر", email:"ای میل", sonOf:"ولد" },
+        en: { dir:"ltr", personal:"Personal Information", summary:"Profile Summary", education:"Education", experience:"Experience", skills:"Skills", languages:"Languages", other:"Additional Information", contact:"Contact", father:"Father's Name", address:"Address", mobile:"Mobile", email:"Email", sonOf:"S/O" }
+      };
+      var FL = {
+        ur: {
+          name:"نام", father:"والد کا نام", address:"پتہ", mobile:"موبائل نمبر", email:"ای میل",
+          summary:"مختصر تعارف", skills:"مہارتیں", languages:"زبانیں", other:"دیگر معلومات",
+          namePh:"اپنا مکمل نام لکھیں", fatherPh:"والد کا نام لکھیں", addressPh:"اپنا مکمل پتہ لکھیں", mobilePh:"موبائل نمبر لکھیں", emailPh:"ای میل لکھیں",
+          summaryPh:"اپنے بارے میں مختصر تعارف لکھیں", skillsPh:"ہر مہارت الگ سطر میں لکھیں", langPh:"ہر زبان الگ سطر میں لکھیں", otherPh:"کوئی اور اہم معلومات لکھیں",
+          eduFields:[["degree","ڈگری / سند"],["inst","ادارہ / بورڈ / یونیورسٹی"],["year","سال"],["grade","نمبر / گریڈ"]],
+          expFields:[["title","عہدہ / کام"],["org","ادارہ / کمپنی"],["period","مدت"],["details","ذمہ داریاں / تفصیل"]],
+          eduEntry:"تعلیم", expEntry:"تجربہ", addEdu:"ایک اور تعلیم شامل کریں", addExp:"ایک اور تجربہ شامل کریں", remove:"حذف کریں"
+        },
+        en: {
+          name:"Full Name", father:"Father's Name", address:"Address", mobile:"Mobile Number", email:"Email Address",
+          summary:"Profile Summary", skills:"Skills", languages:"Languages", other:"Additional Information",
+          namePh:"Write your full name", fatherPh:"Write father's name", addressPh:"Write your full address", mobilePh:"Write mobile number", emailPh:"Write email address",
+          summaryPh:"Write a short summary about yourself", skillsPh:"One skill per line", langPh:"One language per line", otherPh:"Write any other important information",
+          eduFields:[["degree","Degree / Qualification"],["inst","Institution / Board"],["year","Year"],["grade","Grade / Marks"]],
+          expFields:[["title","Job Title"],["org","Organization / Company"],["period","Period"],["details","Responsibilities / Details"]],
+          eduEntry:"Education", expEntry:"Experience", addEdu:"Add Another Education", addExp:"Add Another Experience", remove:"Remove"
+        }
+      };
+      var TPLS = [
+        { id:"classic", name:"کلاسک — رنگین سرخی پٹی", bg:"linear-gradient(135deg,#16265c 55%,#c9a227)" },
+        { id:"sidebar", name:"جدید — سائیڈ بار", bg:"linear-gradient(90deg,#16265c 34%,#ffffff 34%)" },
+        { id:"minimal", name:"سادہ — مینیمل", bg:"linear-gradient(180deg,#ffffff 78%,#16265c 78%)" },
+        { id:"elegant", name:"شاہانہ — سنہری فریم", bg:"linear-gradient(135deg,#fffdf5 55%,#e8c874)" }
+      ];
+
+      function mkEdu(){ return { degree:"", inst:"", year:"", grade:"" }; }
+      function mkExp(){ return { title:"", org:"", period:"", details:"" }; }
+      function emptyData(){ return { name:"", father:"", address:"", mobile:"", email:"", summary:"", skills:"", languages:"", other:"", education:[mkEdu()], experience:[mkExp()] }; }
+      var DATA = { ur: emptyData(), en: emptyData() };
+      var DESIGN = {
+        ur: { tpl:"classic", accent:"#16265c", font:"nastaliq", size:15, photo:true },
+        en: { tpl:"classic", accent:"#16265c", font:"poppins", size:15, photo:true }
+      };
+      var lang = "ur";
+      var photoData = null;
+
+      /* ---------------- form building ---------------- */
+      function textField(key, label, ph, ltr){
+        return '<div class="field" style="margin:0"><label>' + label + '</label>' +
+          '<input type="text" class="tin" data-f="' + key + '" placeholder="' + esc(ph) + '"' + (ltr ? ' dir="ltr" style="text-align:start"' : '') + ' /></div>';
+      }
+      function areaField(key, label, ph, h){
+        return '<div class="field full" style="margin:0"><label>' + label + '</label>' +
+          '<textarea class="tin" data-f="' + key + '" placeholder="' + esc(ph) + '" style="min-height:' + (h || 74) + 'px"></textarea></div>';
+      }
+      function groupHead(txt){
+        return '<div style="font-size:14px;font-weight:700;color:var(--gold-2);border-bottom:1px solid rgba(201,162,39,.3);padding-bottom:5px;margin:16px 0 11px">' + txt + '</div>';
+      }
+      function entryBox(listName, fieldsSpec, entry, idx, entryLabel, removeLabel){
+        var inner = '<div class="entry-head"><b>' + entryLabel + ' ' + (idx + 1) + '</b><button type="button" data-remove="' + listName + '" data-idx="' + idx + '">' + removeLabel + '</button></div>';
+        inner += '<div class="f-grid">';
+        fieldsSpec.forEach(function(fs){
+          var k = fs[0];
+          if (k === "details"){
+            inner += '<div class="field full" style="margin:0"><label>' + fs[1] + '</label><textarea class="tin" data-list="' + listName + '" data-idx="' + idx + '" data-k="' + k + '" style="min-height:56px"></textarea></div>';
+          } else {
+            inner += '<div class="field" style="margin:0"><label>' + fs[1] + '</label><input type="text" class="tin" data-list="' + listName + '" data-idx="' + idx + '" data-k="' + k + '"' + (k === "year" || k === "grade" ? ' dir="ltr" style="text-align:start"' : '') + ' /></div>';
+          }
+        });
+        inner += '</div>';
+        return '<div class="entry-box">' + inner + '</div>';
+      }
+      function buildForm(lg){
+        var F = FL[lg], d = DATA[lg], box = $(lg === "ur" ? "cvFormUr" : "cvFormEn");
+        var h = "";
+        h += groupHead(L[lg].personal);
+        h += '<div class="f-grid">';
+        h += textField("name", F.name, F.namePh);
+        h += textField("father", F.father, F.fatherPh);
+        h += textField("mobile", F.mobile, F.mobilePh, true);
+        h += textField("email", F.email, F.emailPh, true);
+        h += '<div class="field full" style="margin:0"><label>' + F.address + '</label><input type="text" class="tin" data-f="address" placeholder="' + esc(F.addressPh) + '" /></div>';
+        h += areaField("summary", F.summary, F.summaryPh, 64);
+        h += '</div>';
+        h += groupHead(L[lg].education);
+        d.education.forEach(function(e, i){ h += entryBox("education", F.eduFields, e, i, F.eduEntry, F.remove); });
+        h += '<button type="button" class="add-btn" data-add="education">' + F.addEdu + '</button>';
+        h += groupHead(L[lg].experience);
+        d.experience.forEach(function(e, i){ h += entryBox("experience", F.expFields, e, i, F.expEntry, F.remove); });
+        h += '<button type="button" class="add-btn" data-add="experience">' + F.addExp + '</button>';
+        h += groupHead(L[lg].skills + " · " + L[lg].languages + " · " + L[lg].other);
+        h += '<div class="f-grid">';
+        h += areaField("skills", F.skills, F.skillsPh, 84);
+        h += areaField("languages", F.languages, F.langPh, 84);
+        h += areaField("other", F.other, F.otherPh, 84);
+        h += '</div>';
+        box.innerHTML = h;
+        // fill values
+        box.querySelectorAll("[data-f]").forEach(function(inp){ inp.value = d[inp.getAttribute("data-f")] || ""; });
+        box.querySelectorAll("[data-list]").forEach(function(inp){
+          var e = d[inp.getAttribute("data-list")][+inp.getAttribute("data-idx")];
+          if (e) inp.value = e[inp.getAttribute("data-k")] || "";
+        });
+      }
+      function bindForm(lg){
+        var box = $(lg === "ur" ? "cvFormUr" : "cvFormEn");
+        box.addEventListener("input", function(e){
+          var t = e.target, d = DATA[lg];
+          if (t.hasAttribute("data-f")) d[t.getAttribute("data-f")] = t.value;
+          else if (t.hasAttribute("data-list")){
+            var en = d[t.getAttribute("data-list")][+t.getAttribute("data-idx")];
+            if (en) en[t.getAttribute("data-k")] = t.value;
+          } else return;
+          if (lg === lang) scheduleRenderCv();
+        });
+        box.addEventListener("click", function(e){
+          var add = e.target.closest("[data-add]");
+          if (add){
+            var ln = add.getAttribute("data-add");
+            DATA[lg][ln].push(ln === "education" ? mkEdu() : mkExp());
+            buildForm(lg); if (lg === lang) scheduleRenderCv(); return;
+          }
+          var rem = e.target.closest("[data-remove]");
+          if (rem){
+            var ln2 = rem.getAttribute("data-remove"), ix = +rem.getAttribute("data-idx");
+            DATA[lg][ln2].splice(ix, 1);
+            if (!DATA[lg][ln2].length) DATA[lg][ln2].push(ln2 === "education" ? mkEdu() : mkExp());
+            buildForm(lg); if (lg === lang) scheduleRenderCv();
+          }
+        });
+      }
+
+      /* ---------------- preview rendering ---------------- */
+      function filledEntries(arr){ return arr.filter(function(e){ return Object.keys(e).some(function(k){ return (e[k] || "").trim(); }); }); }
+      function listItems(t){ return String(t || "").split(/[\n,،]/).map(function(x){ return x.trim(); }).filter(Boolean); }
+      function personalRows(d, LL){
+        var r = [];
+        if (d.father.trim()) r.push([LL.father, d.father]);
+        if (d.address.trim()) r.push([LL.address, d.address]);
+        if (d.mobile.trim()) r.push([LL.mobile, d.mobile]);
+        if (d.email.trim()) r.push([LL.email, d.email]);
+        return r;
+      }
+      function rowsHTML(rows){
+        return rows.map(function(r){
+          var val = (r[1] || "");
+          var ltr = /[\d@+]/.test(val) && !/[\u0600-\u06FF]/.test(val.replace(/[\d\s+\-()@.a-zA-Z]/g, ""));
+          return '<div style="display:flex;gap:12px;margin-bottom:6px"><b style="flex:0 0 118px;color:#3c4763">' + esc(r[0]) + '</b><span class="cv-pre">' + esc(val) + '</span></div>';
+        }).join("");
+      }
+      function eduHTML(list){
+        return filledEntries(list).map(function(e){
+          var sub = [e.inst, e.grade].filter(function(x){ return (x || "").trim(); }).join(" — ");
+          return '<div class="cv-entry"><div style="display:flex;justify-content:space-between;gap:14px"><b>' + esc(e.degree) + '</b>' + (e.year.trim() ? '<span style="color:#6a7386;white-space:nowrap">' + esc(e.year) + '</span>' : '') + '</div>' + (sub ? '<div style="color:#454f66">' + esc(sub) + '</div>' : '') + '</div>';
+        }).join("");
+      }
+      function expHTML(list){
+        return filledEntries(list).map(function(e){
+          return '<div class="cv-entry"><div style="display:flex;justify-content:space-between;gap:14px"><b>' + esc(e.title) + '</b>' + (e.period.trim() ? '<span style="color:#6a7386;white-space:nowrap">' + esc(e.period) + '</span>' : '') + '</div>' +
+            (e.org.trim() ? '<div style="color:#454f66">' + esc(e.org) + '</div>' : '') +
+            (e.details.trim() ? '<p class="cv-pre" style="margin-top:3px">' + esc(e.details) + '</p>' : '') + '</div>';
+        }).join("");
+      }
+      function ulHTML(items, cols){
+        if (!items.length) return "";
+        return '<ul' + (cols ? ' style="columns:2;column-gap:26px"' : '') + '>' + items.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>';
+      }
+      function contactParts(d, LL){
+        var p = [];
+        if (d.father.trim()) p.push(LL.sonOf + " " + d.father.trim());
+        if (d.mobile.trim()) p.push(d.mobile.trim());
+        if (d.email.trim()) p.push(d.email.trim());
+        return p;
+      }
+      function photoImg(w, h, extra){
+        if (!DESIGN[lang].photo || !photoData) return "";
+        return '<img src="' + photoData + '" alt="" style="width:' + w + 'px;height:' + h + 'px;object-fit:cover;' + (extra || "") + '" />';
+      }
+
+      function renderClassic(d, LL, Dd){
+        var acc = Dd.accent, secs = "";
+        function sec(title, body){ if (body) secs += '<div style="margin-bottom:20px"><h3 style="color:' + acc + ';font-size:1.18em;border-bottom:2px solid #c9a227;padding-bottom:5px;margin-bottom:11px">' + title + '</h3>' + body + '</div>'; }
+        var rows = personalRows(d, LL);
+        sec(LL.personal, rows.length ? rowsHTML(rows) : "");
+        sec(LL.summary, d.summary.trim() ? '<p class="cv-pre">' + esc(d.summary) + '</p>' : "");
+        sec(LL.education, eduHTML(d.education));
+        sec(LL.experience, expHTML(d.experience));
+        sec(LL.skills, ulHTML(listItems(d.skills), true));
+        sec(LL.languages, ulHTML(listItems(d.languages), true));
+        sec(LL.other, d.other.trim() ? '<p class="cv-pre">' + esc(d.other) + '</p>' : "");
+        var parts = contactParts(d, LL);
+        return '<div style="background:' + acc + ';color:#ffffff;padding:28px 36px;display:flex;align-items:center;gap:22px">' +
+          photoImg(104, 128, "border-radius:6px;border:3px solid rgba(255,255,255,.6);flex:0 0 auto") +
+          '<div style="flex:1">' + (d.name.trim() ? '<h1 style="font-size:2em;line-height:1.5;color:#ffffff">' + esc(d.name) + '</h1>' : '') +
+          (parts.length ? '<div style="color:#e6eaf5;margin-top:4px">' + esc(parts.join("  •  ")) + '</div>' : '') + '</div></div>' +
+          '<div style="padding:22px 36px 36px">' + secs + '</div>';
+      }
+      function renderSidebar(d, LL, Dd){
+        var acc = Dd.accent, main = "", aside = "";
+        function secM(title, body){ if (body) main += '<div style="margin-bottom:20px"><h3 style="color:' + acc + ';font-size:1.15em;border-inline-start:4px solid ' + acc + ';padding-inline-start:9px;margin-bottom:10px">' + title + '</h3>' + body + '</div>'; }
+        function secA(title, body){ if (body) aside += '<div style="margin-bottom:20px"><h3 style="color:#e8c874;font-size:1.02em;border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:5px;margin-bottom:9px">' + title + '</h3>' + body + '</div>'; }
+        var contact = "";
+        if (d.address.trim()) contact += '<div style="margin-bottom:9px"><b style="display:block;color:#cdd6ee;font-size:.85em">' + LL.address + '</b><span class="cv-pre">' + esc(d.address) + '</span></div>';
+        if (d.mobile.trim()) contact += '<div style="margin-bottom:9px"><b style="display:block;color:#cdd6ee;font-size:.85em">' + LL.mobile + '</b>' + esc(d.mobile) + '</div>';
+        if (d.email.trim()) contact += '<div style="margin-bottom:9px"><b style="display:block;color:#cdd6ee;font-size:.85em">' + LL.email + '</b>' + esc(d.email) + '</div>';
+        secA(LL.contact, contact);
+        secA(LL.skills, ulHTML(listItems(d.skills), false));
+        secA(LL.languages, ulHTML(listItems(d.languages), false));
+        secM(LL.summary, d.summary.trim() ? '<p class="cv-pre">' + esc(d.summary) + '</p>' : "");
+        secM(LL.education, eduHTML(d.education));
+        secM(LL.experience, expHTML(d.experience));
+        secM(LL.other, d.other.trim() ? '<p class="cv-pre">' + esc(d.other) + '</p>' : "");
+        return '<div style="display:flex;min-height:1123px">' +
+          '<aside style="width:262px;flex:0 0 262px;background:' + acc + ';color:#ffffff;padding:30px 24px">' +
+            '<div style="text-align:center;margin-bottom:20px">' + photoImg(122, 150, "border-radius:8px;border:3px solid rgba(255,255,255,.55)") + '</div>' + aside + '</aside>' +
+          '<div style="flex:1;padding:32px 34px">' +
+            (d.name.trim() ? '<h1 style="font-size:1.95em;line-height:1.5;color:#1c2438">' + esc(d.name) + '</h1>' : '') +
+            (d.father.trim() ? '<div style="color:#66707f;margin:2px 0 20px">' + LL.father + ': ' + esc(d.father) + '</div>' : '<div style="margin-bottom:14px"></div>') +
+            main + '</div></div>';
+      }
+      function renderMinimal(d, LL, Dd){
+        var acc = Dd.accent, secs = "";
+        var upper = lang === "en";
+        function sec(title, body){ if (body) secs += '<div style="margin-bottom:19px"><h3 style="font-size:.98em;color:' + acc + ';border-bottom:1px solid #d8dce6;padding-bottom:4px;margin-bottom:10px' + (upper ? ';letter-spacing:2px;text-transform:uppercase' : '') + '">' + title + '</h3>' + body + '</div>'; }
+        var rows = personalRows(d, LL);
+        sec(LL.personal, rows.length ? rowsHTML(rows) : "");
+        sec(LL.summary, d.summary.trim() ? '<p class="cv-pre">' + esc(d.summary) + '</p>' : "");
+        sec(LL.education, eduHTML(d.education));
+        sec(LL.experience, expHTML(d.experience));
+        sec(LL.skills, ulHTML(listItems(d.skills), true));
+        sec(LL.languages, ulHTML(listItems(d.languages), true));
+        sec(LL.other, d.other.trim() ? '<p class="cv-pre">' + esc(d.other) + '</p>' : "");
+        var parts = contactParts(d, LL);
+        if (d.address.trim()) parts.push(d.address.trim());
+        return '<div style="padding:42px 46px">' +
+          '<div style="display:flex;align-items:center;gap:22px">' +
+            '<div style="flex:1">' + (d.name.trim() ? '<h1 style="font-size:2.05em;line-height:1.45;color:#141a26">' + esc(d.name) + '</h1>' : '') +
+            (parts.length ? '<div style="color:#5a6478;margin-top:4px">' + esc(parts.join("  |  ")) + '</div>' : '') + '</div>' +
+            photoImg(96, 118, "border-radius:4px;flex:0 0 auto") + '</div>' +
+          '<div style="height:3px;background:' + acc + ';margin:16px 0 22px"></div>' + secs + '</div>';
+      }
+      function renderElegant(d, LL, Dd){
+        var acc = Dd.accent, secs = "";
+        function flor(){ return '<div style="display:flex;align-items:center;gap:10px;max-width:430px;margin:0 auto"><span style="flex:1;height:1px;background:' + acc + '"></span><span style="width:8px;height:8px;background:' + acc + ';transform:rotate(45deg);flex:0 0 8px"></span><span style="flex:1;height:1px;background:' + acc + '"></span></div>'; }
+        function sec(title, body){ if (body) secs += '<div style="margin-bottom:20px"><div style="display:flex;align-items:center;gap:12px;margin-bottom:11px"><span style="flex:1;height:1px;background:' + acc + ';opacity:.55"></span><h3 style="color:' + acc + ';font-size:1.15em">' + title + '</h3><span style="flex:1;height:1px;background:' + acc + ';opacity:.55"></span></div>' + body + '</div>'; }
+        var rows = personalRows(d, LL);
+        sec(LL.personal, rows.length ? rowsHTML(rows) : "");
+        sec(LL.summary, d.summary.trim() ? '<p class="cv-pre">' + esc(d.summary) + '</p>' : "");
+        sec(LL.education, eduHTML(d.education));
+        sec(LL.experience, expHTML(d.experience));
+        sec(LL.skills, ulHTML(listItems(d.skills), true));
+        sec(LL.languages, ulHTML(listItems(d.languages), true));
+        sec(LL.other, d.other.trim() ? '<p class="cv-pre">' + esc(d.other) + '</p>' : "");
+        var parts = contactParts(d, LL);
+        if (d.address.trim()) parts.push(d.address.trim());
+        return '<div style="padding:16px"><div style="border:3px double ' + acc + ';min-height:1085px;padding:30px 38px">' +
+          '<div style="text-align:center;margin-bottom:22px">' + photoImg(108, 132, "border-radius:8px;border:2px solid " + acc) +
+          (d.name.trim() ? '<h1 style="font-size:2em;line-height:1.55;color:' + acc + ';margin-top:8px">' + esc(d.name) + '</h1>' : '') +
+          (parts.length ? '<div style="color:#5a6478;margin:5px 0 13px">' + esc(parts.join("  •  ")) + '</div>' : '<div style="margin-bottom:13px"></div>') + flor() + '</div>' +
+          secs + '</div></div>';
+      }
+
+      var renderTimer = null;
+      function scheduleRenderCv(){ if (renderTimer) clearTimeout(renderTimer); renderTimer = setTimeout(renderCv, 90); }
+      function renderCv(){
+        var d = DATA[lang], LL = L[lang], Dd = DESIGN[lang], page = $("cvPage");
+        page.setAttribute("dir", LL.dir);
+        page.style.fontFamily = FONT_STACKS[Dd.font];
+        page.style.fontSize = Dd.size + "px";
+        page.style.lineHeight = Dd.font === "nastaliq" ? "2.05" : Dd.font === "amiri" ? "1.9" : "1.62";
+        var html = Dd.tpl === "sidebar" ? renderSidebar(d, LL, Dd) : Dd.tpl === "minimal" ? renderMinimal(d, LL, Dd) : Dd.tpl === "elegant" ? renderElegant(d, LL, Dd) : renderClassic(d, LL, Dd);
+        page.innerHTML = html;
+        requestAnimationFrame(fitCv);
+      }
+      function fitCv(){
+        var wrap = $("cvFit"), page = $("cvPage");
+        if (!wrap || !page) return;
+        var w = wrap.clientWidth;
+        if (!w) return;
+        var s = w / 794;
+        page.style.transform = "scale(" + s + ")";
+        if (lang === "ur"){ page.style.right = "0"; page.style.left = "auto"; page.style.transformOrigin = "top right"; }
+        else { page.style.left = "0"; page.style.right = "auto"; page.style.transformOrigin = "top left"; }
+        wrap.style.height = Math.ceil(page.offsetHeight * s) + "px";
+      }
+
+      /* ---------------- design controls ---------------- */
+      function buildTplGrid(){
+        var grid = $("cvTplGrid"); grid.innerHTML = "";
+        TPLS.forEach(function(t){
+          var b = document.createElement("button");
+          b.type = "button"; b.className = "tpl-btn" + (t.id === DESIGN[lang].tpl ? " sel" : "");
+          b.setAttribute("data-tpl", t.id);
+          var sw = document.createElement("span"); sw.className = "sw"; sw.style.background = t.bg; sw.style.borderColor = "#c9a227"; sw.style.color = "#c9a227";
+          var nm = document.createElement("span"); nm.textContent = t.name;
+          b.appendChild(sw); b.appendChild(nm);
+          b.addEventListener("click", function(){ DESIGN[lang].tpl = t.id; buildTplGrid(); renderCv(); });
+          grid.appendChild(b);
+        });
+      }
+      function syncDesignControls(){
+        var Dd = DESIGN[lang];
+        buildTplGrid();
+        var sel = $("cvFont"); sel.innerHTML = "";
+        FONT_OPTS[lang].forEach(function(o){
+          var op = document.createElement("option"); op.value = o[0]; op.textContent = o[1]; sel.appendChild(op);
+        });
+        sel.value = Dd.font;
+        $("cvFontSize").value = Dd.size; $("cvFontSizeOut").textContent = Dd.size;
+        $("cvShowPhoto").checked = Dd.photo;
+        var sws = $("cvAccents").querySelectorAll(".sw"), matched = false;
+        sws.forEach(function(sw){
+          var on = sw.getAttribute("data-accent") === Dd.accent;
+          sw.classList.toggle("sel", on); if (on) matched = true;
+        });
+        if (matched) $("cvAccentCustom").value = Dd.accent;
+        $("cvFormTitle").textContent = lang === "ur" ? "مرحلہ 2 — اپنی معلومات درج کریں (اردو CV)" : "Step 2 — Enter Your Information (English CV)";
+      }
+      $("cvLangSeg").addEventListener("click", function(e){
+        var b = e.target.closest("button"); if (!b) return;
+        lang = b.getAttribute("data-cvlang");
+        var btns = this.querySelectorAll("button");
+        for (var i = 0; i < btns.length; i++) btns[i].classList.toggle("on", btns[i] === b);
+        $("cvFormUr").style.display = lang === "ur" ? "" : "none";
+        $("cvFormEn").style.display = lang === "en" ? "" : "none";
+        syncDesignControls(); renderCv();
+      });
+      $("cvAccents").addEventListener("click", function(e){
+        var sw = e.target.closest(".sw"); if (!sw) return;
+        DESIGN[lang].accent = sw.getAttribute("data-accent");
+        syncDesignControls(); renderCv();
+      });
+      $("cvAccentCustom").addEventListener("input", function(){ DESIGN[lang].accent = this.value; renderCv(); });
+      $("cvFont").addEventListener("change", function(){ DESIGN[lang].font = this.value; renderCv(); });
+      $("cvFontSize").addEventListener("input", function(){ DESIGN[lang].size = +this.value; $("cvFontSizeOut").textContent = this.value; renderCv(); });
+      $("cvShowPhoto").addEventListener("change", function(){ DESIGN[lang].photo = this.checked; renderCv(); });
+
+      /* ---------------- photo ---------------- */
+      $("cvPhotoBtn").addEventListener("click", function(){ $("cvPhotoFile").click(); });
+      $("cvPhotoFile").addEventListener("change", function(){
+        var f = this.files && this.files[0]; this.value = "";
+        if (!f) return;
+        var rd = new FileReader();
+        rd.onload = function(){
+          photoData = rd.result;
+          $("cvPhotoThumb").src = photoData;
+          $("cvPhotoChip").classList.add("show");
+          DESIGN.ur.photo = true; DESIGN.en.photo = true;
+          $("cvShowPhoto").checked = true;
+          renderCv(); setStatus("تصویر شامل ہو گئی ہے۔");
+        };
+        rd.readAsDataURL(f);
+      });
+      $("cvPhotoDel").addEventListener("click", function(){
+        photoData = null; $("cvPhotoChip").classList.remove("show"); renderCv();
+      });
+
+      /* ---------------- downloads ---------------- */
+      function fileBase(){
+        var n = (DATA[lang].name || "cv").trim().replace(/[\\/:*?"<>|\s]+/g, "-").slice(0, 40);
+        return (n || "cv") + (lang === "ur" ? "-urdu" : "-english");
+      }
+      function downloadBlob(blob, filename){
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(blob); a.download = filename;
+        document.body.appendChild(a); a.click();
+        setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 900);
+      }
+      function capturePage(){
+        var page = $("cvPage"), wrap = $("cvFit");
+        var prevT = page.style.transform, prevH = wrap.style.height;
+        page.style.transform = "none"; wrap.style.height = page.offsetHeight + "px";
+        return window.html2canvas(page, { scale: 2, backgroundColor: "#ffffff", useCORS: true }).then(function(canvas){
+          page.style.transform = prevT; wrap.style.height = prevH; fitCv();
+          return canvas;
+        }).catch(function(err){
+          page.style.transform = prevT; wrap.style.height = prevH; fitCv();
+          throw err;
+        });
+      }
+      $("cvDlPng").addEventListener("click", function(){
+        if (!window.html2canvas){ setStatus("تصویر انجن لوڈ نہیں ہو سکا — انٹرنیٹ جانچ کر صفحہ دوبارہ کھولیں۔"); return; }
+        setStatus("PNG تصویر تیار ہو رہی ہے…");
+        capturePage().then(function(canvas){
+          canvas.toBlob(function(b){ if (b){ downloadBlob(b, fileBase() + ".png"); setStatus("PNG تصویر ڈاؤن لوڈ ہو گئی۔"); } }, "image/png");
+        }).catch(function(){ setStatus("تصویر نہیں بن سکی — دوبارہ کوشش کریں۔"); });
+      });
+      $("cvDlPdf").addEventListener("click", function(){
+        if (!window.html2canvas){ setStatus("PDF انجن لوڈ نہیں ہو سکا — انٹرنیٹ جانچ کر صفحہ دوبارہ کھولیں۔"); return; }
+        if (!window.jspdf || !window.jspdf.jsPDF){ setStatus("PDF انجن لوڈ نہیں ہو سکا — انٹرنیٹ جانچ کر صفحہ دوبارہ کھولیں۔"); return; }
+        setStatus("PDF تیار ہو رہی ہے…");
+        capturePage().then(function(canvas){
+          var doc = new window.jspdf.jsPDF({ unit: "mm", format: "a4", orientation: "portrait", compress: true });
+          var pageHpx = Math.floor(canvas.width * 297 / 210);
+          var rendered = 0, first = true;
+          while (rendered < canvas.height){
+            var h = Math.min(pageHpx, canvas.height - rendered);
+            var pc = document.createElement("canvas"); pc.width = canvas.width; pc.height = h;
+            var px = pc.getContext("2d"); px.fillStyle = "#ffffff"; px.fillRect(0, 0, pc.width, pc.height);
+            px.drawImage(canvas, 0, rendered, canvas.width, h, 0, 0, canvas.width, h);
+            if (!first) doc.addPage();
+            doc.addImage(pc.toDataURL("image/jpeg", 0.95), "JPEG", 0, 0, 210, h * 210 / canvas.width);
+            rendered += h; first = false;
+          }
+          doc.save(fileBase() + ".pdf");
+          setStatus("PDF ڈاؤن لوڈ ہو گئی — A4 سائز، پرنٹ کے لیے تیار ہے۔");
+        }).catch(function(){ setStatus("PDF نہیں بن سکی — دوبارہ کوشش کریں۔"); });
+      });
+      var clearArmed = false, clearTimer = null;
+      $("cvClear").addEventListener("click", function(){
+        if (!clearArmed){
+          clearArmed = true; this.textContent = "یقینی؟ دوبارہ دبائیں — اس CV کے سب خانے خالی ہو جائیں گے";
+          clearTimer = setTimeout(function(){ clearArmed = false; $("cvClear").textContent = "اس CV کے تمام خانے خالی کریں"; }, 3500);
+          return;
+        }
+        clearTimeout(clearTimer); clearArmed = false; this.textContent = "اس CV کے تمام خانے خالی کریں";
+        DATA[lang] = emptyData();
+        buildForm(lang); renderCv(); setStatus("تمام خانے خالی کر دیے گئے ہیں۔");
+      });
+
+      /* ---------------- init ---------------- */
+      buildForm("ur"); buildForm("en");
+      bindForm("ur"); bindForm("en");
+      syncDesignControls();
+      renderCv();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ renderCv(); });
+      window.addEventListener("resize", fitCv);
+      document.addEventListener("click", function(e){
+        var g = e.target.closest("[data-goto]");
+        if (g && g.getAttribute("data-goto") === "cv") setTimeout(fitCv, 80);
+      });
+    })();
     </script>
   </body>
 </html>
