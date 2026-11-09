@@ -9,6 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@500;600;700&family=Poppins:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet" />
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
     <style>
       :root{
         --gold:#c9a227; --gold-2:#e8c874; --gold-3:#f4dc9a;
@@ -435,6 +438,20 @@
       .udate{font-size:12.5px;color:#5d6a8c}
       .ur-modal .uperm.ok{color:#8f6d0e}
       .ur-modal .uperm.lock{color:#7a8499;border-color:rgba(13,27,62,.16);background:rgba(13,27,62,.03)}
+      /* ---------- Auth (Firebase) & global message ---------- */
+      .global-msg{
+        position:fixed;bottom:16px;top:auto;left:50%;transform:translateX(-50%) translateY(8px);z-index:300;
+        width:min(560px,calc(100vw - 24px));background:#0d1734;color:#fff;border:1px solid var(--gold);
+        border-radius:13px;box-shadow:0 16px 40px rgba(0,0,0,.5);padding:12px 16px;
+        font-size:14.5px;font-weight:600;line-height:1.9;text-align:center;
+        opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;
+      }
+      .global-msg.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+      .global-msg.err{border-color:#e5484d}
+      #authBtn .auth-mail{direction:ltr;font-family:"Poppins",sans-serif;font-size:11.5px;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+      button.uperm{font-family:inherit;cursor:pointer}
+      .ur-modal .users-loading{font-size:13.5px;color:#5d6a8c;line-height:1.9;margin:0 0 10px;display:none}
+      .ur-modal .users-loading.show{display:block}
       footer{margin-top:14px;text-align:center;color:var(--muted);font-size:12px;line-height:1.7;padding-bottom:4px}
       footer .latin{font-family:"Poppins",sans-serif;letter-spacing:.4px}
       footer b{color:var(--gold-2);font-weight:600}
@@ -457,6 +474,7 @@
         .tool-btn{font-size:17px}
         .icon-btn{height:36px;min-width:36px}
         .lang-label{display:none}
+        #authBtn .auth-mail{display:none!important}
       }
       @media (prefers-reduced-motion:reduce){
         *{transition:none!important}
@@ -464,6 +482,8 @@
     </style>
   </head>
   <body>
+
+    <div class="global-msg" id="globalMsg" role="alert"></div>
 
     <!-- ================= Users Record: golden button above the header ================= -->
     <div class="top-record-bar">
@@ -517,6 +537,12 @@
           <button class="icon-btn" id="adminBtn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
             <span class="lang-label" data-i18n="admin">ایڈمن</span>
+          </button>
+
+          <button class="icon-btn" id="authBtn" title="Google سے سائن ان">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+            <span class="lang-label" id="authBtnLabel">سائن ان کریں</span>
+            <span class="auth-mail" id="authBtnMail" style="display:none"></span>
           </button>
 
           <div class="profile">
@@ -1224,7 +1250,7 @@
           <span class="pill"><span class="dia"></span><span data-i18n="userRole">سپر ایڈمن</span></span>
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div>
           <h2 data-i18n="adminTitle">انتظامی کنٹرول — سپر ایڈمن</h2>
-          <p data-i18n="adminDesc">صارفین کا انتظام اور ہر ٹول کی الگ اجازت کا مکمل نظام مرحلہ 3 میں فعال ہوگا۔ اس صفحے سے سپر ایڈمن یہ سب کر سکے گا:</p>
+          <p data-i18n="adminDesc">صارفین کا انتظام اور ہر ٹول کی الگ اجازت کا مکمل نظام اب فعال ہے اور Firebase سے جڑا ہوا ہے۔ سپر ایڈمن اوپر «صارفین کا ریکارڈ» سے یہ سب کر سکتا ہے:</p>
           <div class="chips">
             <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="adminF1">نیا صارف بنانا و Gmail درج کرنا</span></span>
             <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="adminF2">صارف فعال یا غیر فعال کرنا</span></span>
@@ -1286,13 +1312,13 @@
             <button type="button" class="btn-gold" id="nuSave">محفوظ کریں</button>
             <button type="button" class="btn-ghost" id="nuCancel">منسوخ کریں</button>
           </div>
-          <p class="hint" style="margin-top:12px">یہ ریکارڈ فی الحال صرف اسی نشست کے لیے ہے — صفحہ بند یا تازہ کرنے پر فہرست خالی ہو جائے گی۔ سرور پر مستقل اجازتوں کا نظام Firebase جڑنے کے بعد فعال ہوگا۔</p>
         </div>
 
         <!-- Users added in this session -->
         <div class="st-card users-card ur-section" id="urListWrap">
           <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>درج شدہ صارفین</h3>
           <p class="hint" id="nuCount" style="margin-bottom:10px">کل درج شدہ صارفین: ۰</p>
+          <p class="users-loading" id="nuLoading">صارفین کی فہرست لوڈ ہو رہی ہے…</p>
           <p class="users-empty" id="nuEmpty">ابھی کوئی صارف درج نہیں ہے۔ «نیا صارف شامل کریں» سے پہلا صارف شامل کریں۔</p>
           <div id="nuList"></div>
         </div>
@@ -1337,7 +1363,7 @@
           t4Desc: "اردو RTL اور انگریزی LTR — پروفیشنل ٹیمپلیٹس کے ساتھ A4 سائز CV تیار کریں۔",
           t4f1: "اردو و انگریزی الگ حصے", t4f2: "پروفیشنل ٹیمپلیٹس", t4f3: "تصویر شامل کرنے کا اختیار", t4f4: "A4 PDF ڈاؤن لوڈ",
           adminTitle: "انتظامی کنٹرول — سپر ایڈمن",
-          adminDesc: "صارفین کا انتظام اور ہر ٹول کی الگ اجازت کا مکمل نظام مرحلہ 3 میں فعال ہوگا۔ اس صفحے سے سپر ایڈمن یہ سب کر سکے گا:",
+          adminDesc: "صارفین کا انتظام اور ہر ٹول کی الگ اجازت کا مکمل نظام اب فعال ہے اور Firebase سے جڑا ہوا ہے۔ سپر ایڈمن اوپر «صارفین کا ریکارڈ» سے یہ سب کر سکتا ہے:",
           adminF1: "نیا صارف بنانا و Gmail درج کرنا", adminF2: "صارف فعال یا غیر فعال کرنا",
           adminF3: "ہر ٹول کی الگ اجازت (ON / OFF)", adminF4: "استعمال کی رپورٹ دیکھنا",
           adminNote: "اجازتیں صرف سامنے کے صفحے پر نہیں لگیں گی — ہر درخواست پر سرور کی سطح پر شناخت و اجازت کی تصدیق ہوگی، تاکہ کوئی صارف بغیر اجازت کسی ٹول تک نہ پہنچ سکے۔",
@@ -1374,7 +1400,7 @@
           t4Desc: "الأردية باتجاه RTL والإنجليزية LTR — سيرة ذاتية احترافية بمقاس A4 وقوالب أنيقة.",
           t4f1: "قسمان منفصلان للأردية والإنجليزية", t4f2: "قوالب احترافية", t4f3: "خيار إضافة الصورة", t4f4: "تنزيل PDF بمقاس A4",
           adminTitle: "التحكم الإداري — المشرف العام",
-          adminDesc: "سيُفعَّل نظام إدارة المستخدمين وأذونات كل أداة بالكامل في المرحلة 3. ومن هذه الصفحة سيتمكن المشرف العام من:",
+          adminDesc: "نظام إدارة المستخدمين وأذونات كل أداة مفعَّل الآن ومتصل بـ Firebase. ومن «سجل المستخدمين» في الأعلى يمكن للمشرف العام:",
           adminF1: "إنشاء مستخدم جديد وإدخال Gmail", adminF2: "تفعيل المستخدم أو تعطيله",
           adminF3: "إذن منفصل لكل أداة (تشغيل / إيقاف)", adminF4: "عرض تقارير الاستخدام",
           adminNote: "لن تُطبق الأذونات في الواجهة فقط — ستُتحقق الهوية والإذن على مستوى الخادم في كل طلب، حتى لا يصل أي مستخدم إلى أداة دون إذن.",
@@ -1411,7 +1437,7 @@
           t4Desc: "Urdu in full RTL and English in LTR — a professional A4 CV with elegant templates.",
           t4f1: "Separate Urdu & English sections", t4f2: "Professional templates", t4f3: "Optional photo", t4f4: "A4 PDF download",
           adminTitle: "Admin Control — Super Admin",
-          adminDesc: "The complete system for managing users and per-tool permissions goes live in Phase 3. From this page the Super Admin will be able to:",
+          adminDesc: "The system for managing users and per-tool permissions is now live and connected to Firebase. From “Users Record” above, the Super Admin can:",
           adminF1: "Create a new user & add Gmail", adminF2: "Activate or deactivate a user",
           adminF3: "Separate permission per tool (ON / OFF)", adminF4: "View usage reports",
           adminNote: "Permissions will not be applied on the front end only — identity and permission will be verified on the server for every request, so no user can reach a tool without permission.",
@@ -1451,7 +1477,14 @@
 
       document.addEventListener("click", function (e) {
         var gotoEl = e.target.closest("[data-goto]");
-        if (gotoEl) { showView(gotoEl.getAttribute("data-goto")); return; }
+        if (gotoEl) {
+          var dest = gotoEl.getAttribute("data-goto");
+          if (dest === "photo" || dest === "scanner" || dest === "certificate" || dest === "cv") {
+            gateToolAccess(dest, function (ok) { if (ok) showView(dest); });
+            return;
+          }
+          showView(dest); return;
+        }
         var langBtn = e.target.closest("#langMenu button");
         if (langBtn) {
           applyLang(langBtn.getAttribute("data-lang"));
@@ -1488,7 +1521,147 @@
         document.getElementById("themeIconSun").style.display = next === "dark" ? "none" : "";
       });
 
-      /* ---------- Users Record: add-user form (kept in this session's memory only) ---------- */
+      /* ---------- Firebase: accounts + per-tool permissions (Phase 3) ---------- */
+      var FB_CONFIG = {
+        apiKey: "AIzaSyB8QUIGhOUXBUaOga2dT5tJbMLmnhZies0",
+        authDomain: "al-minhaj-creative-studio.firebaseapp.com",
+        projectId: "al-minhaj-creative-studio",
+        storageBucket: "al-minhaj-creative-studio.firebasestorage.app",
+        messagingSenderId: "667520172507",
+        appId: "1:667520172507:web:c1bc40b56833fe2739e7fe"
+      };
+      var FB_ADMINS = ["abdulhafeeza871@gmail.com", "abdulhafeezahmadani502@gmail.com"];
+      var fbReady = false, fbAuth = null, fbDb = null;
+      var currentUser = null, currentUserIsAdmin = false;
+      var MSG_LIB_FAIL = "انٹرنیٹ کنکشن یا Firebase لائبریری لوڈ نہیں ہو سکی۔ براہ کرم انٹرنیٹ چیک کر کے صفحہ دوبارہ لوڈ کریں۔";
+
+      function canonMail(m) { return String(m || "").replace(/\s+/g, "").toLowerCase(); }
+      function isAdminMail(m) { return FB_ADMINS.indexOf(canonMail(m)) !== -1; }
+
+      var globalMsgTimer = null;
+      function showGlobalMsg(text, isErr) {
+        var el = document.getElementById("globalMsg");
+        if (!el) return;
+        el.textContent = text;
+        el.className = "global-msg show" + (isErr ? " err" : "");
+        if (globalMsgTimer) clearTimeout(globalMsgTimer);
+        globalMsgTimer = setTimeout(function () { el.classList.remove("show"); }, 6000);
+      }
+
+      function updateAuthBtn() {
+        var label = document.getElementById("authBtnLabel");
+        var mail = document.getElementById("authBtnMail");
+        if (!label || !mail) return;
+        if (!fbReady) { label.textContent = "سائن ان کریں"; mail.style.display = "none"; return; }
+        if (currentUser) {
+          label.textContent = "سائن آؤٹ";
+          mail.textContent = currentUser.email || "";
+          mail.style.display = "";
+        } else {
+          label.textContent = "سائن ان کریں";
+          mail.style.display = "none";
+        }
+      }
+
+      function doSignIn() {
+        if (!fbReady) { showGlobalMsg(MSG_LIB_FAIL, true); return; }
+        var provider = new firebase.auth.GoogleAuthProvider();
+        fbAuth.signInWithPopup(provider).catch(function (err) {
+          if (err && (err.code === "auth/popup-blocked" || err.code === "auth/operation-not-supported-in-this-environment")) {
+            fbAuth.signInWithRedirect(provider).catch(function () {
+              showGlobalMsg("سائن ان نہیں ہو سکا۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔", true);
+            });
+            return;
+          }
+          if (err && err.code === "auth/popup-closed-by-user") return;
+          showGlobalMsg("سائن ان نہیں ہو سکا۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔", true);
+        });
+      }
+
+      function initFirebase() {
+        if (typeof firebase === "undefined" || !firebase.initializeApp) {
+          fbReady = false;
+          updateAuthBtn();
+          showGlobalMsg(MSG_LIB_FAIL, true);
+          return;
+        }
+        try {
+          firebase.initializeApp(FB_CONFIG);
+          fbAuth = firebase.auth();
+          fbDb = firebase.firestore();
+          fbReady = true;
+        } catch (e) {
+          fbReady = false;
+          updateAuthBtn();
+          showGlobalMsg(MSG_LIB_FAIL, true);
+          return;
+        }
+        try {
+          var p = fbAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+          if (p && p.catch) p.catch(function () {});
+        } catch (e2) {}
+        fbAuth.getRedirectResult().catch(function () {});
+        fbAuth.onAuthStateChanged(function (user) {
+          currentUser = user || null;
+          currentUserIsAdmin = !!(user && isAdminMail(user.email));
+          updateAuthBtn();
+        }, function () {
+          currentUser = null;
+          currentUserIsAdmin = false;
+          updateAuthBtn();
+        });
+        updateAuthBtn();
+      }
+
+      document.getElementById("authBtn").addEventListener("click", function () {
+        if (!fbReady) { showGlobalMsg(MSG_LIB_FAIL, true); return; }
+        if (currentUser) {
+          fbAuth.signOut().then(function () {
+            showGlobalMsg("آپ سائن آؤٹ ہو گئے ہیں۔", false);
+          }).catch(function () {
+            showGlobalMsg("سائن آؤٹ نہیں ہو سکا۔ دوبارہ کوشش کریں۔", true);
+          });
+        } else {
+          doSignIn();
+        }
+      });
+
+      /* Check the signed-in user's Firestore record before a tool opens.
+         Admins always pass; everyone else needs an active record with
+         that tool's permission switched on. */
+      function gateToolAccess(toolKey, done) {
+        if (!fbReady) { showGlobalMsg(MSG_LIB_FAIL, true); done(false); return; }
+        if (currentUserIsAdmin) { done(true); return; }
+        if (!currentUser) {
+          showGlobalMsg("یہ ٹول استعمال کرنے کے لیے پہلے Google سے سائن ان کریں۔", true);
+          doSignIn();
+          done(false);
+          return;
+        }
+        var toolName = toolKey;
+        for (var i = 0; i < NU_TOOLS.length; i++) if (NU_TOOLS[i].key === toolKey) toolName = NU_TOOLS[i].name;
+        fbDb.collection("studio_users").doc(canonMail(currentUser.email)).get().then(function (snap) {
+          if (!snap.exists) {
+            showGlobalMsg("آپ کا اکاؤنٹ صارفین کے ریکارڈ میں درج نہیں ہے۔ رسائی کے لیے سپر ایڈمن سے رابطہ کریں۔", true);
+            done(false); return;
+          }
+          var d = snap.data() || {};
+          if (!d.active) {
+            showGlobalMsg("آپ کا اکاؤنٹ غیر فعال ہے۔ رسائی کے لیے سپر ایڈمن سے رابطہ کریں۔", true);
+            done(false); return;
+          }
+          if (!d.perms || !d.perms[toolKey]) {
+            showGlobalMsg("آپ کو «" + toolName + "» کی اجازت نہیں ہے۔ اجازت کے لیے سپر ایڈمن سے رابطہ کریں۔", true);
+            done(false); return;
+          }
+          done(true);
+        }).catch(function () {
+          showGlobalMsg("اجازت کی جانچ نہیں ہو سکی۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔", true);
+          done(false);
+        });
+      }
+
+      /* ---------- Users Record: backed by Firestore `studio_users` ---------- */
       var NU_TOOLS = [
         { key: "photo", name: "AI پاسپورٹ فوٹو اسٹوڈیو" },
         { key: "scanner", name: "اسمارٹ بک اسکینر" },
@@ -1514,6 +1687,21 @@
         if (!d) return "—";
         var months = ["جنوری","فروری","مارچ","اپریل","مئی","جون","جولائی","اگست","ستمبر","اکتوبر","نومبر","دسمبر"];
         return nuUrduNum(d.getDate()) + " " + months[d.getMonth()] + " " + nuUrduNum(d.getFullYear());
+      }
+      function nuDocToUser(snap) {
+        var d = snap.data() || {};
+        var created = null;
+        if (d.created && typeof d.created.toDate === "function") created = d.created.toDate();
+        else if (d.created) created = new Date(d.created);
+        return {
+          id: snap.id,
+          name: d.name || "",
+          mail: d.email || snap.id,
+          perms: d.perms || {},
+          active: d.active !== false,
+          fee: d.fee !== false,
+          created: created
+        };
       }
       function nuSyncPerms() {
         for (var i = 0; i < NU_TOOLS.length; i++) {
@@ -1545,13 +1733,32 @@
           for (var j = 0; j < NU_TOOLS.length; j++) {
             var t = NU_TOOLS[j];
             var ok = !!u.perms[t.key];
-            chips += '<span class="uperm ' + (ok ? "ok" : "lock") + '">' + (ok ? NU_CHECK_SVG : NU_LOCK_SVG) + "<span>" + t.name + (ok ? " — اجازت" : " — لاک") + "</span></span>";
+            chips += '<button type="button" class="uperm ' + (ok ? "ok" : "lock") + '" data-act="perm" data-tool="' + t.key + '" data-id="' + nuEsc(u.id) + '" title="اجازت بدلنے کے لیے دبائیں">' + (ok ? NU_CHECK_SVG : NU_LOCK_SVG) + "<span>" + t.name + (ok ? " — اجازت" : " — لاک") + "</span></button>";
           }
-          var controls = '<span class="ucontrols"><button type="button" class="ustat ' + (u.active ? "on" : "off") + '" data-act="active" data-idx="' + i + '">' + (u.active ? NU_CHECK_SVG + "<span>فعال</span>" : NU_X_SVG + "<span>غیر فعال</span>") + '</button><button type="button" class="udel" data-act="del" data-idx="' + i + '" aria-label="صارف حذف کریں">' + NU_TRASH_SVG + "</button></span>";
-          var foot = '<div class="ufoot"><button type="button" class="ufee' + (u.fee ? "" : " due") + '" data-act="fee" data-idx="' + i + '">' + (u.fee ? NU_CHECK_SVG + "<span>فیس</span>" : "<span>فیس باقی</span>") + '</button><span class="udate">درج ہوا: ' + nuFmtDate(u.created) + "</span></div>";
+          var controls = '<span class="ucontrols"><button type="button" class="ustat ' + (u.active ? "on" : "off") + '" data-act="active" data-id="' + nuEsc(u.id) + '">' + (u.active ? NU_CHECK_SVG + "<span>فعال</span>" : NU_X_SVG + "<span>غیر فعال</span>") + '</button><button type="button" class="udel" data-act="del" data-id="' + nuEsc(u.id) + '" aria-label="صارف حذف کریں">' + NU_TRASH_SVG + "</button></span>";
+          var foot = '<div class="ufoot"><button type="button" class="ufee' + (u.fee ? "" : " due") + '" data-act="fee" data-id="' + nuEsc(u.id) + '">' + (u.fee ? NU_CHECK_SVG + "<span>فیس</span>" : "<span>فیس باقی</span>") + '</button><span class="udate">درج ہوا: ' + nuFmtDate(u.created) + "</span></div>";
           html += '<div class="user-row"><div class="uhead"><span class="uident"><span class="uname">' + nuEsc(u.name) + '</span><span class="umail" dir="ltr">' + nuEsc(u.mail) + '</span></span>' + controls + '</div><div class="user-perms">' + chips + "</div>" + foot + "</div>";
         }
         list.innerHTML = html;
+      }
+      function nuLoadUsers() {
+        var loading = document.getElementById("nuLoading");
+        if (!fbReady || !fbDb) { showGlobalMsg(MSG_LIB_FAIL, true); return; }
+        if (loading) loading.classList.add("show");
+        fbDb.collection("studio_users").get().then(function (qs) {
+          nuUsers = [];
+          qs.forEach(function (snap) { nuUsers.push(nuDocToUser(snap)); });
+          nuUsers.sort(function (a, b) {
+            var ta = a.created ? a.created.getTime() : 0;
+            var tb = b.created ? b.created.getTime() : 0;
+            return tb - ta;
+          });
+          if (loading) loading.classList.remove("show");
+          nuRenderList();
+        }).catch(function () {
+          if (loading) loading.classList.remove("show");
+          showGlobalMsg("صارفین کی فہرست لوڈ نہیں ہو سکی۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔", true);
+        });
       }
       function nuResetForm() {
         document.getElementById("nuName").value = "";
@@ -1571,15 +1778,43 @@
         var mail = document.getElementById("nuMail").value.trim();
         if (!name) { nuSetMsg("براہ کرم پہلے صارف کا نام لکھیں۔", "err"); document.getElementById("nuName").focus(); return; }
         if (!mail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) { nuSetMsg("براہ کرم درست جی میل لکھیں۔", "err"); document.getElementById("nuMail").focus(); return; }
+        if (!fbReady) { nuSetMsg(MSG_LIB_FAIL, "err"); return; }
+        if (!currentUserIsAdmin) { nuSetMsg("صارف شامل کرنے کی اجازت صرف سپر ایڈمن کو ہے۔", "err"); return; }
         var perms = {};
         for (var i = 0; i < NU_TOOLS.length; i++) {
           var t = NU_TOOLS[i];
           perms[t.key] = document.getElementById("nuPerm-" + t.key).checked;
         }
-        nuUsers.push({ name: name, mail: mail, perms: perms, active: true, fee: true, created: new Date() });
-        nuRenderList();
-        nuResetForm();
-        nuSetMsg("صارف «" + name + "» فہرست میں شامل ہو گیا ہے۔", "ok");
+        var docId = canonMail(mail);
+        var ref = fbDb.collection("studio_users").doc(docId);
+        var saveBtn = document.getElementById("nuSave");
+        saveBtn.disabled = true;
+        nuSetMsg("محفوظ ہو رہا ہے…", "");
+        ref.get().then(function (snap) {
+          if (snap.exists) {
+            saveBtn.disabled = false;
+            nuSetMsg("یہ جی میل پہلے سے درج ہے۔ فہرست میں اسی صارف کی اجازت وہاں سے بدلی جا سکتی ہے۔", "err");
+            return null;
+          }
+          return ref.set({
+            name: name,
+            email: mail,
+            active: true,
+            fee: true,
+            created: firebase.firestore.FieldValue.serverTimestamp(),
+            perms: perms
+          });
+        }).then(function (r) {
+          saveBtn.disabled = false;
+          if (r === null) return;
+          nuResetForm();
+          nuSetMsg("صارف «" + name + "» فہرست میں شامل ہو گیا ہے۔", "ok");
+          document.getElementById("urListWrap").classList.add("show");
+          nuLoadUsers();
+        }).catch(function () {
+          saveBtn.disabled = false;
+          nuSetMsg("صارف محفوظ نہیں ہو سکا۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔", "err");
+        });
       });
       document.getElementById("nuCancel").addEventListener("click", function () {
         nuResetForm();
@@ -1594,20 +1829,58 @@
       document.getElementById("nuList").addEventListener("click", function (e) {
         var btn = e.target.closest("[data-act]");
         if (!btn) return;
-        var idx = parseInt(btn.getAttribute("data-idx"), 10);
-        if (isNaN(idx) || !nuUsers[idx]) return;
+        var id = btn.getAttribute("data-id");
+        var u = null;
+        for (var i = 0; i < nuUsers.length; i++) if (nuUsers[i].id === id) { u = nuUsers[i]; break; }
+        if (!u) return;
+        if (!fbReady) { showGlobalMsg(MSG_LIB_FAIL, true); return; }
+        if (!currentUserIsAdmin) { showGlobalMsg("یہ تبدیلی صرف سپر ایڈمن کر سکتا ہے۔", true); return; }
         var act = btn.getAttribute("data-act");
-        if (act === "active") { nuUsers[idx].active = !nuUsers[idx].active; }
-        else if (act === "fee") { nuUsers[idx].fee = !nuUsers[idx].fee; }
-        else if (act === "del") { nuUsers.splice(idx, 1); nuSetMsg("صارف فہرست سے حذف کر دیا گیا ہے۔", "ok"); }
+        var ref = fbDb.collection("studio_users").doc(u.id);
+        if (act === "del") {
+          ref.delete().then(function () {
+            nuUsers = nuUsers.filter(function (x) { return x.id !== u.id; });
+            nuRenderList();
+            nuSetMsg("صارف فہرست سے حذف کر دیا گیا ہے۔", "ok");
+          }).catch(function () {
+            showGlobalMsg("صارف حذف نہیں ہو سکا۔ دوبارہ کوشش کریں۔", true);
+          });
+          return;
+        }
+        var update = null;
+        if (act === "active") { u.active = !u.active; update = { active: u.active }; }
+        else if (act === "fee") { u.fee = !u.fee; update = { fee: u.fee }; }
+        else if (act === "perm") {
+          var tool = btn.getAttribute("data-tool");
+          if (!tool) return;
+          u.perms[tool] = !u.perms[tool];
+          update = {};
+          update["perms." + tool] = u.perms[tool];
+        }
+        if (!update) return;
         nuRenderList();
+        ref.update(update).catch(function () {
+          showGlobalMsg("تبدیلی محفوظ نہیں ہو سکی۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔", true);
+          nuLoadUsers();
+        });
       });
 
       /* ---------- Users Record popup: open / close / sections ---------- */
       var usersModal = document.getElementById("usersModal");
       function urOpenModal() {
+        if (!fbReady) { showGlobalMsg(MSG_LIB_FAIL, true); return; }
+        if (!currentUser) {
+          showGlobalMsg("صارفین کا ریکارڈ کھولنے کے لیے پہلے سپر ایڈمن کے Google اکاؤنٹ سے سائن ان کریں۔", true);
+          doSignIn();
+          return;
+        }
+        if (!currentUserIsAdmin) {
+          showGlobalMsg("صارفین کا ریکارڈ صرف سپر ایڈمن (مفتی عبدالحفیظ) کے لیے ہے۔", true);
+          return;
+        }
         usersModal.classList.add("open");
         document.body.classList.add("ur-locked");
+        nuLoadUsers();
       }
       function urCloseModal() {
         usersModal.classList.remove("open");
@@ -1629,6 +1902,7 @@
       document.getElementById("urShowList").addEventListener("click", function () {
         var l = document.getElementById("urListWrap");
         l.classList.add("show");
+        nuLoadUsers();
         l.scrollIntoView({ behavior: "smooth", block: "nearest" });
       });
       document.getElementById("nuSave").addEventListener("click", function () {
@@ -1639,6 +1913,8 @@
       document.getElementById("nuCancel").addEventListener("click", function () {
         document.getElementById("urFormWrap").classList.remove("show");
       });
+
+      initFirebase();
 
       // Always open in the dark (black / navy) theme as specified;
       // light mode is available only through the theme toggle button.
